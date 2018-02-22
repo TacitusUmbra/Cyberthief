@@ -2024,7 +2024,7 @@ MonoBehaviour:
   runLerpTime: 4
   crouchLerpTime: 20
   gravity: 50
-  jumpStrength: -70
+  jumpStrength: -100
   gravityForce: 2.5
 --- !u!143 &1057814197
 CharacterController:
