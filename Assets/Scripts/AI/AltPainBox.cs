@@ -20,7 +20,7 @@ public class AltPainBox : MonoBehaviour {
 
 	void OnTriggerStay(Collider other)
 	{
-		if(other.gameObject.tag == "Player" && enemy.GetComponent<Ai>().aiCurrentState == Ai.State.Hostile)
+		if(other.gameObject.tag == "Player" && enemy.GetComponent<PatrolAI>().aiCurrentState == PatrolAI.State.Hostile)
 		Debug.Log("I am angry");
 			if(attackTimer > 2.1)
 			{
