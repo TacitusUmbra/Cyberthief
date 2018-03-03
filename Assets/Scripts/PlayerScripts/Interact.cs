@@ -17,8 +17,7 @@ public class Interact : MonoBehaviour {
 	public GameObject objectHeld;
 	public float grabSpeed;
 	public Transform grabLocation;
-	
-
+	public float thrust;
 	void Start () 
 	{
 		canGrab = true;
@@ -63,25 +62,35 @@ public class Interact : MonoBehaviour {
 				objectHeld.GetComponent<Rigidbody>().useGravity = false;
 			}
 			//If you're holding something and there is an object being held, have it fall into your hands.
-			if(!canGrab && objectHeld)
+			if(objectHeld)
 			{
-
 				objectHeld.transform.position = Vector3.Lerp (objectHeld.transform.position, grabLocation.position, grabSpeed * Time.deltaTime);
 
+				if(objectHeld.gameObject.GetComponent<GrabbableObject>().hit == true)
+					{
+						canGrab = true;
+						objectHeld.GetComponent<Rigidbody>().useGravity = true;
+						objectHeld.transform.parent = null;
+						objectHeld = null;
+					}
+				if(Input.GetKeyDown(pc.use))
+					{
+						objectHeld.GetComponent<Rigidbody> ().AddForce (transform.forward * thrust,ForceMode.Impulse);
+						canGrab = true;
+						objectHeld.GetComponent<Rigidbody>().useGravity = true;
+						objectHeld.transform.parent = null;
+						objectHeld = null;
+					}
 			}
-			if (!canGrab && objectHeld && (Input.GetKeyDown (pc.alternativeInteract)))
+			//It the player presses alternativeInteract, the object will unchild itself, being dropped
+			if(objectHeld && (Input.GetKeyDown (pc.alternativeInteract)))
 			{
 				canGrab = true;
-			}
-			if(canGrab && objectHeld)
-			{
 				objectHeld.GetComponent<Rigidbody>().useGravity = true;
 				objectHeld.transform.parent = null;
 				objectHeld = null;
 			}
-
-
-
+			
 			//Opening Doors
 			if (interactHit.collider.tag == "Door" && (Input.GetKeyDown (pc.interact)))
 			{

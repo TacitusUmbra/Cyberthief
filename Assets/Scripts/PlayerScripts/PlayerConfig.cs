@@ -12,6 +12,7 @@ public class PlayerConfig : MonoBehaviour {
 	public KeyCode crouch;
 	public KeyCode interact;
 	public KeyCode alternativeInteract;
+	public KeyCode use;
 	public bool invertY;
 	public float mouseSensitivity;
 

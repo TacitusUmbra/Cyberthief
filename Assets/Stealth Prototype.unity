@@ -1101,8 +1101,9 @@ MonoBehaviour:
   jump: 32
   run: 304
   crouch: 306
-  interact: 323
+  interact: 101
   alternativeInteract: 324
+  use: 323
   invertY: 1
   mouseSensitivity: 3
 --- !u!1 &618373910
@@ -1415,7 +1416,7 @@ GameObject:
   - component: {fileID: 755703506}
   - component: {fileID: 755703508}
   - component: {fileID: 755703507}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Door Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2335,6 +2336,7 @@ MonoBehaviour:
   objectHeld: {fileID: 0}
   grabSpeed: 3
   grabLocation: {fileID: 1837594910}
+  thrust: 10
 --- !u!1 &1151100592
 GameObject:
   m_ObjectHideFlags: 0
@@ -3037,7 +3039,7 @@ GameObject:
   - component: {fileID: 1876039375}
   m_Layer: 11
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3122,7 +3124,8 @@ GameObject:
   - component: {fileID: 1908544616}
   - component: {fileID: 1908544615}
   - component: {fileID: 1908544614}
-  m_Layer: 0
+  - component: {fileID: 1908544619}
+  m_Layer: 15
   m_Name: Crate
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
@@ -3210,6 +3213,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1908544619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1908544613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0704ca05f4e17ac428ebc24d466fcc4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hit: 0
 --- !u!1 &1939076726
 GameObject:
   m_ObjectHideFlags: 0
@@ -3219,7 +3234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1939076728}
   - component: {fileID: 1939076727}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Spotlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
