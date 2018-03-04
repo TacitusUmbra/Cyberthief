@@ -64,6 +64,7 @@ public class Interact : MonoBehaviour {
 			//If you're holding something and there is an object being held, have it fall into your hands.
 			if(objectHeld)
 			{
+				objectHeld.gameObject.GetComponent<GrabbableObject>().objectState = GrabbableObject.State.Held;
 				objectHeld.transform.position = Vector3.Lerp (objectHeld.transform.position, grabLocation.position, grabSpeed * Time.deltaTime);
 
 				if(objectHeld.gameObject.GetComponent<GrabbableObject>().hit == true)
@@ -71,24 +72,28 @@ public class Interact : MonoBehaviour {
 						canGrab = true;
 						objectHeld.GetComponent<Rigidbody>().useGravity = true;
 						objectHeld.transform.parent = null;
+						objectHeld.gameObject.GetComponent<GrabbableObject>().objectState = GrabbableObject.State.Dropped;
 						objectHeld = null;
 					}
+			//Throwing a gameobject that is being held		
 				if(Input.GetKeyDown(pc.use))
 					{
 						objectHeld.GetComponent<Rigidbody> ().AddForce (transform.forward * thrust,ForceMode.Impulse);
 						canGrab = true;
 						objectHeld.GetComponent<Rigidbody>().useGravity = true;
 						objectHeld.transform.parent = null;
+						objectHeld.gameObject.GetComponent<GrabbableObject>().objectState = GrabbableObject.State.Thrown;
 						objectHeld = null;
 					}
-			}
 			//It the player presses alternativeInteract, the object will unchild itself, being dropped
-			if(objectHeld && (Input.GetKeyDown (pc.alternativeInteract)))
-			{
-				canGrab = true;
-				objectHeld.GetComponent<Rigidbody>().useGravity = true;
-				objectHeld.transform.parent = null;
-				objectHeld = null;
+				if(Input.GetKeyDown (pc.alternativeInteract))
+					{
+						canGrab = true;
+						objectHeld.GetComponent<Rigidbody>().useGravity = true;
+						objectHeld.transform.parent = null;
+						objectHeld.gameObject.GetComponent<GrabbableObject>().objectState = GrabbableObject.State.Dropped;
+						objectHeld = null;
+					}
 			}
 			
 			//Opening Doors
