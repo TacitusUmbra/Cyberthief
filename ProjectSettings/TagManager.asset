@@ -15,6 +15,7 @@ TagManager:
   - Keycard
   - Keycard Panel
   - Ground
+  - Light
   layers:
   - Default
   - TransparentFX

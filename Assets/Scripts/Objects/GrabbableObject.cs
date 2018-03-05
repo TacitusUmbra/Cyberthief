@@ -8,6 +8,7 @@ public bool hit;
 
 public State objectState;
 public State defaultObjectState = State.Grounded;
+public GameObject lightHit;
 
 
 public enum State 
@@ -40,8 +41,6 @@ switch (this.objectState)
 			case State.Held:
 			this.Held ();
 			break;
-		
-
 		}
 }
 
@@ -53,6 +52,19 @@ void OnCollisionEnter(Collision collision)
 		{
 			hit = true;
 		}	
+		
+
+
+	}
+
+
+	if (collision.gameObject.tag == "Light")
+	{
+		lightHit = collision.gameObject;
+		if (objectState == State.Thrown)
+		{
+			lightHit.SetActive(false);
+		}
 	}
 
 	if(collision.gameObject.tag == "Ground")
@@ -73,7 +85,7 @@ void Held()
 }
 void Thrown()
 {
-
+	
 }
 void Dropped()
 {
