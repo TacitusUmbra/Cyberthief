@@ -6,27 +6,31 @@ public class PatrolAI : MonoBehaviour {
 
 	private UnityEngine.AI.NavMeshAgent agent;
 	private UnityEngine.AI.NavMeshPath path;
-
+	//checking if the AI has touched the alarm
 	public bool touchAlarm;
+	//the set alarm Location
 	public Transform alarmLocation;
 
+	//AI State variables
 	[Header("AI States")]
 	public State aiCurrentState;
 	public State defaultState = State.Patrol;
-
 	public State aiCurrentEmotionalState;
 	public State defaultEmotionalState;
 
+	//Variables related to the AI's hearing
 	[Header("AI Hearing")]
 	public RunHearingSensor runHearingSensor;
 	public float distanceRequiredToHear;
 	Vector3 previousCorner;
 	public Vector3 target;
 
+	//Variables related to the AI's sight
 	[Header("AI Seeing")]
 	public SightSensor sightSensor;
 	public SightRay sightRay;
 
+	//Variables related to the AI's movement
 	[Header("AI Movement")]
 	public Transform[] points;
 	private int destPoint = 0;
@@ -38,6 +42,7 @@ public class PatrolAI : MonoBehaviour {
 	public float hostileVigilanceTimer;
 	public float stressedSpeed;
 
+	//Variables related to the AI's suspicion
 	[Header("AI Suspicion")]
 	public float distanceToPlayer;
 	public float suspicionAmount;
@@ -45,7 +50,9 @@ public class PatrolAI : MonoBehaviour {
 	public float suspicionGrowth;
 	public float suspicionStart;
 	public float suspicionRate;
+	public float headTurnSpeed;
 
+	//Variables related to the AI's stress
 	[Header("AI Stress")]
 	public float levelOfStress;
 	public float stressShrinkValue;
@@ -55,7 +62,7 @@ public class PatrolAI : MonoBehaviour {
 	public float paranoidEntryLevel;
 	public float paranoidExitLevel;
 
-
+	//Ai States
 	public enum State 
 	{
 		Patrol,
@@ -83,7 +90,7 @@ public class PatrolAI : MonoBehaviour {
 	void Update ()
 	{
 
-
+		//The AI's states
 		switch (this.aiCurrentState)
 		{
 	
@@ -107,6 +114,8 @@ public class PatrolAI : MonoBehaviour {
 			break;
 			
 		}
+
+		//The AI's emotional states
 		switch (this.aiCurrentEmotionalState)
 		{
 
@@ -125,6 +134,7 @@ public class PatrolAI : MonoBehaviour {
 			
 	}
 
+	//The AI's patrol state where they will walk between points unless some conditions are met to switch states, in which they can become suspicious, hostile, or alerted.
 	void Patrol()
 	{
 		agent.speed = Mathf.Lerp (agent.speed, calmSpeed, hostlileSpeedTimer * Time.deltaTime);
@@ -140,13 +150,15 @@ public class PatrolAI : MonoBehaviour {
 				Patrol();
 			}
 		}
-
-
-		if (sightSensor.isSeeingPlayer && sightRay.raySight && sightRay.target.GetComponent<Player>().visibility > 40f)
+		else if (sightSensor.isSeeingPlayer && sightRay.raySight && sightRay.target.GetComponent<Player>().visibility < 40f)
 			{
 			this.aiCurrentState = State.Suspicion;
 			}
-		 else if (runHearingSensor.isHearingPlayerRun)
+		else if (sightSensor.isSeeingPlayer && sightRay.raySight && sightRay.target.GetComponent<Player>().visibility > 40f)
+			{
+			this.aiCurrentState = State.Hostile;
+			}
+		else if (runHearingSensor.isHearingPlayerRun)
 			{
 				this.aiCurrentState = State.Alerted;
 			}		
@@ -192,20 +204,25 @@ public class PatrolAI : MonoBehaviour {
 
 
 
-
+	//The AI's state where they are hostile and running after the player. The AI's speed will change, and they will make their destination the player's position. 
+	//If they no longer can see the player for ten seconds, they will go back to patrol.
 	void Hostile()
 	{
 		//Suspicion becomes 0
 		suspicionAmount = 0;
+
 		//Have the AI begin to run from walking
 		agent.speed = Mathf.Lerp (agent.speed, hostileSpeed, calmSpeedTimer * Time.deltaTime);
+
 		//target is the position of the player
 		target = sightSensor.sfTarget.transform.position;
+
 		//have the AI run after the player
 		agent.destination = target;
+
 		//if the AI can no longer see the player, begin counting until five seconds have elapsed. In that case
 		//go back to patrol because you have lost the player
-		if(!sightRay.raySight)
+		if (!sightRay.raySight)
 		{
 			hostileTimer += 1 * Time.deltaTime;
 			if (hostileTimer >= hostileVigilanceTimer)
@@ -213,9 +230,13 @@ public class PatrolAI : MonoBehaviour {
 				runHearingSensor.isHearingPlayerRun = false;
 				this.aiCurrentState = State.Patrol;
 			}
+		} else if (sightRay.raySight && hostileTimer >= 0f)
+		{
+			hostileTimer = 0;
 		}
 	}
 
+	//The state where the AI will run to the alarmand set it in order to alert other guards in the scene.
 	void GoToAlarm()
 	{
 		agent.destination = alarmLocation.transform.position;
@@ -230,27 +251,45 @@ public class PatrolAI : MonoBehaviour {
 		}
 	}
 		
+	//The state where the AI can 'see' the player in shadow, but they must wait for a particular amount of time before becoming hostile.
 	void Suspicion()
 	{
+		agent.isStopped = true;
+		distanceToPlayer =  Vector3.Distance(sightRay.target.position, transform.position);
 
+		if (distanceToPlayer > 10f)
+			suspicionCap = 3f;
+		if (distanceToPlayer < 10f)
+			suspicionCap = 2f;
+		if ( distanceToPlayer < 5f)
+			suspicionCap = 1f;
 
-		if (sightSensor.isSeeingPlayer && sightRay.raySight && sightRay.target.GetComponent<Player>().visibility > 40f)
+		if (sightRay.raySight)
 		{
-			distanceToPlayer = Vector3.Distance(sightSensor.sfTarget.transform.position, transform.position);
-			suspicionGrowth = suspicionRate / distanceToPlayer;
-
+			Vector3 targetDir = sightRay.target.position - transform.position;
+			Vector3 playerLocation = Vector3.RotateTowards (transform.forward, targetDir, headTurnSpeed, 0.0f);
 			levelOfStress += stressGrowthValue * Time.deltaTime;
 			suspicionAmount += suspicionGrowth * Time.deltaTime;
-			if (suspicionAmount >= suspicionCap)
-				aiCurrentState = State.Hostile;
-			
-		} else{
+			transform.rotation = Quaternion.LookRotation (playerLocation);
+		}
+		else if(!sightRay.raySight)
+		{
 			suspicionAmount -= suspicionGrowth * Time.deltaTime;
 			if (suspicionAmount <= suspicionStart)
+			{
+				agent.isStopped = false;
 				aiCurrentState = State.Patrol;
+			}
 		}
+		if (suspicionAmount >= suspicionCap)
+		{
+			agent.isStopped = false;
+			aiCurrentState = State.Hostile;
+		}
+
 	}
 
+	//The state prior tothe investigative state where the AI will perform an animation before investigating what made a sound.
 	void Alerted()
 	{
 		

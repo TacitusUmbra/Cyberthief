@@ -12,34 +12,34 @@ public class SightRay : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-
 		raySight = false;
-
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		RaycastHit sightHit;
+		Vector3 forward = transform.TransformDirection (Vector3.forward) * 10;
+		Ray sightRay = new Ray (transform.position, forward);
+		transform.LookAt (target);
+
 		if (ss.isSeeingPlayer)
 		{
-			transform.LookAt (target);
-			Vector3 forward = transform.TransformDirection (Vector3.forward) * 10;
-
-			RaycastHit sightHit;
-			Ray sightRay = new Ray (transform.position, forward);
 			if (Physics.Raycast (sightRay, out sightHit, sightRayDistance))
 			{		
 				if (sightHit.collider.tag == "Player")
+				{
 					raySight = true;
-				else
+				} else
 				{
 					raySight = false;
 				}
 
-
 			}
-
-		
+		}
+		else if (!ss.isSeeingPlayer)
+		{
+			raySight = false;
 		}
 	}
 		
