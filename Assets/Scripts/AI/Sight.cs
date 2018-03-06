@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SightRay : MonoBehaviour
+public class Sight : MonoBehaviour
 {
 	public float sightRayDistance;
 	public Transform target;
-	public bool raySight;
-	public SightSensor ss;
+	public bool canSeePlayer;
+	public FieldOfView Fov;
 
 	// Use this for initialization
 	void Start () 
 	{
-		raySight = false;
+		canSeePlayer = false;
 	}
 	
 	// Update is called once per frame
@@ -23,23 +23,23 @@ public class SightRay : MonoBehaviour
 		Ray sightRay = new Ray (transform.position, forward);
 		transform.LookAt (target);
 
-		if (ss.isSeeingPlayer)
+		if (Fov.playerIsInFieldOfView)
 		{
 			if (Physics.Raycast (sightRay, out sightHit, sightRayDistance))
 			{		
 				if (sightHit.collider.tag == "Player")
 				{
-					raySight = true;
+					canSeePlayer = true;
 				} else
 				{
-					raySight = false;
+					canSeePlayer = false;
 				}
 
 			}
 		}
-		else if (!ss.isSeeingPlayer)
+		else if (!Fov.playerIsInFieldOfView)
 		{
-			raySight = false;
+			canSeePlayer = false;
 		}
 	}
 		

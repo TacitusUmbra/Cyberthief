@@ -537,6 +537,25 @@ Prefab:
       propertyPath: sightLayerMask.m_Bits
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 114450804914252278, guid: 07756540ae4b6bb4285a3725033056d0,
+        type: 2}
+      propertyPath: Fov
+      value: 
+      objectReference: {fileID: 2095578141}
+    - target: {fileID: 114450804914252278, guid: 07756540ae4b6bb4285a3725033056d0,
+        type: 2}
+      propertyPath: aiSight
+      value: 
+      objectReference: {fileID: 354367851}
+    - target: {fileID: 114451514702462012, guid: 07756540ae4b6bb4285a3725033056d0,
+        type: 2}
+      propertyPath: Fov
+      value: 
+      objectReference: {fileID: 2095578141}
+    - target: {fileID: 1556792998551012, guid: 07756540ae4b6bb4285a3725033056d0, type: 2}
+      propertyPath: m_Name
+      value: AI Sight
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 07756540ae4b6bb4285a3725033056d0, type: 2}
   m_IsPrefabParent: 0
@@ -703,6 +722,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &354367851 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114451514702462012, guid: 07756540ae4b6bb4285a3725033056d0,
+    type: 2}
+  m_PrefabInternal: {fileID: 193714514}
+  m_Script: {fileID: 11500000, guid: 32a54947f2f212243a4a9c548023530e, type: 3}
 --- !u!1 &364776796
 GameObject:
   m_ObjectHideFlags: 0
@@ -3707,6 +3732,12 @@ MonoBehaviour:
   percentageHacked: 0
   hacked: 0
   autohack: 0
+--- !u!114 &2095578141 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114398207167997216, guid: 07756540ae4b6bb4285a3725033056d0,
+    type: 2}
+  m_PrefabInternal: {fileID: 193714514}
+  m_Script: {fileID: 11500000, guid: dd9b5ccaacd4af34bb1f2831886b6044, type: 3}
 --- !u!1 &2106141107
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,8 +27,8 @@ public class PatrolAI : MonoBehaviour {
 
 	//Variables related to the AI's sight
 	[Header("AI Seeing")]
-	public SightSensor sightSensor;
-	public SightRay sightRay;
+	public FieldOfView Fov;
+	public Sight aiSight;
 
 	//Variables related to the AI's movement
 	[Header("AI Movement")]
@@ -150,11 +150,11 @@ public class PatrolAI : MonoBehaviour {
 				Patrol();
 			}
 		}
-		else if (sightSensor.isSeeingPlayer && sightRay.raySight && sightRay.target.GetComponent<Player>().visibility < 40f)
+		else if (Fov.playerIsInFieldOfView && aiSight.canSeePlayer && aiSight.target.GetComponent<Player>().visibility < 40f)
 			{
 			this.aiCurrentState = State.Suspicion;
 			}
-		else if (sightSensor.isSeeingPlayer && sightRay.raySight && sightRay.target.GetComponent<Player>().visibility > 40f)
+		else if (Fov.playerIsInFieldOfView && aiSight.canSeePlayer && aiSight.target.GetComponent<Player>().visibility > 40f)
 			{
 			this.aiCurrentState = State.Hostile;
 			}
@@ -187,7 +187,7 @@ public class PatrolAI : MonoBehaviour {
 			}
 
 
-		if (sightSensor.isSeeingPlayer == true && sightRay.raySight == true)
+		if (Fov.playerIsInFieldOfView == true && aiSight.canSeePlayer == true)
 		{
 			this.aiCurrentState = State.Hostile;
 		}
@@ -215,14 +215,14 @@ public class PatrolAI : MonoBehaviour {
 		agent.speed = Mathf.Lerp (agent.speed, hostileSpeed, calmSpeedTimer * Time.deltaTime);
 
 		//target is the position of the player
-		target = sightSensor.sfTarget.transform.position;
+		target = Fov.sfTarget.transform.position;
 
 		//have the AI run after the player
 		agent.destination = target;
 
 		//if the AI can no longer see the player, begin counting until five seconds have elapsed. In that case
 		//go back to patrol because you have lost the player
-		if (!sightRay.raySight)
+		if (!aiSight.canSeePlayer)
 		{
 			hostileTimer += 1 * Time.deltaTime;
 			if (hostileTimer >= hostileVigilanceTimer)
@@ -230,7 +230,7 @@ public class PatrolAI : MonoBehaviour {
 				runHearingSensor.isHearingPlayerRun = false;
 				this.aiCurrentState = State.Patrol;
 			}
-		} else if (sightRay.raySight && hostileTimer >= 0f)
+		} else if (aiSight.canSeePlayer && hostileTimer >= 0f)
 		{
 			hostileTimer = 0;
 		}
@@ -255,7 +255,7 @@ public class PatrolAI : MonoBehaviour {
 	void Suspicion()
 	{
 		agent.isStopped = true;
-		distanceToPlayer =  Vector3.Distance(sightRay.target.position, transform.position);
+		distanceToPlayer =  Vector3.Distance(aiSight.target.position, transform.position);
 
 		if (distanceToPlayer > 10f)
 			suspicionCap = 3f;
@@ -264,15 +264,15 @@ public class PatrolAI : MonoBehaviour {
 		if ( distanceToPlayer < 5f)
 			suspicionCap = 1f;
 
-		if (sightRay.raySight)
+		if (aiSight.canSeePlayer)
 		{
-			Vector3 targetDir = sightRay.target.position - transform.position;
+			Vector3 targetDir = aiSight.target.position - transform.position;
 			Vector3 playerLocation = Vector3.RotateTowards (transform.forward, targetDir, headTurnSpeed, 0.0f);
 			levelOfStress += stressGrowthValue * Time.deltaTime;
 			suspicionAmount += suspicionGrowth * Time.deltaTime;
 			transform.rotation = Quaternion.LookRotation (playerLocation);
 		}
-		else if(!sightRay.raySight)
+		else if(!aiSight.canSeePlayer)
 		{
 			suspicionAmount -= suspicionGrowth * Time.deltaTime;
 			if (suspicionAmount <= suspicionStart)

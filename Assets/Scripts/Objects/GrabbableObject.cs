@@ -52,12 +52,8 @@ void OnCollisionEnter(Collision collision)
 		{
 			hit = true;
 		}	
-		
-
-
 	}
-
-
+			
 	if (collision.gameObject.tag == "Light")
 	{
 		lightHit = collision.gameObject;

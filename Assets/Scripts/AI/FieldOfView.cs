@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SightSensor : MonoBehaviour {
+public class FieldOfView : MonoBehaviour {
 
-	public bool isSeeingPlayer;
+	public bool playerIsInFieldOfView;
 	public GameObject sfTarget;
 
 	void Start()
 	{
-		isSeeingPlayer = false;
+		playerIsInFieldOfView = false;
 	}
 
 	void OnTriggerStay(Collider other)
 	{
 		if (other.gameObject.tag == "Player")
 		{
-			isSeeingPlayer = true;
+			playerIsInFieldOfView = true;
 			sfTarget = other.gameObject;
 		}
 	}
@@ -25,7 +25,7 @@ public class SightSensor : MonoBehaviour {
 		if (other.gameObject.tag == "Player")
 		{
 
-			isSeeingPlayer = false;
+			playerIsInFieldOfView = false;
 		}
 	}
 
