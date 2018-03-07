@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 135694728637303994}
   - component: {fileID: 114377442572424696}
   m_Layer: 2
-  m_Name: Run Hearing Sensor
+  m_Name: AI Hearing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4679234251081908}
   - component: {fileID: 114451514702462012}
   m_Layer: 2
-  m_Name: RaySight
+  m_Name: AI Sight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -431,8 +431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa61fcb8320b9e498420a20a8fe483b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHearingPlayerRun: 0
-  hsTarget: {x: 0, y: 0, z: 0}
+  isHearingPlayer: 0
+  hearingTarget: {x: 0, y: 0, z: 0}
 --- !u!114 &114398207167997216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd9b5ccaacd4af34bb1f2831886b6044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSeeingPlayer: 0
+  playerIsInFieldOfView: 0
   sfTarget: {fileID: 0}
 --- !u!114 &114450804914252278
 MonoBehaviour:
@@ -463,11 +463,11 @@ MonoBehaviour:
   defaultState: 0
   aiCurrentEmotionalState: 5
   defaultEmotionalState: 5
-  runHearingSensor: {fileID: 114377442572424696}
+  hearingSense: {fileID: 114377442572424696}
   distanceRequiredToHear: 50
   target: {x: 0, y: 0, z: 0}
-  sightSensor: {fileID: 114398207167997216}
-  sightRay: {fileID: 114451514702462012}
+  Fov: {fileID: 114398207167997216}
+  aiSight: {fileID: 114451514702462012}
   points:
   - {fileID: 0}
   - {fileID: 0}
@@ -481,7 +481,7 @@ MonoBehaviour:
   distanceToPlayer: 0
   suspicionAmount: 0
   suspicionCap: 3
-  suspicionGrowth: 0
+  suspicionGrowth: 1
   suspicionStart: 0
   suspicionRate: 20
   levelOfStress: 0
@@ -504,8 +504,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightRayDistance: 20
   target: {fileID: 0}
-  raySight: 0
-  ss: {fileID: 114398207167997216}
+  canSeePlayer: 0
+  Fov: {fileID: 114398207167997216}
 --- !u!114 &114636083253840524
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -20,7 +20,7 @@ public class PatrolAI : MonoBehaviour {
 
 	//Variables related to the AI's hearing
 	[Header("AI Hearing")]
-	public RunHearingSensor runHearingSensor;
+	public Hearing hearingSense;
 	public float distanceRequiredToHear;
 	Vector3 previousCorner;
 	public Vector3 target;
@@ -50,7 +50,6 @@ public class PatrolAI : MonoBehaviour {
 	public float suspicionGrowth;
 	public float suspicionStart;
 	public float suspicionRate;
-	public float headTurnSpeed;
 
 	//Variables related to the AI's stress
 	[Header("AI Stress")]
@@ -158,7 +157,7 @@ public class PatrolAI : MonoBehaviour {
 			{
 			this.aiCurrentState = State.Hostile;
 			}
-		else if (runHearingSensor.isHearingPlayerRun)
+		else if (hearingSense.isHearingPlayer)
 			{
 				this.aiCurrentState = State.Alerted;
 			}		
@@ -170,7 +169,7 @@ public class PatrolAI : MonoBehaviour {
 
 		agent.speed = calmSpeed;
 
-		target = runHearingSensor.hsTarget;
+		target = hearingSense.hearingTarget;
 
 		UnityEngine.AI.NavMesh.CalculatePath(transform.position, target, UnityEngine.AI.NavMesh.AllAreas, path);
 			previousCorner = path.corners[0];
@@ -196,7 +195,7 @@ public class PatrolAI : MonoBehaviour {
 			hostileTimer += 1 * Time.deltaTime;
 			if (hostileTimer >= 5f)
 			{
-				runHearingSensor.isHearingPlayerRun = false;
+				hearingSense.isHearingPlayer = false;
 				this.aiCurrentState = State.Patrol;
 			}
 		}
@@ -227,7 +226,7 @@ public class PatrolAI : MonoBehaviour {
 			hostileTimer += 1 * Time.deltaTime;
 			if (hostileTimer >= hostileVigilanceTimer)
 			{
-				runHearingSensor.isHearingPlayerRun = false;
+				hearingSense.isHearingPlayer = false;
 				this.aiCurrentState = State.Patrol;
 			}
 		} else if (aiSight.canSeePlayer && hostileTimer >= 0f)
@@ -266,11 +265,8 @@ public class PatrolAI : MonoBehaviour {
 
 		if (aiSight.canSeePlayer)
 		{
-			Vector3 targetDir = aiSight.target.position - transform.position;
-			Vector3 playerLocation = Vector3.RotateTowards (transform.forward, targetDir, headTurnSpeed, 0.0f);
 			levelOfStress += stressGrowthValue * Time.deltaTime;
 			suspicionAmount += suspicionGrowth * Time.deltaTime;
-			transform.rotation = Quaternion.LookRotation (playerLocation);
 		}
 		else if(!aiSight.canSeePlayer)
 		{

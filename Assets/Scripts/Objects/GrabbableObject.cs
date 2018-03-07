@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class GrabbableObject : MonoBehaviour {
 
-public bool hit;
+	public bool hit;
 
-public State objectState;
-public State defaultObjectState = State.Grounded;
-public GameObject lightHit;
+	public State objectState;
+	public State defaultObjectState = State.Grounded;
+	public GameObject lightHit;
 
 
-public enum State 
+	public enum State 
+		{
+			Grounded,
+			Held,
+			Thrown,
+			Dropped,
+			Break
+		}
+
+	void Start()
 	{
-		Grounded,
-		Held,
-		Thrown,
-		Dropped
+		objectState = defaultObjectState;
+		hit = false;
 	}
-
-void Start()
-{
-	objectState = defaultObjectState;
-	hit = false;
-}
-void Update()
-{
-switch (this.objectState)
+	void Update()
+	{
+	switch (this.objectState)
 		{
 			case State.Grounded:
 			this.Grounded();
@@ -35,58 +36,85 @@ switch (this.objectState)
 			case State.Dropped:
 			this.Dropped ();
 			break;
+
 			case State.Thrown:
 			this.Thrown ();
 			break;
+
 			case State.Held:
 			this.Held ();
 			break;
-		}
-}
 
-void OnCollisionEnter(Collision collision)
-{
-	if(objectState == State.Held)
-	{
-		if(collision.gameObject.tag != "Ground")
-		{
-			hit = true;
-		}	
+			case State.Break:
+			this.Break ();
+			break;
+		}
 	}
-			
-	if (collision.gameObject.tag == "Light")
+
+	void OnCollisionEnter(Collision collision)
 	{
-		lightHit = collision.gameObject;
+
 		if (objectState == State.Thrown)
 		{
-			lightHit.SetActive(false);
+			if (collision.gameObject.tag != "Ground")
+			{
+				objectState = State.Break;
+			}
+			if(collision.gameObject.tag == "Ground")
+			{
+				objectState = State.Break;
+			}
 		}
+
+
+		if(objectState == State.Held)
+		{
+			if(collision.gameObject.tag != "Ground")
+			{
+				hit = true;
+			}	
+		}
+				
+		if (collision.gameObject.tag == "Light")
+		{
+			lightHit = collision.gameObject;
+			if (objectState == State.Thrown)
+			{
+				lightHit.SetActive(false);
+				Destroy (gameObject);
+			}
+		}
+
+		if(collision.gameObject.tag == "Ground")
+			{	
+				objectState = State.Grounded;
+			}
+
+
 	}
 
-	if(collision.gameObject.tag == "Ground")
-		{
-			objectState = State.Grounded;
-		}
+	void Grounded()
+	{
 
-}
+	}
+	void Held()
+	{
+			if(hit == true)
+			objectState = State.Dropped;
+	}
+	void Thrown()
+	{
+			
+	}
+	void Dropped()
+	{
+		hit = false;
+		objectState = State.Grounded;
+	}
 
-void Grounded()
-{
-
-}
-void Held()
-{
-		if(hit == true)
-		objectState = State.Dropped;
-}
-void Thrown()
-{
-	
-}
-void Dropped()
-{
-	hit = false;
-	objectState = State.Grounded;
-}
+	void Break()
+	{
+		Destroy (gameObject);
+	}
 
 }
