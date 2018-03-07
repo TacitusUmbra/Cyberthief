@@ -10,6 +10,8 @@ public class PatrolAI : MonoBehaviour {
 	public bool touchAlarm;
 	//the set alarm Location
 	public Transform alarmLocation;
+	private UnityEngine.AI.NavMeshPath path;
+	Vector3 previousCorner;
 
 	//AI State variables
 	[Header("AI States")]
@@ -81,10 +83,10 @@ public class PatrolAI : MonoBehaviour {
 	void Start () 
 	{
 		aiCurrentState = defaultState;
-		//path = new UnityEngine.AI.NavMeshPath();
 		agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 		hostileTimer = 0;
 		aiCurrentEmotionalState = defaultEmotionalState;
+		path = new UnityEngine.AI.NavMeshPath();
 
 	}
 
@@ -172,27 +174,39 @@ public class PatrolAI : MonoBehaviour {
 	{
 		agent.speed = calmSpeed;
 		agent.destination = aiHearing.hearingTarget;
-		distanceToSound = Vector3.Distance(aiHearing.hearingTarget, transform.position);
+
+		UnityEngine.AI.NavMesh.CalculatePath(transform.position, target, UnityEngine.AI.NavMesh.AllAreas, path);
+			previousCorner = path.corners[0];
+
+		float distance = 0;
+
+			foreach(Vector3 corner in path.corners)
+			{
+				distance += Vector3.Distance(previousCorner, corner);
+			}
+			if(distance <= distanceRequiredToHear)
+			{
+				agent.destination = target;
+			}
+
 
 		if (Fov.playerIsInFieldOfView == true && aiSight.canSeePlayer == true)
 		{
 			this.aiCurrentState = State.Hostile;
 		}
-				
-		if(distanceToSound < 2f)
+		else if(gameObject.transform.position.x == target.x)
 		{
 			hostileTimer += 1 * Time.deltaTime;
-			
 			if (hostileTimer >= 5f)
 			{
 				aiHearing.isHearingPlayer = false;
 				this.aiCurrentState = State.Patrol;
 			}
 		}
-
-			
-		
 	}
+	
+		
+	
 
 
 
