@@ -9,7 +9,7 @@ public class GrabbableObject : MonoBehaviour {
 	public State objectState;
 	public State defaultObjectState = State.Grounded;
 	public GameObject lightHit;
-
+	public GameObject soundToInstantiate;
 
 	public enum State 
 		{
@@ -56,14 +56,11 @@ public class GrabbableObject : MonoBehaviour {
 
 		if (objectState == State.Thrown)
 		{
-			if (collision.gameObject.tag != "Ground")
+			if (collision.gameObject.tag != "Anything in the scene")
 			{
 				objectState = State.Break;
 			}
-			if(collision.gameObject.tag == "Ground")
-			{
-				objectState = State.Break;
-			}
+			
 		}
 
 
@@ -84,13 +81,14 @@ public class GrabbableObject : MonoBehaviour {
 				Destroy (gameObject);
 			}
 		}
+		if(objectState == State.Dropped)
+		{
+			if(collision.gameObject.tag == "Ground")
+				{	
+					objectState = State.Grounded;
+				}
 
-		if(collision.gameObject.tag == "Ground")
-			{	
-				objectState = State.Grounded;
-			}
-
-
+		}
 	}
 
 	void Grounded()
@@ -114,7 +112,7 @@ public class GrabbableObject : MonoBehaviour {
 
 	void Break()
 	{
-		Destroy (gameObject);
+	Destroy (gameObject,0.2f);
 	}
 
 }

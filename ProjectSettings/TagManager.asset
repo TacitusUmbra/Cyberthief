@@ -16,6 +16,7 @@ TagManager:
   - Keycard Panel
   - Ground
   - Light
+  - Breaking Sound
   layers:
   - Default
   - TransparentFX

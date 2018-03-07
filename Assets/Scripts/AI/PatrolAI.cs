@@ -5,7 +5,7 @@ using UnityEngine;
 public class PatrolAI : MonoBehaviour {
 
 	private UnityEngine.AI.NavMeshAgent agent;
-	private UnityEngine.AI.NavMeshPath path;
+	//private UnityEngine.AI.NavMeshPath path;
 	//checking if the AI has touched the alarm
 	public bool touchAlarm;
 	//the set alarm Location
@@ -20,10 +20,13 @@ public class PatrolAI : MonoBehaviour {
 
 	//Variables related to the AI's hearing
 	[Header("AI Hearing")]
-	public Hearing hearingSense;
-	public float distanceRequiredToHear;
-	Vector3 previousCorner;
+	public Hearing aiHearing;
+	//Vector3 previousCorner;
 	public Vector3 target;
+	public float distanceForHeight;	
+	public float distanceRequiredToHear;
+	public float distanceToSound;
+
 
 	//Variables related to the AI's sight
 	[Header("AI Seeing")]
@@ -78,7 +81,7 @@ public class PatrolAI : MonoBehaviour {
 	void Start () 
 	{
 		aiCurrentState = defaultState;
-		path = new UnityEngine.AI.NavMeshPath();
+		//path = new UnityEngine.AI.NavMeshPath();
 		agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 		hostileTimer = 0;
 		aiCurrentEmotionalState = defaultEmotionalState;
@@ -157,7 +160,7 @@ public class PatrolAI : MonoBehaviour {
 			{
 			this.aiCurrentState = State.Hostile;
 			}
-		else if (hearingSense.isHearingPlayer)
+		else if (aiHearing.isHearingPlayer)
 			{
 				this.aiCurrentState = State.Alerted;
 			}		
@@ -165,40 +168,30 @@ public class PatrolAI : MonoBehaviour {
 
 
 
-	void Investigate(){
-
+	void Investigate()
+	{
 		agent.speed = calmSpeed;
-
-		target = hearingSense.hearingTarget;
-
-		UnityEngine.AI.NavMesh.CalculatePath(transform.position, target, UnityEngine.AI.NavMesh.AllAreas, path);
-			previousCorner = path.corners[0];
-
-		float distance = 0;
-
-			foreach(Vector3 corner in path.corners)
-			{
-				distance += Vector3.Distance(previousCorner, corner);
-			}
-			if(distance <= distanceRequiredToHear)
-			{
-				agent.destination = target;
-			}
-
+		agent.destination = aiHearing.hearingTarget;
+		distanceToSound = Vector3.Distance(aiHearing.hearingTarget, transform.position);
 
 		if (Fov.playerIsInFieldOfView == true && aiSight.canSeePlayer == true)
 		{
 			this.aiCurrentState = State.Hostile;
 		}
-		else if(gameObject.transform.position.x == target.x)
+				
+		if(distanceToSound < 2f)
 		{
 			hostileTimer += 1 * Time.deltaTime;
+			
 			if (hostileTimer >= 5f)
 			{
-				hearingSense.isHearingPlayer = false;
+				aiHearing.isHearingPlayer = false;
 				this.aiCurrentState = State.Patrol;
 			}
 		}
+
+			
+		
 	}
 
 
@@ -226,7 +219,7 @@ public class PatrolAI : MonoBehaviour {
 			hostileTimer += 1 * Time.deltaTime;
 			if (hostileTimer >= hostileVigilanceTimer)
 			{
-				hearingSense.isHearingPlayer = false;
+				aiHearing.isHearingPlayer = false;
 				this.aiCurrentState = State.Patrol;
 			}
 		} else if (aiSight.canSeePlayer && hostileTimer >= 0f)
