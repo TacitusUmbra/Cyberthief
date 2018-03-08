@@ -18,6 +18,8 @@ public class Terminal : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+
+		Debug.Log(percentageHacked);
 			if(percentageHacked >= 100f)
 			{
 				door.gameObject.GetComponent<Door> ().locked = false;
