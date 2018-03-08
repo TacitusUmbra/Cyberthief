@@ -5,12 +5,12 @@ using UnityEngine;
 public class PatrolAI : MonoBehaviour {
 
 	private UnityEngine.AI.NavMeshAgent agent;
-	//private UnityEngine.AI.NavMeshPath path;
 	//checking if the AI has touched the alarm
 	public bool touchAlarm;
 	//the set alarm Location
 	public Transform alarmLocation;
-
+	Vector3 previousCorner;
+	
 	//AI State variables
 	[Header("AI States")]
 	public State aiCurrentState;
@@ -21,12 +21,12 @@ public class PatrolAI : MonoBehaviour {
 	//Variables related to the AI's hearing
 	[Header("AI Hearing")]
 	public Hearing aiHearing;
-	//Vector3 previousCorner;
 	public Vector3 target;
-	public float distanceForHeight;	
 	public float distanceRequiredToHear;
 	public float distanceToSound;
-
+	public float investigateTimer;
+	public float timeWillingToInvestigate;
+	public float withinRangeOfSound;
 
 	//Variables related to the AI's sight
 	[Header("AI Seeing")]
@@ -81,7 +81,6 @@ public class PatrolAI : MonoBehaviour {
 	void Start () 
 	{
 		aiCurrentState = defaultState;
-		//path = new UnityEngine.AI.NavMeshPath();
 		agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 		hostileTimer = 0;
 		aiCurrentEmotionalState = defaultEmotionalState;
@@ -139,6 +138,8 @@ public class PatrolAI : MonoBehaviour {
 	//The AI's patrol state where they will walk between points unless some conditions are met to switch states, in which they can become suspicious, hostile, or alerted.
 	void Patrol()
 	{
+
+
 		agent.speed = Mathf.Lerp (agent.speed, calmSpeed, hostlileSpeedTimer * Time.deltaTime);
 
         agent.destination = points[destPoint].position;
@@ -165,35 +166,42 @@ public class PatrolAI : MonoBehaviour {
 				this.aiCurrentState = State.Alerted;
 			}		
 	}
+//The state prior tothe investigative state where the AI will perform an animation before investigating what made a sound.
+	void Alerted()
+	{
+		
+		//Run Animation, then to check what made a sound
+		//After the AI is alerted, it will investigate
+		Debug.Log("What was that?!");
+		levelOfStress = levelOfStress + 20f;
+		this.aiCurrentState = State.Investigate;
 
+	}
 
 
 	void Investigate()
 	{
 		agent.speed = calmSpeed;
-		agent.destination = aiHearing.hearingTarget;
-		distanceToSound = Vector3.Distance(aiHearing.hearingTarget, transform.position);
+		target = aiHearing.hearingTarget;
+		agent.destination = target;
+		distanceToSound = Vector3.Distance(target, transform.position);
 
 		if (Fov.playerIsInFieldOfView == true && aiSight.canSeePlayer == true)
 		{
 			this.aiCurrentState = State.Hostile;
 		}
-				
-		if(distanceToSound < 2f)
+		
+		else if(distanceToSound <= withinRangeOfSound)
 		{
-			hostileTimer += 1 * Time.deltaTime;
-			
-			if (hostileTimer >= 5f)
+			investigateTimer += 1 * Time.deltaTime;
+			if (investigateTimer >= timeWillingToInvestigate)
 			{
+				investigateTimer = 0;
 				aiHearing.isHearingPlayer = false;
 				this.aiCurrentState = State.Patrol;
 			}
 		}
-
-			
-		
 	}
-
 
 
 	//The AI's state where they are hostile and running after the player. The AI's speed will change, and they will make their destination the player's position. 
@@ -275,18 +283,6 @@ public class PatrolAI : MonoBehaviour {
 			agent.isStopped = false;
 			aiCurrentState = State.Hostile;
 		}
-
-	}
-
-	//The state prior tothe investigative state where the AI will perform an animation before investigating what made a sound.
-	void Alerted()
-	{
-		
-		//Run Animation, then to check what made a sound
-		//After the AI is alerted, it will investigate
-		Debug.Log("What was that?!");
-		levelOfStress = levelOfStress + 20f;
-		this.aiCurrentState = State.Investigate;
 
 	}
 
