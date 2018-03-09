@@ -23,7 +23,6 @@ public class Door : MonoBehaviour {
 	void Start() 
 	{
 		doorState = defaultdoorState;
-		locked = true;
 	}
 	void Update() 
 	{
