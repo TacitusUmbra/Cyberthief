@@ -8,6 +8,7 @@ public class Sight : MonoBehaviour
 	public Transform target;
 	public bool canSeePlayer;
 	public FieldOfView Fov;
+	public bool canSeeBody;
 
 	// Use this for initialization
 	void Start () 
@@ -23,10 +24,11 @@ public class Sight : MonoBehaviour
 		Ray sightRay = new Ray (transform.position, forward);
 		transform.LookAt (target);
 
-		if (Fov.playerIsInFieldOfView)
+
+		if (Physics.Raycast (sightRay, out sightHit, sightRayDistance))
 		{
-			if (Physics.Raycast (sightRay, out sightHit, sightRayDistance))
-			{		
+			if (Fov.playerIsInFieldOfView)
+			{
 				if (sightHit.collider.tag == "Player")
 				{
 					canSeePlayer = true;
@@ -41,6 +43,7 @@ public class Sight : MonoBehaviour
 		{
 			canSeePlayer = false;
 		}
+
 	}
 		
 }

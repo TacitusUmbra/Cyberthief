@@ -215,7 +215,7 @@ public class PatrolAI : MonoBehaviour {
 		agent.speed = Mathf.Lerp (agent.speed, hostileSpeed, calmSpeedTimer * Time.deltaTime);
 
 		//target is the position of the player
-		target = Fov.sfTarget.transform.position;
+		target = Fov.fovTarget.transform.position;
 
 		//have the AI run after the player
 		agent.destination = target;

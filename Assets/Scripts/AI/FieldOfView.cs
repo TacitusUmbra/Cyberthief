@@ -5,7 +5,8 @@ using UnityEngine;
 public class FieldOfView : MonoBehaviour {
 
 	public bool playerIsInFieldOfView;
-	public GameObject sfTarget;
+	public bool bodyIsInFieldOfView;
+	public GameObject fovTarget;
 
 	void Start()
 	{
@@ -17,14 +18,13 @@ public class FieldOfView : MonoBehaviour {
 		if (other.gameObject.tag == "Player")
 		{
 			playerIsInFieldOfView = true;
-			sfTarget = other.gameObject;
+			fovTarget = other.gameObject;
 		}
 	}
 	void OnTriggerExit(Collider other)
 	{
 		if (other.gameObject.tag == "Player")
 		{
-
 			playerIsInFieldOfView = false;
 		}
 	}

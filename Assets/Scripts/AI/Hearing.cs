@@ -24,7 +24,7 @@ public class Hearing : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player>().currentState == Player.State.Run )
 		{
-
+			hearingTarget = other.transform.position;
 			UnityEngine.AI.NavMesh.CalculatePath(transform.position, hearingTarget, UnityEngine.AI.NavMesh.AllAreas, path);
 			previousCorner = path.corners[0];
 

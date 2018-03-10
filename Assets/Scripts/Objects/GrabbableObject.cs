@@ -5,11 +5,9 @@ using UnityEngine;
 public class GrabbableObject : MonoBehaviour {
 
 	public bool hit;
-
 	public State objectState;
 	public State defaultObjectState = State.Grounded;
 	public GameObject lightHit;
-	public GameObject soundToInstantiate;
 
 	public enum State 
 		{
@@ -112,7 +110,12 @@ public class GrabbableObject : MonoBehaviour {
 
 	void Break()
 	{
-	Destroy (gameObject,0.2f);
+		StartCoroutine (BreakDestroy());
+	}
+
+	IEnumerator BreakDestroy(){
+		yield return new WaitForSeconds (0.2f);
+		Destroy (gameObject);
 	}
 
 }

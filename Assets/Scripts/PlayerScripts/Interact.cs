@@ -6,18 +6,26 @@ using UnityEngine.UI;
 public class Interact : MonoBehaviour {
 
 
+
 	public PlayerConfig pc;
 	public float interactionDistance;
 	public Player pl;
 	public LayerMask camLayerMask;
 	public Inventory inventory;
 
-	[Header("Holding")]
+	[Header("Holding Objects")]
 	public bool canGrab;
 	public GameObject objectHeld;
 	public float grabSpeed;
 	public Transform grabLocation;
 	public float thrust;
+
+	[Header("Holding Bodies")]
+	public GameObject bodyHeld;
+	public Transform grabBodyLocation;
+	public float grabBodySpeed;
+	public float bodyThrust;
+
 	void Start () 
 	{
 		canGrab = true;
@@ -26,6 +34,24 @@ public class Interact : MonoBehaviour {
 	void Update ()
 	{
 		
+		if (bodyHeld)
+		{
+
+			bodyHeld.gameObject.GetComponent<GrabbableObject>().objectState = GrabbableObject.State.Held;
+			bodyHeld.transform.position = Vector3.Lerp (bodyHeld.transform.position, grabBodyLocation.position, grabBodySpeed * Time.deltaTime);
+			bodyHeld.transform.rotation = grabBodyLocation.transform.rotation;
+
+			if(Input.GetKeyDown(pc.use))
+			{
+				bodyHeld.GetComponent<Rigidbody> ().isKinematic = false;
+				bodyHeld.GetComponent<Rigidbody> ().AddForce (transform.forward * bodyThrust,ForceMode.Impulse);
+				canGrab = true;
+				bodyHeld.GetComponent<Rigidbody>().useGravity = true;
+				bodyHeld.transform.parent = null;
+				bodyHeld.gameObject.GetComponent<GrabbableObject>().objectState = GrabbableObject.State.Dropped;
+				bodyHeld = null;
+			}
+		}
 
 
 
@@ -149,6 +175,21 @@ public class Interact : MonoBehaviour {
 				else if(interactHit.collider.gameObject.GetComponent<KeycardPanel>().keycardLevelRequired == 2 && inventory.keycardLevelTwo == true)
 					interactHit.collider.gameObject.GetComponent<KeycardPanel>().accessGranted = true;	
 			}
+
+			if (interactHit.collider.tag == "Unconscious Body" && (Input.GetKey (pc.interact)) && canGrab)
+			{
+				bodyHeld = interactHit.collider.gameObject;
+				bodyHeld.transform.SetParent(grabBodyLocation);
+				canGrab = false;
+				bodyHeld.GetComponent<Rigidbody>().useGravity = false;
+				bodyHeld.GetComponent<Rigidbody> ().isKinematic = true;
+			}
+
+			if (interactHit.collider.tag == "HitZone" && (Input.GetKey(pc.alternativeInteract)))
+			{
+				//interactHit.collider.gameObject.GetComponentsInParent<PatrolAI>()
+			}
+
 
 
 
