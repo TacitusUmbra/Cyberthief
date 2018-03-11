@@ -174,13 +174,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1497622379445516}
-  m_LocalRotation: {x: -0.00000002980233, y: -0.7071068, z: 0.7071068, w: -0.00000002980233}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.8, z: 0}
   m_LocalScale: {x: 2, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 4291168403735144}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: -90.00001, z: 90.00001}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4679234251081908
 Transform:
   m_ObjectHideFlags: 1
@@ -431,10 +431,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa61fcb8320b9e498420a20a8fe483b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHearingPlayer: 0
-  hearingTarget: {x: 0, y: 0, z: 0}
   distanceRequiredToHear: 30
   distanceForHeight: 10
+  canHearSomething: 0
+  hearingTarget: {x: 0, y: 0, z: 0}
   soundToInstantiate: {fileID: 1372135177100076, guid: bea3931042bb6a84abca56e111f0ebb4,
     type: 2}
 --- !u!114 &114398207167997216
@@ -449,7 +449,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIsInFieldOfView: 0
-  sfTarget: {fileID: 0}
+  bodyIsInFieldOfView: 0
+  fovTarget: {fileID: 0}
+  numberOfThingsInView: 0
+  objectsOfInterest: {x: 0, y: 0, z: 0}
+  sightDistance: 20
+  sightLayer:
+    serializedVersion: 2
+    m_Bits: 2560
+  thingsInFieldofView: []
 --- !u!114 &114450804914252278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -514,6 +522,7 @@ MonoBehaviour:
   target: {fileID: 0}
   canSeePlayer: 0
   Fov: {fileID: 114398207167997216}
+  canSeeBody: 0
 --- !u!114 &114636083253840524
 MonoBehaviour:
   m_ObjectHideFlags: 1
