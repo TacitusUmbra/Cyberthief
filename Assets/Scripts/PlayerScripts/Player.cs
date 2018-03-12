@@ -294,4 +294,6 @@ public class Player : MonoBehaviour {
 			this.cam.transform.position = newVector + this.cam.transform.parent.position;
 		}
 	}
+
+	
 }

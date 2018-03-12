@@ -18,6 +18,7 @@ TagManager:
   - Light
   - Breaking Sound
   - Unconscious Body
+  - Outlined Object
   layers:
   - Default
   - TransparentFX

@@ -137,7 +137,10 @@ public class PatrolAI : MonoBehaviour {
 	//The AI's patrol state where they will walk between points unless some conditions are met to switch states, in which they can become suspicious, hostile, or alerted.
 	void Patrol()
 	{
-
+		if(Fov.canSeeBody)
+		{
+			aiCurrentEmotionalState = State.Paranoid;
+		}
 
 		agent.speed = Mathf.Lerp (agent.speed, calmSpeed, hostlileSpeedTimer * Time.deltaTime);
 
