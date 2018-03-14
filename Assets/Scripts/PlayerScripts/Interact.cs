@@ -12,6 +12,13 @@ public class Interact : MonoBehaviour {
 	public Player pl;
 	public LayerMask camLayerMask;
 	public Inventory inventory;
+	
+
+	[Header("People Choking")]
+	public float chokeTimer;
+	public float chokeTime;
+	public GameObject chokeTarget;
+
 
 	[Header("Holding Objects")]
 	public bool canGrab;
@@ -25,6 +32,8 @@ public class Interact : MonoBehaviour {
 	public Transform grabBodyLocation;
 	public float grabBodySpeed;
 	public float bodyThrust;
+
+
 
 	void Start () 
 	{
@@ -185,19 +194,36 @@ public class Interact : MonoBehaviour {
 				bodyHeld.GetComponent<Rigidbody> ().isKinematic = true;
 			}
 
-			if (interactHit.collider.tag == "HitZone" && (Input.GetKey(pc.alternativeInteract)))
-			{
-				//interactHit.collider.gameObject.GetComponentsInParent<PatrolAI>()
+			if (interactHit.collider.tag == "HitZone") 
+				chokeTarget = interactHit.collider.gameObject;
+			else
+				chokeTarget = null;
+
+			if(chokeTarget){
+
+				if((Input.GetKey(pc.alternativeInteract)) && interactHit.collider.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState != PatrolAI.State.Unconscious)
+				{	
+					chokeTarget.GetComponentInParent<PatrolAI>().aiCurrentState = PatrolAI.State.Choking;
+					chokeTime += 1 * Time.deltaTime;
+				//	interactHit.collider.gameObject
+					Debug.Log("About to choke a bitch!!!!");
+					if(chokeTime > chokeTimer)
+					{
+					chokeTarget.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState = PatrolAI.State.Unconscious;
+					chokeTime = 0;
+					Debug.Log("He's Unconscious");
+					}
+				}
+				else if((!Input.GetKey(pc.alternativeInteract)) && chokeTarget.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState == PatrolAI.State.Choking
+)
+					{	
+						chokeTime = 0;
+						chokeTarget.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState = PatrolAI.State.Recover;
+					}
+
 			}
-
-
-
-
-
-			}
-		}
-
 		
-	
-	
+		}
+	}
+
 }

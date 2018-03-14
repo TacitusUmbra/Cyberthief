@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,13 +10,16 @@ public class PatrolAI : MonoBehaviour {
 	//the set alarm Location
 	public Transform alarmLocation;
 	Vector3 previousCorner;
+	public GameObject hitters;
 	
 	//AI State variables
 	[Header("AI States")]
 	public State aiCurrentState;
 	public State defaultState = State.Patrol;
 	public State aiCurrentEmotionalState;
-	public State defaultEmotionalState;
+	public State defaultEmotionalState = State.Calm;
+	
+
 
 	//Variables related to the AI's hearing
 	[Header("AI Hearing")]
@@ -74,7 +77,10 @@ public class PatrolAI : MonoBehaviour {
 		Calm,
 		Stressed,
 		Paranoid,
-		GoToAlarm
+		GoToAlarm,
+		Choking,
+		Unconscious,
+		Recover
 	}
 
 	void Start () 
@@ -111,6 +117,15 @@ public class PatrolAI : MonoBehaviour {
 			break;
 		case State.GoToAlarm:
 			this.GoToAlarm ();
+			break;
+		case State.Choking:
+			this.Choking ();
+			break;
+		case State.Unconscious:
+			this.Unconscious ();
+			break;
+		case State.Recover:
+			this.Recover ();
 			break;
 			
 		}
@@ -166,7 +181,8 @@ public class PatrolAI : MonoBehaviour {
 		else if (aiHearing.canHearSomething)
 			{
 				this.aiCurrentState = State.Alerted;
-			}		
+			}
+				
 	}
 //The state prior tothe investigative state where the AI will perform an animation before investigating what made a sound.
 	void Alerted()
@@ -249,7 +265,6 @@ public class PatrolAI : MonoBehaviour {
 			this.aiCurrentEmotionalState = State.Stressed;
 			this.aiCurrentState = State.Patrol;
 			touchAlarm = false;
-			Debug.Log ("Patrolling");
 		}
 	}
 		
@@ -288,6 +303,18 @@ public class PatrolAI : MonoBehaviour {
 
 	}
 
+	void Choking()
+	{
+		agent.isStopped = true;
+		
+	}
+
+	void Recover()
+	{
+		agent.isStopped = false;
+		aiCurrentState = State.Hostile;
+	}
+
 	void Calm()
 	{
 		//if calm, the suspicion cap becomes three
@@ -320,6 +347,14 @@ public class PatrolAI : MonoBehaviour {
 		levelOfStress -= stressShrinkValue * Time.deltaTime;
 		aiCurrentState = State.GoToAlarm;
 		stressShrinkValue = 0.5f;
+	}
+
+	void Unconscious()
+	{
+		gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+		Destroy(hitters);
+		gameObject.AddComponent<UnconsciousBody>();
+		Destroy(this);
 	}
 
 	void OnTriggerEnter (Collider other)

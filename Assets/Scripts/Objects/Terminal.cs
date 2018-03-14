@@ -19,7 +19,6 @@ public class Terminal : MonoBehaviour {
 	void Update () 
 	{
 
-		Debug.Log(percentageHacked);
 			if(percentageHacked >= 100f)
 			{
 				door.gameObject.GetComponent<Door> ().locked = false;

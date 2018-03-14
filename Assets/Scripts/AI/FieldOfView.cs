@@ -73,7 +73,6 @@ public class FieldOfView : MonoBehaviour {
 				if((sightHit.collider.tag == "Unconscious Body"))
 				{
 				Debug.DrawRay(transform.position, forward, Color.green);
-				Debug.Log(sightHit);
 				canSeeBody = true;
 				}
 				else 

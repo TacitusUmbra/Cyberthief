@@ -20,7 +20,6 @@ public class PainBox : MonoBehaviour {
 	void OnTriggerStay(Collider other)
 	{
 		if(other.gameObject.tag == "Player" && enemy.GetComponent<PatrolAI>().aiCurrentState == PatrolAI.State.Hostile)
-		Debug.Log("I am angry");
 			if(attackTimer > 2.1)
 			{
 				other.GetComponent<Health>().health -= 1;
