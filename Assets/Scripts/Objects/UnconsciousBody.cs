@@ -9,15 +9,14 @@ public class UnconsciousBody : MonoBehaviour {
 	void Start () 
 	{
 		gameObject.AddComponent<Rigidbody>();
-
+		gameObject.GetComponent<CapsuleCollider>().isTrigger = false;
+		gameObject.AddComponent<GrabbableObject>();
+		gameObject.tag = "Unconscious Body";
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		gameObject.GetComponent<CapsuleCollider>().isTrigger = false;
-		gameObject.AddComponent<GrabbableObject>();
-
-		gameObject.tag = "Unconscious Body";
+		
 	}
 }
