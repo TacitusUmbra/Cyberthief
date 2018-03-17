@@ -234,10 +234,11 @@ public class Player : MonoBehaviour {
 
 
 	void Crouch(){
-
-		//Creating a ray to verify if the player is hitting anything while in the crouched State. If so, they are not allowed to uncrouch.
+		
+		Debug.Log("Crouching");
+		Vector3 up = transform.TransformDirection (Vector3.up);
 		RaycastHit crouchHit;
-		Ray crouchRay = new Ray(transform.position, Vector3.up);
+		Ray crouchRay = new Ray(transform.position, up);
 		if (Physics.Raycast (crouchRay, out crouchHit, crouchRayDistance, crouchLayer)) 
 		{
 			if(crouchHit.collider) 

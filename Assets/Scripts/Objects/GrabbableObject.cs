@@ -48,6 +48,7 @@ public class GrabbableObject : MonoBehaviour {
 			break;
 		}
 	}
+	
 
 	void OnCollisionEnter(Collision collision)
 	{
@@ -60,16 +61,6 @@ public class GrabbableObject : MonoBehaviour {
 			}	
 		}
 				
-		if (collision.gameObject.tag == "Light")
-		{
-			lightHit = collision.gameObject;
-			if (objectState == State.Thrown)
-			{
-				lightHit.SetActive(false);
-				Destroy (gameObject);
-			}
-
-		}
 		if(objectState == State.Dropped)
 		{
 			if(collision.gameObject.tag == "Ground")
@@ -81,6 +72,13 @@ public class GrabbableObject : MonoBehaviour {
 
 		if (objectState == State.Thrown)
 		{
+			if(collision.gameObject.tag == "Light")
+			{
+				lightHit = collision.gameObject.GetComponentInParent<Lights>().lightObject;
+				lightHit.SetActive(false);
+				objectState = State.Break;
+			}
+
 			if (collision.gameObject.tag != "Anything in the scene")
 			{
 				objectState = State.Break;
@@ -110,11 +108,6 @@ public class GrabbableObject : MonoBehaviour {
 
 	void Break()
 	{
-		StartCoroutine (BreakDestroy());
-	}
-
-	IEnumerator BreakDestroy(){
-		yield return new WaitForSeconds (0.2f);
 		Destroy (gameObject);
 	}
 

@@ -62,12 +62,8 @@ public class Interact : MonoBehaviour {
 			}
 		}
 
-
-
 		Vector3 forward = transform.TransformDirection (Vector3.forward);
-
 		RaycastHit interactHit;
-
 		Ray interactRay = new Ray (transform.position, forward);
 		if (Physics.Raycast (interactRay, out interactHit, interactionDistance,camLayerMask))
 		{

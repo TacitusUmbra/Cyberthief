@@ -13,6 +13,8 @@ public class PlayerConfig : MonoBehaviour {
 	public KeyCode interact;
 	public KeyCode alternativeInteract;
 	public KeyCode use;
+	public KeyCode deviceKey;
+	public KeyCode nightstickKey;
 	public bool invertY;
 	public float mouseSensitivity;
 
