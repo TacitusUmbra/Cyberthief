@@ -6219,7 +6219,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1057814195}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.65, y: -0.934, z: 13.619}
+  m_LocalPosition: {x: 10.08, y: 8.03, z: 116.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1532517688}
@@ -6242,7 +6242,7 @@ MonoBehaviour:
   device: {fileID: 299941957}
   interact: {fileID: 1115601317}
   equipState: 0
-  defaultEquipState: 0
+  defaultEquipState: 1
   previousEquipState: 0
   pc: {fileID: 617874144}
   numberOfDecoders: 2
@@ -10488,6 +10488,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4055642563747358, guid: a7b7078044236a340b8be7e731459479,
     type: 2}
   m_PrefabInternal: {fileID: 136728559}
+--- !u!1 &1931258844 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1019391050850426, guid: 07756540ae4b6bb4285a3725033056d0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1940028823}
 --- !u!4 &1938843788 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4055642563747358, guid: a7b7078044236a340b8be7e731459479,
@@ -10634,6 +10639,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114450804914252278, guid: 07756540ae4b6bb4285a3725033056d0,
+        type: 2}
+      propertyPath: hitters
+      value: 
+      objectReference: {fileID: 1931258844}
     m_RemovedComponents:
     - {fileID: 54399620293723578, guid: 07756540ae4b6bb4285a3725033056d0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 07756540ae4b6bb4285a3725033056d0, type: 2}

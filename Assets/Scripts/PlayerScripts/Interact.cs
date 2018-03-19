@@ -201,7 +201,6 @@ public class Interact : MonoBehaviour {
 				{	
 					chokeTarget.GetComponentInParent<PatrolAI>().aiCurrentState = PatrolAI.State.Choking;
 					chokeTime += 1 * Time.deltaTime;
-				//	interactHit.collider.gameObject
 					Debug.Log("Choking guard");
 					if(chokeTime > chokeTimer)
 					{
@@ -210,8 +209,8 @@ public class Interact : MonoBehaviour {
 					Debug.Log("He's Unconscious");
 					}
 				}
-				else if((!Input.GetKey(pc.alternativeInteract)) && chokeTarget.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState == PatrolAI.State.Choking
-)
+				else if((!Input.GetKey(pc.alternativeInteract)) && chokeTarget.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState == PatrolAI.State.Choking)
+
 					{	
 						chokeTime = 0;
 						chokeTarget.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState = PatrolAI.State.Recover;
