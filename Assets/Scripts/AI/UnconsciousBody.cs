@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class UnconsciousBody : MonoBehaviour {
 
+	public bool seen;
+
 
 	// Use this for initialization
 	void Start () 
 	{
+		seen = false;
 		gameObject.AddComponent<Rigidbody>();
 		gameObject.GetComponent<CapsuleCollider>().isTrigger = false;
 		gameObject.AddComponent<GrabbableObject>();
