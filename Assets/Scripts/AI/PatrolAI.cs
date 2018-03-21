@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PatrolAI : MonoBehaviour {
 
-	private UnityEngine.AI.NavMeshAgent agent;
+	public UnityEngine.AI.NavMeshAgent agent;
 	//checking if the AI has touched the alarm
 	public bool touchAlarm;
 	//the set alarm Location
