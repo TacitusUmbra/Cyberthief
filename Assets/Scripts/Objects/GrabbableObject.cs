@@ -55,7 +55,7 @@ public class GrabbableObject : MonoBehaviour {
 
 		if(objectState == State.Held)
 		{
-			if(collision.gameObject.tag != "Ground")
+			if(collision.gameObject.tag != "Ground" || collision.gameObject.tag !="Player")
 			{
 				hit = true;
 			}	
