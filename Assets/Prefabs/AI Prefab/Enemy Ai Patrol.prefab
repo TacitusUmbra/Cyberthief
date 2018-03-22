@@ -56,7 +56,6 @@ GameObject:
   - component: {fileID: 23995553182551050}
   - component: {fileID: 195166320465002582}
   - component: {fileID: 114450804914252278}
-  - component: {fileID: 54399620293723578}
   m_Layer: 2
   m_Name: Enemy Ai Patrol
   m_TagString: Untagged
@@ -142,14 +141,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1267624467576556}
-  m_LocalRotation: {x: -0, y: 0.5426955, z: -0, w: 0.8399295}
-  m_LocalPosition: {x: 8.14, y: 13.08, z: 13.6}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 2.5, y: 1, z: 120}
   m_LocalScale: {x: 0.4, y: 0.9, z: 0.2}
   m_Children:
   - {fileID: 4495449921299642}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 65.735, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &4389327048808182
 Transform:
   m_ObjectHideFlags: 1
@@ -370,21 +369,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1316286465849786}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54399620293723578
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1267624467576556}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!64 &64916616344261750
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -448,10 +432,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceRequiredToHear: 30
   distanceForHeight: 10
-  canHearSomething: 0
-  hearingTarget: {x: 0, y: 0, z: 0}
+  canHearSomething: 1
+  hearingTarget: {x: 9.137319, y: 0.049999952, z: 116.09829}
   soundToInstantiate: {fileID: 1372135177100076, guid: bea3931042bb6a84abca56e111f0ebb4,
     type: 2}
+  hitArea: {x: 9.137319, y: 0.049999952, z: 116.09829}
+  myposition: {x: 2.5299332, y: 0.9499999, z: 119.946304}
+  couldHearSomething: 1
 --- !u!114 &114398207167997216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -478,22 +465,27 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1267624467576556}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06c41b036dbf587438acf88defbfec43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchAlarm: 0
+  agent: {fileID: 195166320465002582}
   alarmLocation: {fileID: 0}
   hitters: {fileID: 1019391050850426}
-  aiCurrentState: 0
-  defaultState: 0
-  aiCurrentEmotionalState: 5
+  idleSpot: {fileID: 0}
+  IdleLookAt: {fileID: 0}
+  rotationSpeed: 1
+  idleGuard: 1
+  patrolGuard: 0
+  aiCurrentState: 8
+  defaultState: 12
+  aiCurrentEmotionalState: 7
   defaultEmotionalState: 5
   aiHearing: {fileID: 114377442572424696}
-  target: {x: 0, y: 0, z: 0}
+  target: {x: 9.137319, y: 0.049999952, z: 116.09829}
   distanceRequiredToHear: 20
-  distanceToSound: 2
+  distanceToSound: 8.488689
   investigateTimer: 0
   timeWillingToInvestigate: 5
   withinRangeOfSound: 2
@@ -505,18 +497,18 @@ MonoBehaviour:
   calmSpeedTimer: 8
   hostileSpeed: 4
   hostlileSpeedTimer: 2
-  hostileTimer: 3
+  hostileTimer: 0
   hostileVigilanceTimer: 10
   stressedSpeed: 2.5
   distanceToPlayer: 0
   suspicionAmount: 0
-  suspicionCap: 3
+  suspicionCap: 2
   suspicionGrowth: 1
   suspicionStart: 0
   suspicionRate: 20
   levelOfStress: 0
-  stressShrinkValue: 0
-  stressGrowthValue: 0
+  stressShrinkValue: 0.05
+  stressGrowthValue: 2
   stressedEntryLevel: 50
   stressedExitLevel: 40
   paranoidEntryLevel: 80
@@ -553,7 +545,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1267624467576556}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3
   m_Height: 1.8
@@ -565,10 +557,10 @@ NavMeshAgent:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1267624467576556}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2.8
+  m_Speed: 3.4189765
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 900

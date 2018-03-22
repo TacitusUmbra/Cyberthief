@@ -5,17 +5,22 @@ using UnityEngine;
 public class PatrolAI : MonoBehaviour {
 
 	public UnityEngine.AI.NavMeshAgent agent;
-	//checking if the AI has touched the alarm
-	public bool touchAlarm;
+	
 	//the set alarm Location
 	public Transform alarmLocation;
 	Vector3 previousCorner;
 	public GameObject hitters;
+	public GameObject idleSpot;
+	public Transform IdleLookAt;
+	public float rotationSpeed;
+
+	public bool idleGuard;
+	public bool patrolGuard;
 	
 	//AI State variables
 	[Header("AI States")]
 	public State aiCurrentState;
-	public State defaultState = State.Patrol;
+	public State defaultState;
 	public State aiCurrentEmotionalState;
 	public State defaultEmotionalState = State.Calm;
 	
@@ -80,16 +85,26 @@ public class PatrolAI : MonoBehaviour {
 		GoToAlarm,
 		Choking,
 		Unconscious,
-		Recover
+		Recover,
+		Idle,
+		WalkBackToIdleSpot
 	}
 
 	void Start () 
 	{
+		if(patrolGuard)
+		{
+		defaultState = State.Patrol;
+		}
+		else if(idleGuard)
+		{
+		defaultState = State.Idle;
+		}
+
 		aiCurrentState = defaultState;
 		agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 		hostileTimer = 0;
 		aiCurrentEmotionalState = defaultEmotionalState;
-
 	}
 
 
@@ -126,6 +141,12 @@ public class PatrolAI : MonoBehaviour {
 			break;
 		case State.Recover:
 			this.Recover ();
+			break;
+		case State.Idle:
+			this.Idle ();
+			break;
+		case State.WalkBackToIdleSpot:
+			this.WalkBackToIdleSpot ();
 			break;
 			
 		}
@@ -182,12 +203,75 @@ public class PatrolAI : MonoBehaviour {
 			{
 				this.aiCurrentState = State.Alerted;
 			}
+		else if((aiCurrentEmotionalState == State.Calm) && idleGuard == true)
+		{
+			this.aiCurrentState = State.WalkBackToIdleSpot;
+		}
 				
 	}
+
+	void Idle()
+	{
+		if(Fov.canSeeBody)
+			{
+				aiCurrentEmotionalState = State.Paranoid;
+			}
+
+ 		Vector3 targetDir = IdleLookAt.position - transform.position;
+        float step = rotationSpeed * Time.deltaTime;
+		targetDir.y =0;
+        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+        Debug.DrawRay(transform.position, newDir, Color.red);
+        transform.rotation = Quaternion.LookRotation(newDir);
+
+		if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.target.GetComponent<Player>().visibility < 40f)
+			{
+			this.aiCurrentState = State.Suspicion;
+			}
+		else if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.target.GetComponent<Player>().visibility > 40f)
+			{
+			this.aiCurrentState = State.Hostile;
+			}
+		else if (aiHearing.canHearSomething)
+			{
+				this.aiCurrentState = State.Alerted;
+			}
+
+
+	}
+	void WalkBackToIdleSpot()
+	{
+		agent.destination = idleSpot.transform.position;
+
+		if(Fov.canSeeBody)
+			{
+				aiCurrentEmotionalState = State.Paranoid;
+			}
+
+		if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.target.GetComponent<Player>().visibility < 40f)
+			{
+			this.aiCurrentState = State.Suspicion;
+			}
+		else if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.target.GetComponent<Player>().visibility > 40f)
+			{
+			this.aiCurrentState = State.Hostile;
+			}
+		else if (aiHearing.canHearSomething)
+			{
+				this.aiCurrentState = State.Alerted;
+			}
+		else if(transform.position.x == idleSpot.transform.position.x)
+			{
+				if(transform.position.z == idleSpot.transform.position.z)
+				{
+				this.aiCurrentState = State.Idle;
+				}
+			}
+	}
+
 //The state prior tothe investigative state where the AI will perform an animation before investigating what made a sound.
 	void Alerted()
 	{
-		
 		//Run Animation, then to check what made a sound
 		//After the AI is alerted, it will investigate
 		Debug.Log("What was that?!");
@@ -212,13 +296,31 @@ public class PatrolAI : MonoBehaviour {
 		else if(distanceToSound <= withinRangeOfSound)
 		{
 			investigateTimer += 1 * Time.deltaTime;
-			if (investigateTimer >= timeWillingToInvestigate)
+			if ((investigateTimer >= timeWillingToInvestigate) && patrolGuard == true)
 			{
 				investigateTimer = 0;
 				aiHearing.canHearSomething = false;
+				aiHearing.couldHearSomething = false;
 				this.aiCurrentState = State.Patrol;
 			}
+			else if((investigateTimer >= timeWillingToInvestigate) && idleGuard == true)
+			{
+				if(levelOfStress < stressedEntryLevel)
+				{
+				investigateTimer = 0;
+				aiHearing.canHearSomething = false;
+				aiHearing.couldHearSomething = false;
+				this.aiCurrentState = State.WalkBackToIdleSpot;
+				}
+				else if((idleGuard == true) && levelOfStress > stressedEntryLevel)
+				{
+				aiHearing.canHearSomething = false;
+				aiHearing.couldHearSomething = false;
+				aiCurrentState = State.Patrol;
+				}
+			}
 		}
+		
 	}
 
 
@@ -258,14 +360,15 @@ public class PatrolAI : MonoBehaviour {
 	void GoToAlarm()
 	{
 		agent.destination = alarmLocation.transform.position;
-		//the Ai will run to the alarm and upon touching it, they will return to a stressed emotional state
-		if (touchAlarm)
+		if(transform.position.x == alarmLocation.transform.position.x)
 		{
+			if(transform.position.z == alarmLocation.transform.position.z)
+			{
 			levelOfStress = 60;
 			this.aiCurrentEmotionalState = State.Stressed;
-			this.aiCurrentState = State.Patrol;
-			touchAlarm = false;
-		}
+			this.aiCurrentState = State.Patrol;				
+			}
+		}		
 	}
 		
 	//The state where the AI can 'see' the player in shadow, but they must wait for a particular amount of time before becoming hostile.
@@ -319,6 +422,8 @@ public class PatrolAI : MonoBehaviour {
 	{
 		//if calm, the suspicion cap becomes three
 		suspicionCap = 3;
+		//Bring the stress shrink value to this value
+		stressShrinkValue = 0.5f;
 		//if they reach the level of stress needed, they enter the emotional state of being stressed
 		if (levelOfStress > stressedEntryLevel)
 			aiCurrentEmotionalState = State.Stressed;
@@ -334,7 +439,9 @@ public class PatrolAI : MonoBehaviour {
 		suspicionCap = 2;
 
 		if (levelOfStress < stressedExitLevel)
+		{
 			aiCurrentEmotionalState = State.Calm;
+		}
 		else if (levelOfStress > paranoidEntryLevel)
 		{
 			aiCurrentEmotionalState = State.Paranoid;
@@ -346,7 +453,9 @@ public class PatrolAI : MonoBehaviour {
 		agent.speed = Mathf.Lerp (agent.speed, hostileSpeed, calmSpeedTimer * Time.deltaTime);
 		levelOfStress -= stressShrinkValue * Time.deltaTime;
 		aiCurrentState = State.GoToAlarm;
-		stressShrinkValue = 0.5f;
+		aiHearing.canHearSomething = false;
+		aiHearing.couldHearSomething = false;
+		stressShrinkValue = 0.25f;
 	}
 
 	void Unconscious()
@@ -361,10 +470,5 @@ public class PatrolAI : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Player")
 			aiCurrentState = State.Hostile;
-		if (other.gameObject.tag == "Alarm" && aiCurrentState == State.GoToAlarm)
-		{
-			Debug.Log ("Touching");
-			touchAlarm = true;
-		}
 	}
 }

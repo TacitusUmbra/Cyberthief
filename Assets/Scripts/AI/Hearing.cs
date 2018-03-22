@@ -61,9 +61,6 @@ public class Hearing : MonoBehaviour {
 
 		}
 
-	
-	
-
 		if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player>().currentState == Player.State.Run)
 		{
 			canHearSomething = true;
