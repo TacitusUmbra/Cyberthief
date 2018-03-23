@@ -64,6 +64,8 @@ public class Inventory : MonoBehaviour {
 
 		nightstick.SetActive(false);
 		device.SetActive(true);
+
+
 		equipState = State.HoldDevice;
 
 	}

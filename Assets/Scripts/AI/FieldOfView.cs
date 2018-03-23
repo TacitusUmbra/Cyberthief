@@ -58,8 +58,7 @@ public class FieldOfView : MonoBehaviour {
 				{
 					canSeePlayer=false;
 				}
-				
-				
+					
 			}
 			
 		}

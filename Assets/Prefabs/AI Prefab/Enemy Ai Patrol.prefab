@@ -439,6 +439,7 @@ MonoBehaviour:
   hitArea: {x: 9.137319, y: 0.049999952, z: 116.09829}
   myposition: {x: 2.5299332, y: 0.9499999, z: 119.946304}
   couldHearSomething: 1
+  patrol: {fileID: 114450804914252278}
 --- !u!114 &114398207167997216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -536,7 +537,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 12
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136112641469102686
 CapsuleCollider:

@@ -108,7 +108,7 @@ public class GrabbableObject : MonoBehaviour {
 
 	void Break()
 	{
-		Destroy (gameObject, 0.2f);
+		Destroy (gameObject,0.02f);
 	}
 
 }

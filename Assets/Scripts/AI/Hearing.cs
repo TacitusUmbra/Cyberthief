@@ -15,6 +15,7 @@ public class Hearing : MonoBehaviour {
 	public Vector3 hitArea;
 	public Vector3 myposition;
 	public bool couldHearSomething;
+	public PatrolAI patrol;
 
 	// Use this for initialization
 	void Start () 
@@ -27,47 +28,62 @@ public class Hearing : MonoBehaviour {
 	void OnTriggerStay(Collider other)
 	{
 		UnityEngine.AI.NavMeshHit myNavHit;
-		if (other.gameObject.GetComponent<GrabbableObject> ().objectState == GrabbableObject.State.Break)
+		if (other.gameObject.tag == "Grabbable")
 		{
-			if (UnityEngine.AI.NavMesh.SamplePosition(other.gameObject.transform.position, out myNavHit, 50.0f, UnityEngine.AI.NavMesh.AllAreas))
+			if (other.gameObject.GetComponent<GrabbableObject> ().objectState == GrabbableObject.State.Break)
 			{
-				hitArea = myNavHit.position;
-				myposition = transform.position;
-				couldHearSomething = true;
-
-				if (couldHearSomething)
+				if (UnityEngine.AI.NavMesh.SamplePosition (other.gameObject.transform.position, out myNavHit, 50.0f, UnityEngine.AI.NavMesh.AllAreas))
 				{
-					UnityEngine.AI.NavMesh.CalculatePath (transform.position, hitArea, UnityEngine.AI.NavMesh.AllAreas, path);
-					previousCorner = path.corners [0];
+					hitArea = myNavHit.position;
+					myposition = transform.position;
+					couldHearSomething = true;
 
-					float distance = 0;
+					if (couldHearSomething)
+					{
+						UnityEngine.AI.NavMesh.CalculatePath (transform.position, hitArea, UnityEngine.AI.NavMesh.AllAreas, path);
+						previousCorner = path.corners [0];
 
-					foreach (Vector3 corner in path.corners)
-					{
-						distance += Vector3.Distance (previousCorner, corner);
+						float distance = 0;
+
+						foreach (Vector3 corner in path.corners)
+						{
+							distance += Vector3.Distance (previousCorner, corner);
+						}
+						if (distance <= distanceRequiredToHear)
+						{
+							patrol.levelOfStress = patrol.levelOfStress + 20f;
+							hearingTarget = hitArea;
+							canHearSomething = true;
+						} else
+						{
+							couldHearSomething = false;
+							Debug.Log ("Too Far");
+						}
 					}
-					if (distance <= distanceRequiredToHear)
-					{
-						hearingTarget = hitArea;
-						canHearSomething = true;
-					} else
-					{
-						couldHearSomething = false;
-						Debug.Log ("Too Far");
-					}
+
 				}
 
 			}
-
 		}
 
 		if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player>().currentState == Player.State.Run)
 		{
-			canHearSomething = true;
-			hearingTarget = other.transform.position;
-		}
+			UnityEngine.AI.NavMesh.CalculatePath(transform.position, other.transform.position, UnityEngine.AI.NavMesh.AllAreas, path);
+			previousCorner = path.corners[0];
 
-	
+			float distance = 0;
+
+			foreach(Vector3 corner in path.corners)
+			{
+				distance += Vector3.Distance(previousCorner, corner);
+			}
+			if(distance <= distanceRequiredToHear)
+			{
+				canHearSomething = true;
+				hearingTarget = other.transform.position;
+				patrol.aiCurrentEmotionalState = PatrolAI.State.Stressed;
+			}
+		}
 	}
 
 	void OnTriggerExit(Collider other)
@@ -75,6 +91,7 @@ public class Hearing : MonoBehaviour {
 		if (other.gameObject.tag == "Player")
 			canHearSomething = false;
 	}
+		
 }
 	
 	

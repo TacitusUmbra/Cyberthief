@@ -224,7 +224,7 @@ public class PatrolAI : MonoBehaviour {
         Debug.DrawRay(transform.position, newDir, Color.red);
         transform.rotation = Quaternion.LookRotation(newDir);
 
-		if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.target.GetComponent<Player>().visibility < 40f)
+		if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.target.GetComponent<Player>().visibility < 40f && Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.target.GetComponent<Player>().visibility > 20f)
 			{
 			this.aiCurrentState = State.Suspicion;
 			}
@@ -275,7 +275,6 @@ public class PatrolAI : MonoBehaviour {
 		//Run Animation, then to check what made a sound
 		//After the AI is alerted, it will investigate
 		Debug.Log("What was that?!");
-		levelOfStress = levelOfStress + 20f;
 		this.aiCurrentState = State.Investigate;
 
 	}
