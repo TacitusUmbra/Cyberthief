@@ -1984,7 +1984,7 @@ MonoBehaviour:
   crouchLerpTime: 20
   gravity: 50
   jumpStrength: -100
-  gravityForce: 2.5
+  gravityForce: 4.5
 --- !u!143 &1057814197
 CharacterController:
   m_ObjectHideFlags: 0
