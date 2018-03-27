@@ -42,7 +42,7 @@ public class Interact : MonoBehaviour {
 	
 	void Update ()
 	{
-		
+		//If you're holding a body, you can throw it by clicking the Use button
 		if (bodyHeld)
 		{
 
@@ -61,7 +61,7 @@ public class Interact : MonoBehaviour {
 				bodyHeld = null;
 			}
 		}
-
+		//The interact ray
 		Vector3 forward = transform.TransformDirection (Vector3.forward);
 		RaycastHit interactHit;
 		Ray interactRay = new Ray (transform.position, forward);
@@ -136,15 +136,17 @@ public class Interact : MonoBehaviour {
 				}	
 			}
 
-			//Acessing Terminals to hack them
-			if (interactHit.collider.tag == "Terminal" && Input.GetKey(pc.interact))
+			//Acessing Terminals to hack them only if you are holding the device
+			if (inventory.equipState == Inventory.State.HoldDevice)
 			{
-				if(interactHit.collider.gameObject.GetComponent<Terminal>().hacked == false)
+				if (interactHit.collider.tag == "Terminal" && Input.GetKey (pc.interact))
 				{
-					interactHit.collider.gameObject.GetComponent<Terminal>().percentageHacked += 15f * Time.deltaTime;
+					if (interactHit.collider.gameObject.GetComponent<Terminal> ().hacked == false)
+					{
+						interactHit.collider.gameObject.GetComponent<Terminal> ().percentageHacked += 15f * Time.deltaTime;
+					}
 				}
 			}
-
 			//If all conditions are met, autohack the terminal, otherwise, display message saying there are not enough decoders
 			if(interactHit.collider.tag == "Terminal" && Input.GetKeyDown(pc.alternativeInteract) && interactHit.collider.gameObject.GetComponent<Terminal>().autohack == false && inventory.numberOfDecoders > 0)
 				{
@@ -181,6 +183,9 @@ public class Interact : MonoBehaviour {
 					interactHit.collider.gameObject.GetComponent<KeycardPanel>().accessGranted = true;	
 			}
 
+
+
+			//if you find an unconscious body, you can pick it up
 			if (interactHit.collider.tag == "Unconscious Body" && (Input.GetKey (pc.interact)) && canGrab)
 			{
 				bodyHeld = interactHit.collider.gameObject;
@@ -190,15 +195,18 @@ public class Interact : MonoBehaviour {
 				bodyHeld.GetComponent<Rigidbody> ().isKinematic = true;
 			}
 
+			//Storing the hitzone as a target
 			if (interactHit.collider.tag == "HitZone") 
 				chokeTarget = interactHit.collider.gameObject;
 			else
 				chokeTarget = null;
 
+			//if you're choking someone and you stop, they will recover and become hostile
 			if(chokeTarget){
 
 				if((Input.GetKey(pc.alternativeInteract)) && interactHit.collider.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState != PatrolAI.State.Unconscious)
 				{	
+					pl.isCrouched = false;
 					chokeTarget.GetComponentInParent<PatrolAI>().aiCurrentState = PatrolAI.State.Choking;
 					chokeTime += 1 * Time.deltaTime;
 					Debug.Log("Choking guard");
