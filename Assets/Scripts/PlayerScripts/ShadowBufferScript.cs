@@ -27,6 +27,7 @@ public class ShadowBufferScript : MonoBehaviour {
 		relativeLuminance = shadowBufferColor.r * 0.2126f + shadowBufferColor.g * 0.7152f + shadowBufferColor.b * 0.0722f;
 
 		percentageHidden = relativeLuminance * 100;
+		Debug.Log (percentageHidden);
 
 	}
 }
