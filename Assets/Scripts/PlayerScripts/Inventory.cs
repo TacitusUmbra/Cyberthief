@@ -32,6 +32,7 @@ public class Inventory : MonoBehaviour {
 	void Start () 
 	{
 		equipState = defaultEquipState;
+		device.SetActive(true);
 
 	}
 	
@@ -64,14 +65,13 @@ public class Inventory : MonoBehaviour {
 
 		nightstick.SetActive(false);
 		device.SetActive(true);
-
-
 		equipState = State.HoldDevice;
 
 	}
 
 	void HoldDevice()
 	{
+
 		if(Input.GetKey(pc.nightstickKey))
 		equipState = State.EquipWeapon;
 

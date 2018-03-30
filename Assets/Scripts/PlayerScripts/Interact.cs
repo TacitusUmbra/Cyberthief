@@ -139,7 +139,7 @@ public class Interact : MonoBehaviour {
 			//Acessing Terminals to hack them only if you are holding the device
 			if (inventory.equipState == Inventory.State.HoldDevice)
 			{
-				if (interactHit.collider.tag == "Terminal" && Input.GetKey (pc.interact))
+				if (interactHit.collider.tag == "Terminal" && Input.GetKey (pc.use))
 				{
 					if (interactHit.collider.gameObject.GetComponent<Terminal> ().hacked == false)
 					{
