@@ -23,4 +23,5 @@ public class DoorTrigger : MonoBehaviour {
 			door.doorState = Door.State.Closing;
 		}
 	}
+
 }

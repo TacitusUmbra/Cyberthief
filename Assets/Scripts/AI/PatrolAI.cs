@@ -29,7 +29,7 @@ public class PatrolAI : MonoBehaviour {
 	//Variables related to the AI's hearing
 	[Header("AI Hearing")]
 	public Hearing aiHearing;
-	public Vector3 target;
+	public Vector3 hearingTarget;
 	public float distanceRequiredToHear;
 	public float distanceToSound;
 	public float investigateTimer;
@@ -39,6 +39,7 @@ public class PatrolAI : MonoBehaviour {
 	//Variables related to the AI's sight
 	[Header("AI Seeing")]
 	public FieldOfView Fov;
+	public Vector3 locationOfPlayerPreviouslySighted;
 
 	//Variables related to the AI's movement
 	[Header("AI Movement")]
@@ -191,11 +192,11 @@ public class PatrolAI : MonoBehaviour {
 				Patrol();
 			}
 		}
-		else if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.target.GetComponent<Player>().visibility < 40f)
+		else if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.sightTarget.GetComponent<Player>().visibility < 40f &&  Fov.sightTarget.GetComponent<Player>().visibility > 20f)
 			{
 			this.aiCurrentState = State.Suspicion;
 			}
-		else if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.target.GetComponent<Player>().visibility > 40f)
+		else if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.sightTarget.GetComponent<Player>().visibility > 40f)
 			{
 			this.aiCurrentState = State.Hostile;
 			}
@@ -221,14 +222,13 @@ public class PatrolAI : MonoBehaviour {
         float step = rotationSpeed * Time.deltaTime;
 		targetDir.y =0;
         Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
-        Debug.DrawRay(transform.position, newDir, Color.red);
         transform.rotation = Quaternion.LookRotation(newDir);
 
-		if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.target.GetComponent<Player>().visibility < 40f && Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.target.GetComponent<Player>().visibility > 20f)
+		if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.sightTarget.GetComponent<Player>().visibility < 40f &&  Fov.sightTarget.GetComponent<Player>().visibility > 20f)
 			{
 			this.aiCurrentState = State.Suspicion;
 			}
-		else if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.target.GetComponent<Player>().visibility > 40f)
+		else if (Fov.playerInFieldOfView && Fov.canSeePlayer)
 			{
 			this.aiCurrentState = State.Hostile;
 			}
@@ -248,11 +248,11 @@ public class PatrolAI : MonoBehaviour {
 				aiCurrentEmotionalState = State.Paranoid;
 			}
 
-		if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.target.GetComponent<Player>().visibility < 40f)
+		if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.sightTarget.GetComponent<Player>().visibility < 40f &&  Fov.sightTarget.GetComponent<Player>().visibility > 20f)
 			{
 			this.aiCurrentState = State.Suspicion;
 			}
-		else if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.target.GetComponent<Player>().visibility > 40f)
+		else if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.sightTarget.GetComponent<Player>().visibility > 40f)
 			{
 			this.aiCurrentState = State.Hostile;
 			}
@@ -274,7 +274,6 @@ public class PatrolAI : MonoBehaviour {
 	{
 		//Run Animation, then to check what made a sound
 		//After the AI is alerted, it will investigate
-		Debug.Log("What was that?!");
 		this.aiCurrentState = State.Investigate;
 
 	}
@@ -283,15 +282,18 @@ public class PatrolAI : MonoBehaviour {
 	void Investigate()
 	{
 		agent.speed = calmSpeed;
-		target = aiHearing.hearingTarget;
-		agent.destination = target;
-		distanceToSound = Vector3.Distance(target, transform.position);
+		hearingTarget = aiHearing.hearingTarget;
+		agent.destination = hearingTarget;
+		distanceToSound = Vector3.Distance(hearingTarget, transform.position);
 
-		if (Fov.playerInFieldOfView == true && Fov.canSeePlayer == true)
+		if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.sightTarget.GetComponent<Player>().visibility > 40f)
 		{
 			this.aiCurrentState = State.Hostile;
 		}
-		
+		else if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.sightTarget.GetComponent<Player>().visibility < 40f &&  Fov.sightTarget.GetComponent<Player>().visibility > 20f)
+		{
+			this.aiCurrentState = State.Suspicion;
+		}
 		else if(distanceToSound <= withinRangeOfSound)
 		{
 			investigateTimer += 1 * Time.deltaTime;
@@ -333,16 +335,17 @@ public class PatrolAI : MonoBehaviour {
 		//Have the AI begin to run from walking
 		agent.speed = Mathf.Lerp (agent.speed, hostileSpeed, calmSpeedTimer * Time.deltaTime);
 
-		//target is the position of the player
-		target = Fov.target.transform.position;
-
-		//have the AI run after the player
-		agent.destination = target;
+		//target is the position of the player previously sighted
+		if(Fov.canSeePlayer)
+		{
+		locationOfPlayerPreviouslySighted = Fov.sightTarget.transform.position;
+		}		
 
 		//if the AI can no longer see the player, begin counting until five seconds have elapsed. In that case
 		//go back to patrol because you have lost the player
 		if (!Fov.canSeePlayer)
 		{
+			agent.destination = locationOfPlayerPreviouslySighted;
 			hostileTimer += 1 * Time.deltaTime;
 			if (hostileTimer >= hostileVigilanceTimer)
 			{
@@ -353,6 +356,10 @@ public class PatrolAI : MonoBehaviour {
 		{
 			hostileTimer = 0;
 		}
+
+		
+
+
 	}
 
 	//The state where the AI will run to the alarmand set it in order to alert other guards in the scene.
@@ -374,7 +381,7 @@ public class PatrolAI : MonoBehaviour {
 	void Suspicion()
 	{
 		agent.isStopped = true;
-		distanceToPlayer =  Vector3.Distance(Fov.target.position, transform.position);
+		distanceToPlayer =  Vector3.Distance(Fov.sightTarget.position, transform.position);
 
 		if (distanceToPlayer > 10f)
 			suspicionCap = 3f;
@@ -451,10 +458,18 @@ public class PatrolAI : MonoBehaviour {
 	{
 		agent.speed = Mathf.Lerp (agent.speed, hostileSpeed, calmSpeedTimer * Time.deltaTime);
 		levelOfStress -= stressShrinkValue * Time.deltaTime;
+		if(alarmLocation)
+		{
 		aiCurrentState = State.GoToAlarm;
+		}
 		aiHearing.canHearSomething = false;
 		aiHearing.couldHearSomething = false;
 		stressShrinkValue = 0.25f;
+		if(levelOfStress < paranoidExitLevel)
+		{
+		aiCurrentEmotionalState = State.Stressed;
+		}
+
 	}
 
 	void Unconscious()

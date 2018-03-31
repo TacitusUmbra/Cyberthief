@@ -235,7 +235,6 @@ public class Player : MonoBehaviour {
 
 	void Crouch(){
 		
-		Debug.Log("Crouching");
 		Vector3 up = transform.TransformDirection (Vector3.up);
 		RaycastHit crouchHit;
 		Ray crouchRay = new Ray(transform.position, up);

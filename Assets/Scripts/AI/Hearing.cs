@@ -57,7 +57,6 @@ public class Hearing : MonoBehaviour {
 						} else
 						{
 							couldHearSomething = false;
-							Debug.Log ("Too Far");
 						}
 					}
 

@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 23703557288253646}
   - component: {fileID: 114838239819109420}
   - component: {fileID: 111536300650669956}
-  - component: {fileID: 208139556648154796}
   m_Layer: 0
   m_Name: Door
   m_TagString: Door
@@ -56,8 +55,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1671008321827072}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.025, y: 1, z: 0.073}
-  m_LocalScale: {x: 1.2, y: 2.2, z: 0.1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1.2, y: 2.2, z: 0.09}
   m_Children: []
   m_Father: {fileID: 4603440200877348}
   m_RootOrder: 0
@@ -69,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1209484115041602}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -4.98, y: 0.04, z: -21.012001}
+  m_LocalPosition: {x: 21.5, y: -0.85, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4086432606922506}
@@ -184,18 +183,3 @@ MonoBehaviour:
   doorState: 0
   defaultdoorState: 1
   locked: 0
---- !u!208 &208139556648154796
-NavMeshObstacle:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1671008321827072}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5

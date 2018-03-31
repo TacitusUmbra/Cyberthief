@@ -19,6 +19,8 @@ TagManager:
   - Breaking Sound
   - Unconscious Body
   - Outlined Object
+  - AI
+  - Guard
   layers:
   - Default
   - TransparentFX

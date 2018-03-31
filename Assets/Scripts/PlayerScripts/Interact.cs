@@ -67,7 +67,6 @@ public class Interact : MonoBehaviour {
 		Ray interactRay = new Ray (transform.position, forward);
 		if (Physics.Raycast (interactRay, out interactHit, interactionDistance,camLayerMask))
 		{
-			        Debug.DrawRay(transform.position, forward, Color.green);
 
 			if (interactHit.collider.tag == "Lightswitch")
 			{
@@ -127,6 +126,8 @@ public class Interact : MonoBehaviour {
 					}
 			}
 			
+
+
 			//Opening Doors
 			if (interactHit.collider.tag == "Door" && (Input.GetKeyDown (pc.interact)))
 			{
@@ -152,11 +153,11 @@ public class Interact : MonoBehaviour {
 				{
 					interactHit.collider.gameObject.GetComponent<Terminal>().autohack = true;
 					inventory.numberOfDecoders = inventory.numberOfDecoders-1;
-					Debug.Log("Autohacking!");
+					
 				}
 			else if(interactHit.collider.tag == "Terminal" && Input.GetKey(pc.alternativeInteract) && inventory.numberOfDecoders == 0)
 				{
-					Debug.Log("Not Enough Decoders!");
+				
 				}
 
 			//Picking up a keycard of a particular level and destroying it afterwards
@@ -175,7 +176,7 @@ public class Interact : MonoBehaviour {
 			}	
 
 			//Using Keycard on Keycard Panel
-			if(interactHit.collider.tag == "Keycard Panel" && Input.GetKey(pc.interact))
+			if(interactHit.collider.tag == "Terminal" && Input.GetKey(pc.interact))
 			{
 				if(interactHit.collider.gameObject.GetComponent<KeycardPanel>().keycardLevelRequired == 1 && inventory.keycardLevelOne == true)
 					interactHit.collider.gameObject.GetComponent<KeycardPanel>().accessGranted = true;
@@ -209,12 +210,10 @@ public class Interact : MonoBehaviour {
 					pl.isCrouched = false;
 					chokeTarget.GetComponentInParent<PatrolAI>().aiCurrentState = PatrolAI.State.Choking;
 					chokeTime += 1 * Time.deltaTime;
-					Debug.Log("Choking guard");
 					if(chokeTime > chokeTimer)
 					{
 					chokeTarget.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState = PatrolAI.State.Unconscious;
 					chokeTime = 0;
-					Debug.Log("He's Unconscious");
 					}
 				}
 				else if((!Input.GetKey(pc.alternativeInteract)) && chokeTarget.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState == PatrolAI.State.Choking)

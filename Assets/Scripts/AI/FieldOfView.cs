@@ -11,7 +11,7 @@ public class FieldOfView : MonoBehaviour {
 	public bool bodyInFieldOfView;
 	public float sightDistance;
 	public LayerMask sightLayer;
-	public Transform target;
+	public Transform sightTarget;
 
 
 	void Start()
@@ -50,13 +50,13 @@ public class FieldOfView : MonoBehaviour {
 			{		
 				if((sightHit.collider.tag == "Player"))
 				{
-				Debug.DrawRay(transform.position, forward, Color.green);
-				Debug.Log(sightHit);
+				sightTarget = sightHit.collider.gameObject.transform;
 				canSeePlayer = true;
 				}
 				else 
 				{
-					canSeePlayer=false;
+				canSeePlayer=false;
+				sightTarget = null;
 				}
 					
 			}
@@ -72,7 +72,6 @@ public class FieldOfView : MonoBehaviour {
 				if((sightHit.collider.tag == "Unconscious Body"))
 				{
 				checkPosition.gameObject.GetComponent<UnconsciousBody>().seen = true;
-				Debug.DrawRay(transform.position, forward, Color.green);
 				canSeeBody = true;
 				}
 				else 
