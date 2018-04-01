@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Interact : MonoBehaviour {
 
 
-
 	public PlayerConfig pc;
 	public float interactionDistance;
 	public Player pl;
@@ -33,11 +32,25 @@ public class Interact : MonoBehaviour {
 	public float grabBodySpeed;
 	public float bodyThrust;
 
+	[Header("Interactions")]
+	public GameObject doorText;
+	public GameObject keycardText;
+	public GameObject grabText;
+	public GameObject objecHeldText;
+	public GameObject chokeText;
+	public GameObject unconsciousBody;
+	public GameObject terminalText;
+	public GameObject useKeycardText;
+	public GameObject autohackText;
 
 
 	void Start () 
 	{
 		canGrab = true;
+		doorText.SetActive(false);
+		keycardText.SetActive(false);
+		grabText.SetActive(false);
+		objecHeldText.SetActive(false);
 	}
 	
 	void Update ()
@@ -61,6 +74,7 @@ public class Interact : MonoBehaviour {
 				bodyHeld = null;
 			}
 		}
+
 		//The interact ray
 		Vector3 forward = transform.TransformDirection (Vector3.forward);
 		RaycastHit interactHit;
@@ -84,16 +98,28 @@ public class Interact : MonoBehaviour {
 			}
 
 			//If conditions are met, pickup an object
-			if (interactHit.collider.tag == "Grabbable" && (Input.GetKeyDown (pc.interact)) && canGrab)
+			if (interactHit.collider.tag == "Grabbable" && canGrab && interactHit.collider.gameObject.GetComponent<GrabbableObject>().objectState == GrabbableObject.State.Grounded)
 			{
+				grabText.SetActive(true);
+
+				if(Input.GetKeyDown (pc.interact))
+				{
 				objectHeld = interactHit.collider.gameObject;
 				objectHeld.transform.SetParent(grabLocation);
 				canGrab = false;
 				objectHeld.GetComponent<Rigidbody>().useGravity = false;
+				}
 			}
+			else
+			{
+				grabText.SetActive(false);				
+			}
+
+
 			//If you're holding something and there is an object being held, have it fall into your hands.
 			if(objectHeld)
 			{
+				objecHeldText.SetActive(true);
 				objectHeld.gameObject.GetComponent<GrabbableObject>().objectState = GrabbableObject.State.Held;
 				objectHeld.transform.position = Vector3.Lerp (objectHeld.transform.position, grabLocation.position, grabSpeed * Time.deltaTime);
 
@@ -125,29 +151,64 @@ public class Interact : MonoBehaviour {
 						objectHeld = null;
 					}
 			}
+			else
+			{
+				objecHeldText.SetActive(false);
+			}
 			
 
 
 			//Opening Doors
-			if (interactHit.collider.tag == "Door" && (Input.GetKeyDown (pc.interact)))
+			if (interactHit.collider.tag == "Door")
 			{
-				if(interactHit.collider.gameObject.GetComponent<Door> ().locked == false)
+				doorText.SetActive(true);
+				if(Input.GetKeyDown (pc.interact))
 				{
-				interactHit.collider.gameObject.GetComponent<Door> ().doorState = Door.State.Opening;
+					if(interactHit.collider.gameObject.GetComponent<Door> ().locked == false)
+						{
+						interactHit.collider.gameObject.GetComponent<Door> ().doorState = Door.State.Opening;
+						}
 				}	
+			}
+			else
+			{
+			doorText.SetActive(false);
 			}
 
 			//Acessing Terminals to hack them only if you are holding the device
 			if (inventory.equipState == Inventory.State.HoldDevice)
 			{
-				if (interactHit.collider.tag == "Terminal" && Input.GetKey (pc.use))
+				if (interactHit.collider.tag == "Terminal")
 				{
-					if (interactHit.collider.gameObject.GetComponent<Terminal> ().hacked == false)
+					terminalText.SetActive(true);
+
+					if(inventory.keycardLevelOne)
 					{
-						interactHit.collider.gameObject.GetComponent<Terminal> ().percentageHacked += 15f * Time.deltaTime;
+					useKeycardText.SetActive(true);
+					}
+					if(inventory.numberOfDecoders > 1)
+					{
+					autohackText.SetActive(true);
+					}
+
+					if (Input.GetKey (pc.use))
+					{
+						if (interactHit.collider.gameObject.GetComponent<Terminal> ().hacked == false)
+						{
+							interactHit.collider.gameObject.GetComponent<Terminal> ().percentageHacked += 15f * Time.deltaTime;
+						}
 					}
 				}
+				else
+				{
+				terminalText.SetActive(false);
+				useKeycardText.SetActive(false);
+				autohackText.SetActive(false);
+				}
 			}
+			
+
+
 			//If all conditions are met, autohack the terminal, otherwise, display message saying there are not enough decoders
 			if(interactHit.collider.tag == "Terminal" && Input.GetKeyDown(pc.alternativeInteract) && interactHit.collider.gameObject.GetComponent<Terminal>().autohack == false && inventory.numberOfDecoders > 0)
 				{
@@ -161,19 +222,27 @@ public class Interact : MonoBehaviour {
 				}
 
 			//Picking up a keycard of a particular level and destroying it afterwards
-			if(interactHit.collider.tag == "Keycard" && Input.GetKey(pc.interact))
+			if(interactHit.collider.tag == "Keycard")
 			{
-				if(interactHit.collider.gameObject.GetComponent<Keycard>().keycardLevel == 1 && inventory.keycardLevelOne == false)
+				keycardText.SetActive(true);
+				if(Input.GetKey(pc.interact))
 				{
-					inventory.keycardLevelOne = true;
-					Destroy(interactHit.collider.gameObject);
+					if(interactHit.collider.gameObject.GetComponent<Keycard>().keycardLevel == 1 && inventory.keycardLevelOne == false)
+					{
+						inventory.keycardLevelOne = true;
+						Destroy(interactHit.collider.gameObject);
+					}
+					if(interactHit.collider.gameObject.GetComponent<Keycard>().keycardLevel == 2 && inventory.keycardLevelOne == false)
+					{
+						inventory.keycardLevelTwo = true;
+						Destroy(interactHit.collider.gameObject);
+					}
 				}
-				if(interactHit.collider.gameObject.GetComponent<Keycard>().keycardLevel == 2 && inventory.keycardLevelOne == false)
-				{
-					inventory.keycardLevelTwo = true;
-					Destroy(interactHit.collider.gameObject);
-				}
-			}	
+			}
+			else
+			{
+				keycardText.SetActive(false);
+			}
 
 			//Using Keycard on Keycard Panel
 			if(interactHit.collider.tag == "Terminal" && Input.GetKey(pc.interact))
@@ -187,14 +256,23 @@ public class Interact : MonoBehaviour {
 
 
 			//if you find an unconscious body, you can pick it up
-			if (interactHit.collider.tag == "Unconscious Body" && (Input.GetKey (pc.interact)) && canGrab)
+			if (interactHit.collider.tag == "Unconscious Body" && canGrab)
 			{
+				unconsciousBody.SetActive(true);
+				if(Input.GetKey (pc.interact))
+				{
 				bodyHeld = interactHit.collider.gameObject;
 				bodyHeld.transform.SetParent(grabBodyLocation);
 				canGrab = false;
 				bodyHeld.GetComponent<Rigidbody>().useGravity = false;
 				bodyHeld.GetComponent<Rigidbody> ().isKinematic = true;
+				}
 			}
+			else
+			{
+				unconsciousBody.SetActive(false);
+			}
+
 
 			//Storing the hitzone as a target
 			if (interactHit.collider.tag == "HitZone") 
@@ -205,6 +283,7 @@ public class Interact : MonoBehaviour {
 			//if you're choking someone and you stop, they will recover and become hostile
 			if(chokeTarget){
 
+				chokeText.SetActive(true);
 				if((Input.GetKey(pc.alternativeInteract)) && interactHit.collider.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState != PatrolAI.State.Unconscious)
 				{	
 					pl.isCrouched = false;
@@ -224,7 +303,22 @@ public class Interact : MonoBehaviour {
 					}
 
 			}
+			else
+			{
+				chokeText.SetActive(false);
+			}
 		
+		}
+		else
+		{
+			doorText.SetActive(false);
+			keycardText.SetActive(false);
+			grabText.SetActive(false);
+			objecHeldText.SetActive(false);
+			unconsciousBody.SetActive(false);
+			terminalText.SetActive(false);
+			useKeycardText.SetActive(false);
+			autohackText.SetActive(false);
 		}
 	}
 

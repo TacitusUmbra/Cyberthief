@@ -228,7 +228,7 @@ public class PatrolAI : MonoBehaviour {
 			{
 			this.aiCurrentState = State.Suspicion;
 			}
-		else if (Fov.playerInFieldOfView && Fov.canSeePlayer)
+		else if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.sightTarget.GetComponent<Player>().visibility > 40f)
 			{
 			this.aiCurrentState = State.Hostile;
 			}

@@ -7,6 +7,7 @@ public class Health : MonoBehaviour {
 
 	public float health;
 	public Slider slider;
+	public Transform respawnZone;
 	// Use this for initialization
 	void Start () 
 	{
@@ -18,6 +19,11 @@ public class Health : MonoBehaviour {
 
 		if (health > 5)
 		{
+			health = 5;
+		}
+		if(health < 1)
+		{
+			gameObject.transform.position = respawnZone.position;
 			health = 5;
 		}
 	
