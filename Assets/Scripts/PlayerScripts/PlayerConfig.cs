@@ -16,6 +16,8 @@ public class PlayerConfig : MonoBehaviour {
 	public KeyCode deviceKey;
 	public KeyCode nightstickKey;
 	public KeyCode escape;
+	public KeyCode hackMode;
+	public KeyCode comMode;
 	public bool invertY;
 	public float mouseSensitivity;
 

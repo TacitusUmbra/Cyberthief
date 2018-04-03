@@ -21,6 +21,7 @@ TagManager:
   - Outlined Object
   - AI
   - Guard
+  - Floor
   layers:
   - Default
   - TransparentFX

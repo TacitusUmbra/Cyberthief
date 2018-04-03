@@ -13,6 +13,12 @@ public class PatrolAI : MonoBehaviour {
 	public GameObject idleSpot;
 	public Transform IdleLookAt;
 	public float rotationSpeed;
+	public float distanceToOrderedLocation;
+	public float distanceRequiredToOrderedLocation;
+	public float keycardLevel;
+
+	public float waitTimer;
+	public float waitCooldown;
 
 	public bool idleGuard;
 	public bool patrolGuard;
@@ -26,7 +32,7 @@ public class PatrolAI : MonoBehaviour {
 	
 
 
-	//Variables related to the AI's hearing
+	//Variables related to the AI's 
 	[Header("AI Hearing")]
 	public Hearing aiHearing;
 	public Vector3 hearingTarget;
@@ -76,6 +82,11 @@ public class PatrolAI : MonoBehaviour {
 	public float shootTimer;
 	public float shootCooldown;
 
+	[Header("ComLink")]
+	public float comlinkPercentageHacked;
+	public bool comlinkHacked; 
+
+
 	//Ai States
 	public enum State 
 	{
@@ -92,7 +103,10 @@ public class PatrolAI : MonoBehaviour {
 		Unconscious,
 		Recover,
 		Idle,
-		WalkBackToIdleSpot
+		WalkBackToIdleSpot,
+		FollowOrder,
+		UnlockDoor,
+		Wait
 	}
 
 	void Start () 
@@ -153,7 +167,15 @@ public class PatrolAI : MonoBehaviour {
 		case State.WalkBackToIdleSpot:
 			this.WalkBackToIdleSpot ();
 			break;
-			
+		case State.FollowOrder:
+			this.FollowOrder ();
+			break;
+		case State.UnlockDoor:
+			this.UnlockDoor();
+			break;
+		case State.Wait:
+			this.Wait();
+			break;
 		}
 
 		//The AI's emotional states
@@ -171,7 +193,6 @@ public class PatrolAI : MonoBehaviour {
 			break;
 
 		}
-
 			
 	}
 
@@ -401,6 +422,8 @@ public class PatrolAI : MonoBehaviour {
 	void Suspicion()
 	{
 		agent.isStopped = true;
+		
+		if(Fov.sightTarget)
 		distanceToPlayer =  Vector3.Distance(Fov.sightTarget.position, transform.position);
 
 		if (distanceToPlayer > 10f)
@@ -409,6 +432,7 @@ public class PatrolAI : MonoBehaviour {
 			suspicionCap = 2f;
 		if ( distanceToPlayer < 5f)
 			suspicionCap = 1f;
+
 		if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.sightTarget.GetComponent<Player>().visibility > 40f)
 		{
 			shootTimer = 2.9f;
@@ -504,6 +528,33 @@ public class PatrolAI : MonoBehaviour {
 		Destroy(hitters);
 		gameObject.AddComponent<UnconsciousBody>();
 		Destroy(this);
+	}
+
+	void FollowOrder()
+	{
+		distanceToOrderedLocation = Vector3.Distance(agent.destination,transform.position);
+		if(distanceToOrderedLocation < distanceRequiredToOrderedLocation)
+		{
+			aiCurrentState = State.Wait;
+		}
+	}
+
+	void UnlockDoor()
+	{
+		distanceToOrderedLocation = Vector3.Distance(agent.destination,transform.position);
+		if(distanceToOrderedLocation < distanceRequiredToOrderedLocation)
+		{
+		aiCurrentState = State.Wait;
+		}
+	}
+
+	void Wait()
+	{
+		waitTimer += 1 * Time.deltaTime;
+		if(waitTimer > waitCooldown)
+		{
+			aiCurrentState = State.WalkBackToIdleSpot;
+		}
 	}
 
 	void OnTriggerEnter (Collider other)

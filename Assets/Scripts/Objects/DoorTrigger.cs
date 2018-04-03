@@ -22,6 +22,16 @@ public class DoorTrigger : MonoBehaviour {
 		{
 			door.doorState = Door.State.Closing;
 		}
+		
+	}
+
+	void OnTriggerEnter(Collider enter)
+	{
+		Debug.Log("BBSA");
+		if(enter.gameObject.tag == "Guard" )
+			{
+				Debug.Log("BBB");
+			}
 	}
 
 }
