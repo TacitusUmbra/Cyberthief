@@ -22,6 +22,8 @@ public class PatrolAI : MonoBehaviour {
 
 	public bool idleGuard;
 	public bool patrolGuard;
+
+	public Player pl;
 	
 	//AI State variables
 	[Header("AI States")]
@@ -469,6 +471,7 @@ public class PatrolAI : MonoBehaviour {
 
 	void Recover()
 	{
+		locationOfPlayerPreviouslySighted = pl.gameObject.transform.position;
 		shootTimer = 2.9f;
 		agent.isStopped = false;
 		aiCurrentState = State.Hostile;
@@ -560,6 +563,11 @@ public class PatrolAI : MonoBehaviour {
 	void OnTriggerEnter (Collider other)
 	{
 		if (other.gameObject.tag == "Player")
+		{
+			locationOfPlayerPreviouslySighted = pl.gameObject.transform.position;
+			shootTimer = 2.9f;
 			aiCurrentState = State.Hostile;
+		}
+			
 	}
 }

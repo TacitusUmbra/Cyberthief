@@ -8,6 +8,7 @@ public class Tutorial : MonoBehaviour {
 	public GameObject tutorial;
 	public GameObject thisTutorialObject;
 	public GameObject reticule;
+
 	public bool paused;
 	// Use this for initialization
 	void Start () 

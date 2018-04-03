@@ -56,6 +56,7 @@ public class Interact : MonoBehaviour {
 	public float deviceDistance;
 	public float comHackTimer;
 	
+	
 
 
 
@@ -66,8 +67,8 @@ public class Interact : MonoBehaviour {
 		keycardText.SetActive(false);
 		grabText.SetActive(false);
 		objecHeldText.SetActive(false);
-		comHackMode = true;
-		terminalHackMode = false;
+		comHackMode = false;
+		terminalHackMode = true;
 		comlinkText.SetActive(false);
 		canHackGuard = true;
 
