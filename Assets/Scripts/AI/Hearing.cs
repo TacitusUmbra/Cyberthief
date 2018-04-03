@@ -68,20 +68,25 @@ public class Hearing : MonoBehaviour {
 		if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player>().currentState == Player.State.Run)
 		{
 			UnityEngine.AI.NavMesh.CalculatePath(transform.position, other.transform.position, UnityEngine.AI.NavMesh.AllAreas, path);
-			previousCorner = path.corners[0];
 
-			float distance = 0;
+			if(path.status == UnityEngine.AI.NavMeshPathStatus.PathComplete)
+			{
+				previousCorner = path.corners[0];
 
-			foreach(Vector3 corner in path.corners)
-			{
-				distance += Vector3.Distance(previousCorner, corner);
+				float distance = 0;
+
+				foreach(Vector3 corner in path.corners)
+				{
+					distance += Vector3.Distance(previousCorner, corner);
+				}
+				if(distance <= distanceRequiredToHear)
+				{
+					canHearSomething = true;
+					hearingTarget = other.transform.position;
+					patrol.aiCurrentEmotionalState = PatrolAI.State.Stressed;
+				}
 			}
-			if(distance <= distanceRequiredToHear)
-			{
-				canHearSomething = true;
-				hearingTarget = other.transform.position;
-				patrol.aiCurrentEmotionalState = PatrolAI.State.Stressed;
-			}
+				
 		}
 	}
 

@@ -15,8 +15,7 @@ public class PlayerConfig : MonoBehaviour {
 	public KeyCode use;
 	public KeyCode deviceKey;
 	public KeyCode nightstickKey;
-	public KeyCode peekingRight;
-	public KeyCode peekingLeft;
+	public KeyCode escape;
 	public bool invertY;
 	public float mouseSensitivity;
 

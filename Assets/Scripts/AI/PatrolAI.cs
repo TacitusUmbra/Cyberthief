@@ -72,6 +72,10 @@ public class PatrolAI : MonoBehaviour {
 	public float paranoidEntryLevel;
 	public float paranoidExitLevel;
 
+	[Header("AI Stress")]
+	public float shootTimer;
+	public float shootCooldown;
+
 	//Ai States
 	public enum State 
 	{
@@ -192,13 +196,14 @@ public class PatrolAI : MonoBehaviour {
 				Patrol();
 			}
 		}
+		else if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.sightTarget.GetComponent<Player>().visibility > 40f)
+		{
+			shootTimer = 2.9f;
+			this.aiCurrentState = State.Hostile;
+		}
 		else if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.sightTarget.GetComponent<Player>().visibility < 40f &&  Fov.sightTarget.GetComponent<Player>().visibility > 20f)
 			{
 			this.aiCurrentState = State.Suspicion;
-			}
-		else if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.sightTarget.GetComponent<Player>().visibility > 40f)
-			{
-			this.aiCurrentState = State.Hostile;
 			}
 		else if (aiHearing.canHearSomething)
 			{
@@ -224,14 +229,16 @@ public class PatrolAI : MonoBehaviour {
         Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
         transform.rotation = Quaternion.LookRotation(newDir);
 
-		if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.sightTarget.GetComponent<Player>().visibility < 40f &&  Fov.sightTarget.GetComponent<Player>().visibility > 20f)
+		if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.sightTarget.GetComponent<Player>().visibility > 40f)
+			{
+				shootTimer = 2.9f;
+			this.aiCurrentState = State.Hostile;
+			}
+		else if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.sightTarget.GetComponent<Player>().visibility < 40f &&  Fov.sightTarget.GetComponent<Player>().visibility > 20f)
 			{
 			this.aiCurrentState = State.Suspicion;
 			}
-		else if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.sightTarget.GetComponent<Player>().visibility > 40f)
-			{
-			this.aiCurrentState = State.Hostile;
-			}
+	
 		else if (aiHearing.canHearSomething)
 			{
 				this.aiCurrentState = State.Alerted;
@@ -248,13 +255,14 @@ public class PatrolAI : MonoBehaviour {
 				aiCurrentEmotionalState = State.Paranoid;
 			}
 
-		if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.sightTarget.GetComponent<Player>().visibility < 40f &&  Fov.sightTarget.GetComponent<Player>().visibility > 20f)
+		if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.sightTarget.GetComponent<Player>().visibility > 40f)
+		{
+			shootTimer = 2.9f;
+			this.aiCurrentState = State.Hostile;
+		}
+		else if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.sightTarget.GetComponent<Player>().visibility < 40f &&  Fov.sightTarget.GetComponent<Player>().visibility > 20f)
 			{
 			this.aiCurrentState = State.Suspicion;
-			}
-		else if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.sightTarget.GetComponent<Player>().visibility > 40f)
-			{
-			this.aiCurrentState = State.Hostile;
 			}
 		else if (aiHearing.canHearSomething)
 			{
@@ -288,6 +296,7 @@ public class PatrolAI : MonoBehaviour {
 
 		if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.sightTarget.GetComponent<Player>().visibility > 40f)
 		{
+			shootTimer = 2.9f;
 			this.aiCurrentState = State.Hostile;
 		}
 		else if (Fov.playerInFieldOfView && Fov.canSeePlayer &&  Fov.sightTarget.GetComponent<Player>().visibility < 40f &&  Fov.sightTarget.GetComponent<Player>().visibility > 20f)
@@ -329,6 +338,7 @@ public class PatrolAI : MonoBehaviour {
 	//If they no longer can see the player for ten seconds, they will go back to patrol.
 	void Hostile()
 	{
+		shootTimer += 1 * Time.deltaTime;
 		//Suspicion becomes 0
 		suspicionAmount = 0;
 
@@ -339,6 +349,19 @@ public class PatrolAI : MonoBehaviour {
 		if(Fov.canSeePlayer)
 		{
 		locationOfPlayerPreviouslySighted = Fov.sightTarget.transform.position;
+
+		Vector3 playerDirection = Fov.sightTarget.transform.position - transform.position;
+		float hostileTurning = rotationSpeed * Time.deltaTime;
+		playerDirection.y = 0f;
+		Vector3 newPlayerDirection = Vector3.RotateTowards(transform.forward, playerDirection, hostileTurning, 0.0F);
+        transform.rotation = Quaternion.LookRotation(newPlayerDirection);
+
+			if(shootTimer > shootCooldown)
+			{
+				Fov.sightTarget.GetComponent<Health>().health -=1f;
+				shootTimer = 0;
+			}
+
 		}		
 
 		//if the AI can no longer see the player, begin counting until five seconds have elapsed. In that case
@@ -346,6 +369,7 @@ public class PatrolAI : MonoBehaviour {
 		if (!Fov.canSeePlayer)
 		{
 			agent.destination = locationOfPlayerPreviouslySighted;
+			
 			hostileTimer += 1 * Time.deltaTime;
 			if (hostileTimer >= hostileVigilanceTimer)
 			{
@@ -356,10 +380,6 @@ public class PatrolAI : MonoBehaviour {
 		{
 			hostileTimer = 0;
 		}
-
-		
-
-
 	}
 
 	//The state where the AI will run to the alarmand set it in order to alert other guards in the scene.
@@ -389,8 +409,12 @@ public class PatrolAI : MonoBehaviour {
 			suspicionCap = 2f;
 		if ( distanceToPlayer < 5f)
 			suspicionCap = 1f;
-
-		if (Fov.canSeePlayer)
+		if (Fov.playerInFieldOfView && Fov.canSeePlayer && Fov.sightTarget.GetComponent<Player>().visibility > 40f)
+		{
+			shootTimer = 2.9f;
+			this.aiCurrentState = State.Hostile;
+		}
+		else if (Fov.canSeePlayer)
 		{
 			levelOfStress += stressGrowthValue * Time.deltaTime;
 			suspicionAmount += suspicionGrowth * Time.deltaTime;
@@ -406,6 +430,7 @@ public class PatrolAI : MonoBehaviour {
 		}
 		if (suspicionAmount >= suspicionCap)
 		{
+			shootTimer = 2.9f;
 			agent.isStopped = false;
 			aiCurrentState = State.Hostile;
 		}
@@ -420,6 +445,7 @@ public class PatrolAI : MonoBehaviour {
 
 	void Recover()
 	{
+		shootTimer = 2.9f;
 		agent.isStopped = false;
 		aiCurrentState = State.Hostile;
 	}

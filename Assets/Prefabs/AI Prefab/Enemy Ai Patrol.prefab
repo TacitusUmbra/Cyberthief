@@ -182,7 +182,7 @@ Transform:
   m_GameObject: {fileID: 1316286465849786}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.010001659, y: 0.124, z: -0.16199756}
-  m_LocalScale: {x: 0.2280567, y: 1.0822403, z: 0.010000001}
+  m_LocalScale: {x: 0.27774373, y: 1.2169054, z: 0.010000001}
   m_Children: []
   m_Father: {fileID: 4495449921299642}
   m_RootOrder: 0
@@ -443,6 +443,8 @@ MonoBehaviour:
   stressedExitLevel: 40
   paranoidEntryLevel: 80
   paranoidExitLevel: 65
+  shootTimer: 0
+  shootCooldown: 3
 --- !u!114 &114616250742278794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -487,7 +489,7 @@ CapsuleCollider:
   m_Radius: 0.3
   m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.15}
 --- !u!195 &195166320465002582
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -496,7 +498,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1267624467576556}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Speed: 3.4189765
   m_Acceleration: 8
   avoidancePriority: 50
