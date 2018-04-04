@@ -7714,6 +7714,26 @@ Prefab:
       propertyPath: points.Array.data[1]
       value: 
       objectReference: {fileID: 2106141108}
+    - target: {fileID: 114450804914252278, guid: 07756540ae4b6bb4285a3725033056d0,
+        type: 2}
+      propertyPath: waitCooldown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114450804914252278, guid: 07756540ae4b6bb4285a3725033056d0,
+        type: 2}
+      propertyPath: pl
+      value: 
+      objectReference: {fileID: 1057814196}
+    - target: {fileID: 114450804914252278, guid: 07756540ae4b6bb4285a3725033056d0,
+        type: 2}
+      propertyPath: distanceRequiredToOrderedLocation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114450804914252278, guid: 07756540ae4b6bb4285a3725033056d0,
+        type: 2}
+      propertyPath: keycardLevel
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 07756540ae4b6bb4285a3725033056d0, type: 2}
   m_IsPrefabParent: 0

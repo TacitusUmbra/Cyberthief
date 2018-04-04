@@ -355,9 +355,18 @@ public class Interact : MonoBehaviour {
 				//This mode is for interacting with terminals
 				if(terminalHackMode)
 				{	
+
+
 					comlinkText.SetActive(false);
 					comlinkPercentage.SetActive(false);
 					deviceDistance = 3.5f;
+
+
+					if(Input.GetKeyUp(pc.comMode))
+					{
+						comHackMode = true;
+						terminalHackMode = false;
+					}
 
 					if (deviceHit.collider.tag == "Terminal")
 					{
@@ -387,11 +396,7 @@ public class Interact : MonoBehaviour {
 					autohackText.SetActive(false);
 					}
 
-					if(Input.GetKeyUp(pc.comMode))
-					{
-						comHackMode = true;
-						terminalHackMode = false;
-					}
+
 
 				}
 
@@ -400,6 +405,14 @@ public class Interact : MonoBehaviour {
 				{
 					comHackTimer -= 1* Time.deltaTime;
 					deviceDistance = 40f;
+
+
+					if(Input.GetKeyUp(pc.hackMode))
+					{
+						comHackMode = false;
+						terminalHackMode = true;
+
+					}
 
 					if(comHackTimer < 0 || numberOfOrders < 1)
 					{
@@ -473,12 +486,7 @@ public class Interact : MonoBehaviour {
 					}
 
 
-					if(Input.GetKeyUp(pc.hackMode))
-					{
-						comHackMode = false;
-						terminalHackMode = true;
 
-					}
 				}
 			}
 			else
