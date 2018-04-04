@@ -24,8 +24,8 @@ public class Inventory : MonoBehaviour {
 		{
 			EquipDevice,
 			HoldDevice,
-			EquipWeapon,
-			HoldWeapon,
+			HoldComDevice,
+			EquipComDevice,
 			CarryBody
 		}
 	// Use this for initialization
@@ -48,11 +48,11 @@ public class Inventory : MonoBehaviour {
 		case State.HoldDevice:
 			this.HoldDevice ();
 			break;
-		case State.EquipWeapon:
-			this.EquipWeapon ();
+		case State.EquipComDevice:
+			this.EquipComDevice ();
 			break;
-		case State.HoldWeapon:
-			this.HoldWeapon ();
+		case State.HoldComDevice:
+			this.HoldComDevice ();
 			break;
 		case State.CarryBody:
 			this.CarryBody ();
@@ -73,7 +73,7 @@ public class Inventory : MonoBehaviour {
 	{
 
 		if(Input.GetKey(pc.nightstickKey))
-		equipState = State.EquipWeapon;
+		equipState = State.EquipComDevice;
 
 		if(interact.bodyHeld)
 		{
@@ -82,20 +82,20 @@ public class Inventory : MonoBehaviour {
 		}
 	}
 
-	void EquipWeapon()
+	void EquipComDevice()
 	{
 		device.SetActive(false);
 		nightstick.SetActive(true);
-		equipState = State.HoldWeapon;
+		equipState = State.HoldComDevice;
 	}
-	void HoldWeapon()
+	void HoldComDevice()
 	{
 		if(Input.GetKey(pc.deviceKey))
 		equipState = State.EquipDevice;
 
 		if(interact.bodyHeld)
 		{
-		previousEquipState = State.HoldWeapon;
+		previousEquipState = State.HoldComDevice;
 		equipState = State.CarryBody;
 		}
 	}
@@ -108,8 +108,8 @@ public class Inventory : MonoBehaviour {
 		{
 		if(previousEquipState == State.HoldDevice)
 		  equipState = State.EquipDevice;
-		if(previousEquipState == State.HoldWeapon)
-		  equipState = State.EquipWeapon;
+		if(previousEquipState == State.HoldComDevice)
+		  equipState = State.EquipComDevice;
 
 
 		}

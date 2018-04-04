@@ -9,7 +9,7 @@ public class Interact : MonoBehaviour {
 	public PlayerConfig pc;
 	public float interactionDistance;
 	public Player pl;
-	public LayerMask camLayerMask;
+	public LayerMask interactLayerMask;
 	public Inventory inventory;
 	
 
@@ -40,25 +40,7 @@ public class Interact : MonoBehaviour {
 	public GameObject objecHeldText;
 	public GameObject chokeText;
 	public GameObject unconsciousBody;
-	public GameObject terminalText;
 	public GameObject useKeycardText;
-	public GameObject autohackText;
-
-	[Header("Comlink Hacking")]
-	public bool terminalHackMode;
-	public bool comHackMode;
-	public GameObject comlinkText;
-	public string stringHack;
-	public GameObject comlinkPercentage;
-	public GameObject guardHacked;
-	public float numberOfOrders;
-	public bool canHackGuard;
-	public float deviceDistance;
-	public float comHackTimer;
-	
-	
-
-
 
 	void Start () 
 	{
@@ -67,11 +49,6 @@ public class Interact : MonoBehaviour {
 		keycardText.SetActive(false);
 		grabText.SetActive(false);
 		objecHeldText.SetActive(false);
-		comHackMode = false;
-		terminalHackMode = true;
-		comlinkText.SetActive(false);
-		canHackGuard = true;
-
 	}
 	
 	void Update ()
@@ -100,7 +77,7 @@ public class Interact : MonoBehaviour {
 		Vector3 forward = transform.TransformDirection (Vector3.forward);
 		RaycastHit interactHit;
 		Ray interactRay = new Ray (transform.position, forward);
-		if (Physics.Raycast (interactRay, out interactHit, interactionDistance,camLayerMask))
+		if (Physics.Raycast (interactRay, out interactHit, interactionDistance,interactLayerMask))
 		{
 
 			if (interactHit.collider.tag == "Lightswitch")
@@ -311,194 +288,10 @@ public class Interact : MonoBehaviour {
 			grabText.SetActive(false);
 			objecHeldText.SetActive(false);
 			unconsciousBody.SetActive(false);
-			terminalText.SetActive(false);
 			useKeycardText.SetActive(false);
-			autohackText.SetActive(false);
-			comlinkText.SetActive(false);
+			
 
 		}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		RaycastHit deviceHit;
-		Ray deviceRay = new Ray (transform.position, forward);
-		if (Physics.Raycast (deviceRay, out deviceHit, deviceDistance,camLayerMask))
-			{
-			//Acessing Terminals and hacking guards
-			if (inventory.equipState == Inventory.State.HoldDevice)
-			{
-
-				//This mode is for interacting with terminals
-				if(terminalHackMode)
-				{	
-
-
-					comlinkText.SetActive(false);
-					comlinkPercentage.SetActive(false);
-					deviceDistance = 3.5f;
-
-
-					if(Input.GetKeyUp(pc.comMode))
-					{
-						comHackMode = true;
-						terminalHackMode = false;
-					}
-
-					if (deviceHit.collider.tag == "Terminal")
-					{
-						terminalText.SetActive(true);
-
-						if(inventory.keycardLevelOne)
-						{
-						useKeycardText.SetActive(true);
-						}
-						if(inventory.numberOfDecoders > 1)
-						{
-						autohackText.SetActive(true);
-						}
-
-						if (Input.GetKey (pc.use))
-						{
-							if (deviceHit.collider.gameObject.GetComponent<Terminal> ().hacked == false)
-							{
-								deviceHit.collider.gameObject.GetComponent<Terminal> ().percentageHacked += 15f * Time.deltaTime;
-							}
-						}
-					}
-					else
-					{
-					terminalText.SetActive(false);
-					useKeycardText.SetActive(false);
-					autohackText.SetActive(false);
-					}
-
-
-
-				}
-
-				//This mode is for hacking the communications link of the guards
-				if(comHackMode)
-				{
-					comHackTimer -= 1* Time.deltaTime;
-					deviceDistance = 40f;
-
-
-					if(Input.GetKeyUp(pc.hackMode))
-					{
-						comHackMode = false;
-						terminalHackMode = true;
-
-					}
-
-					if(comHackTimer < 0 || numberOfOrders < 1)
-					{
-						guardHacked = null;
-						comHackTimer = 30;
-					}
-
-					if(guardHacked)
-					{
-
-
-						if(deviceHit.collider.tag == "Floor")
-						{
-							if(Input.GetKey(pc.use))
-									{
-									guardHacked.GetComponent<PatrolAI>().agent.destination = deviceHit.collider.gameObject.transform.position;
-									guardHacked.GetComponent<PatrolAI>().aiCurrentState = PatrolAI.State.FollowOrder;
-									Debug.Log("Ordered");
-									numberOfOrders -= 1;
-									canHackGuard = true;
-									}
-						}
-							
-						if(deviceHit.collider.tag == "Terminal")
-						{
-							if(Input.GetKey(pc.use))
-								{
-								if(guardHacked.GetComponent<PatrolAI>().keycardLevel == deviceHit.collider.GetComponent<KeycardPanel>().keycardLevelRequired)
-								{
-								guardHacked.GetComponent<PatrolAI>().agent.destination = deviceHit.collider.gameObject.transform.position;
-								guardHacked.GetComponent<PatrolAI>().aiCurrentState = PatrolAI.State.UnlockDoor;
-								}
-								numberOfOrders -= 1;
-								canHackGuard = true;
-								}
-						}
-
-					}
-					
-
-					if(deviceHit.collider.tag == "Guard")
-					{
-						
-						stringHack = deviceHit.collider.gameObject.GetComponent<PatrolAI>().comlinkPercentageHacked.ToString();
-						comlinkPercentage.GetComponentInChildren<Text>().text = stringHack;
-
-						if(deviceHit.collider.gameObject.GetComponent<PatrolAI>().comlinkPercentageHacked <= 100)
-						{
-							comlinkText.SetActive(true);
-							comlinkPercentage.SetActive(true);
-							if (Input.GetKey (pc.use))
-							{
-								deviceHit.collider.gameObject.GetComponent<PatrolAI>().comlinkPercentageHacked += 15 * Time.deltaTime;
-
-								if(deviceHit.collider.gameObject.GetComponent<PatrolAI>().comlinkPercentageHacked >= 100f)
-								{
-									guardHacked = deviceHit.collider.gameObject;
-									numberOfOrders = 1;
-									canHackGuard = false;
-								}
-
-
-							}
-						}
-						
-					}
-					else
-					{
-						comlinkText.SetActive(false);
-						comlinkPercentage.SetActive(false);
-					}
-
-
-
-				}
-			}
-			else
-			{
-				terminalText.SetActive(false);
-				autohackText.SetActive(false);
-				comlinkText.SetActive(false);
-
-			}
-
-
 	}
-
-}
 }

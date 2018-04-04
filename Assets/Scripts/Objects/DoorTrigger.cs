@@ -27,10 +27,9 @@ public class DoorTrigger : MonoBehaviour {
 
 	void OnTriggerEnter(Collider enter)
 	{
-		Debug.Log("BBSA");
 		if(enter.gameObject.tag == "Guard" )
 			{
-				Debug.Log("BBB");
+
 			}
 	}
 
