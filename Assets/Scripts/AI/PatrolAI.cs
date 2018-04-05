@@ -391,7 +391,11 @@ public class PatrolAI : MonoBehaviour {
 		//go back to patrol because you have lost the player
 		if (!Fov.canSeePlayer)
 		{
-			agent.destination = locationOfPlayerPreviouslySighted;
+			agent.ResetPath ();
+			agent.SetDestination (locationOfPlayerPreviouslySighted);
+
+			Debug.Log (agent.pathStatus);
+			Debug.DrawLine (transform.position, locationOfPlayerPreviouslySighted);
 			
 			hostileTimer += 1 * Time.deltaTime;
 			if (hostileTimer >= hostileVigilanceTimer)

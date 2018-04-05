@@ -9,6 +9,8 @@ public class Device : MonoBehaviour {
 	public LayerMask deviceLayer;
 	public GameObject terminalText;
 	public GameObject autohackText;
+	public GameObject comlinkText;
+	public GameObject comlinkPercentage;
 	public float deviceDistance;
 	
 
@@ -23,6 +25,9 @@ public class Device : MonoBehaviour {
 	{
 		if (inventory.equipState == Inventory.State.HoldDevice)
 		{
+
+			comlinkText.SetActive (false);
+			comlinkPercentage.SetActive (false);
 
 			Vector3 forward = transform.TransformDirection (Vector3.forward);
 			RaycastHit deviceHit;
@@ -53,9 +58,11 @@ public class Device : MonoBehaviour {
 					{
 					terminalText.SetActive(false);
 					autohackText.SetActive(false);
+
 					}
 
 				}	
 		}
+
 	}
 }

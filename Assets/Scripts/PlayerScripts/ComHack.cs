@@ -16,6 +16,7 @@ public class ComHack : MonoBehaviour {
 	public GameObject terminalText;
 	public GameObject comlinkPercentage;
 	public GameObject guardHacked;
+	public GameObject autohackText;
 
 	public bool canHackGuard;
 
@@ -39,6 +40,9 @@ public class ComHack : MonoBehaviour {
 		Ray comlinkRay = new Ray (transform.position, forward);
 		if (Physics.Raycast (comlinkRay, out comlinkHit, comlinkDistance,comlinkLayer))
 				{
+
+				terminalText.SetActive (false);
+				autohackText.SetActive (false);
 
 					if(comHackTimer < 0 || numberOfOrders < 1)
 					{
@@ -116,11 +120,10 @@ public class ComHack : MonoBehaviour {
 
 				}
 				else
-			{
+				{
 				terminalText.SetActive(false);
 				comlinkText.SetActive(false);
-
-			}	
+				}	
 		}
 	}
 			

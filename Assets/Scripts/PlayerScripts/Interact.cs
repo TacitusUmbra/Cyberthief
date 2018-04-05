@@ -41,6 +41,8 @@ public class Interact : MonoBehaviour {
 	public GameObject chokeText;
 	public GameObject unconsciousBody;
 	public GameObject useKeycardText;
+	public GameObject throwBodyText;
+	public GameObject chokeImage;
 
 	void Start () 
 	{
@@ -49,6 +51,8 @@ public class Interact : MonoBehaviour {
 		keycardText.SetActive(false);
 		grabText.SetActive(false);
 		objecHeldText.SetActive(false);
+		throwBodyText.SetActive (false);
+
 	}
 	
 	void Update ()
@@ -56,21 +60,26 @@ public class Interact : MonoBehaviour {
 		//If you're holding a body, you can throw it by clicking the Use button
 		if (bodyHeld)
 		{
+			throwBodyText.SetActive (true);
 
-			bodyHeld.gameObject.GetComponent<GrabbableObject>().objectState = GrabbableObject.State.Held;
+			bodyHeld.gameObject.GetComponent<GrabbableObject> ().objectState = GrabbableObject.State.Held;
 			bodyHeld.transform.position = Vector3.Lerp (bodyHeld.transform.position, grabBodyLocation.position, grabBodySpeed * Time.deltaTime);
 			bodyHeld.transform.rotation = grabBodyLocation.transform.rotation;
 
-			if(Input.GetKeyDown(pc.use))
+			if (Input.GetKeyDown (pc.use))
 			{
 				bodyHeld.GetComponent<Rigidbody> ().isKinematic = false;
-				bodyHeld.GetComponent<Rigidbody> ().AddForce (transform.forward * bodyThrust,ForceMode.Impulse);
+				bodyHeld.GetComponent<Rigidbody> ().AddForce (transform.forward * bodyThrust, ForceMode.Impulse);
 				canGrab = true;
-				bodyHeld.GetComponent<Rigidbody>().useGravity = true;
+				bodyHeld.GetComponent<Rigidbody> ().useGravity = true;
 				bodyHeld.transform.parent = null;
-				bodyHeld.gameObject.GetComponent<GrabbableObject>().objectState = GrabbableObject.State.Dropped;
+				bodyHeld.gameObject.GetComponent<GrabbableObject> ().objectState = GrabbableObject.State.Dropped;
 				bodyHeld = null;
 			}
+		}
+		else
+		{
+			throwBodyText.SetActive (false);
 		}
 
 		//The interact ray
@@ -254,8 +263,9 @@ public class Interact : MonoBehaviour {
 
 			//if you're choking someone and you stop, they will recover and become hostile
 			if(chokeTarget){
-
+				//chokeImage.SetActive (true);
 				chokeText.SetActive(true);
+				//chokeImage.GetComponent<Fill
 				if((Input.GetKey(pc.alternativeInteract)) && interactHit.collider.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState != PatrolAI.State.Unconscious)
 				{	
 					pl.isCrouched = false;
@@ -277,6 +287,7 @@ public class Interact : MonoBehaviour {
 			}
 			else
 			{
+				//chokeImage.SetActive (false);
 				chokeText.SetActive(false);
 			}
 		
@@ -289,8 +300,6 @@ public class Interact : MonoBehaviour {
 			objecHeldText.SetActive(false);
 			unconsciousBody.SetActive(false);
 			useKeycardText.SetActive(false);
-			
-
 		}
 
 	}

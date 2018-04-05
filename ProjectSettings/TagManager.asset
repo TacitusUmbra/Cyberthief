@@ -20,6 +20,7 @@ TagManager:
   - AI
   - Guard
   - Floor
+  - Activator
   layers:
   - Default
   - TransparentFX
