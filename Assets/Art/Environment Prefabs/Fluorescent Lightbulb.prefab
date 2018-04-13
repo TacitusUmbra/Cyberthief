@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114466886487565542}
   m_Layer: 0
   m_Name: Fluorescent Lightbulb
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,7 +124,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.04, y: 0.039392315, z: 1.4999999}
+  m_Size: {x: 0.2, y: 0.5, z: 1.4999999}
   m_Center: {x: 0, y: 0, z: 0.74999994}
 --- !u!108 &108717225104998550
 Light:
