@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a6690c773db5fa94e9c8c253408996fe
-timeCreated: 1523772515
+guid: bdf0fd739cb5b5e42a665fcd63cd91dd
+timeCreated: 1524000541
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -10,7 +10,7 @@ ModelImporter:
     2100000: No Name
     2300000: //RootNode
     3300000: //RootNode
-    4300000: 1 x 0.15 pipe
+    4300000: Cylinder001
     9500000: //RootNode
   externalObjects: {}
   materials:
