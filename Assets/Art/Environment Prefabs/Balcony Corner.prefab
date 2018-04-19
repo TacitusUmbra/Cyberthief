@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33847921424585796}
   - component: {fileID: 23078507996494196}
   - component: {fileID: 64919862125723810}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Balcony Corner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,13 +35,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1522896200493974}
-  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 41.051003, y: -1.2, z: 15.01}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: -0.5}
+  m_LocalPosition: {x: -4.985002, y: -0.10100031, z: -1.0099998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: -90, y: 180, z: 90}
 --- !u!23 &23078507996494196
 MeshRenderer:
   m_ObjectHideFlags: 1
