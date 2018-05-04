@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: 43432d743b93b0742bf9a4a424238eb8
-timeCreated: 1525466474
+guid: fe8258a6c950c784b9d75bed85c9e218
+timeCreated: 1525468073
 licenseType: Free
 SubstanceImporter:
   externalObjects: {}
   serializedVersion: 5
   materialInstances:
   - serializedVersion: 16
-    name: Industrial_Floor_Concrete
-    prototypeName: Industrial_Floor_Concrete
+    name: Smooth_Concrete
+    prototypeName: Smooth_Concrete
     shaderName: 
     shader: {fileID: 47, guid: 0000000000000000f000000000000000, type: 0}
-    shaderKeywords: _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP
+    shaderKeywords: _METALLICGLOSSMAP _NORMALMAP _SPECGLOSSMAP
     renderQueue: -1
     lightmapFlags: 4
     inputs:
@@ -78,16 +78,16 @@ SubstanceImporter:
           scale: {x: 1, y: 1}
           offset: {x: 0, y: 0}
       - _SpecGlossMap:
-          texture: {instanceID: 0}
+          texture: {fileID: 2800000, guid: 6469d5e25f8979241857126d8045607f, type: 3}
           scale: {x: 1, y: 1}
           offset: {x: 0, y: 0}
       floats:
-      - _BumpScale: 1
+      - _BumpScale: 0.8
       - _Cutoff: 0.5
       - _DetailNormalMapScale: 1
       - _DstBlend: 0
       - _GlossMapScale: 1
-      - _Glossiness: 0.5
+      - _Glossiness: 0.8
       - _GlossyReflections: 1
       - _Metallic: 0
       - _Mode: 0
@@ -102,27 +102,22 @@ SubstanceImporter:
       - _Color: {r: 1, g: 1, b: 1, a: 1}
       - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     textureParameters:
-    - name: Industrial_Floor_Concrete_basecolor
+    - name: Smooth_Concrete_basecolor
       alphaSource: 6
       filterMode: 1
       aniso: 1
       wrapMode: 0
-    - name: Industrial_Floor_Concrete_normal
+    - name: Smooth_Concrete_normal
       alphaSource: 0
       filterMode: 1
       aniso: 1
       wrapMode: 0
-    - name: Industrial_Floor_Concrete_metallic
+    - name: Smooth_Concrete_metallic
       alphaSource: 7
       filterMode: 1
       aniso: 1
       wrapMode: 0
-    - name: Industrial_Floor_Concrete_ambientOcclusion
-      alphaSource: 0
-      filterMode: 1
-      aniso: 1
-      wrapMode: 0
-    - name: Industrial_Floor_Concrete_height
+    - name: Smooth_Concrete_ambientOcclusion
       alphaSource: 0
       filterMode: 1
       aniso: 1
@@ -130,19 +125,16 @@ SubstanceImporter:
     textureAssignments:
     - shaderProp: _MainTex
       material: {instanceID: 0}
-      baseUID: 3785515078
+      baseUID: 848941849
     - shaderProp: _BumpMap
       material: {instanceID: 0}
-      baseUID: 3785515072
+      baseUID: 848941924
     - shaderProp: _MetallicGlossMap
       material: {instanceID: 0}
-      baseUID: 3785515196
+      baseUID: 848941934
     - shaderProp: _OcclusionMap
       material: {instanceID: 0}
-      baseUID: 3785515198
-    - shaderProp: _ParallaxMap
-      material: {instanceID: 0}
-      baseUID: 3785515192
+      baseUID: 848941933
     buildTargetSettings:
     - serializedVersion: 2
       buildTarget: 
