@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: 2902da07fba838b4db0946a666360546
-timeCreated: 1525382925
+guid: 3437b8af4662f8b448e5c7c04864b9bf
+timeCreated: 1525413282
 licenseType: Free
 SubstanceImporter:
   externalObjects: {}
   serializedVersion: 5
   materialInstances:
   - serializedVersion: 16
-    name: Warehouse_Wall_Metal
-    prototypeName: Warehouse_Wall_Metal
+    name: Industrial_Concrete
+    prototypeName: Industrial_Concrete
     shaderName: 
-    shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-    shaderKeywords: _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP
+    shader: {fileID: 47, guid: 0000000000000000f000000000000000, type: 0}
+    shaderKeywords: _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP _SPECGLOSSMAP
     renderQueue: -1
     lightmapFlags: 4
     inputs:
@@ -26,6 +26,86 @@ SubstanceImporter:
     - name: $randomseed
       value:
         scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Dirt_Level
+      value:
+        scalar[0]: 0.7
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Grunge_Amount
+      value:
+        scalar[0]: 0.4
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Divot_X_Amount
+      value:
+        scalar[0]: 10
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Divot_Y_Amount
+      value:
+        scalar[0]: 10
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Divot_Scale
+      value:
+        scalar[0]: 0.14
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Divot__Random_Scale_Size
+      value:
+        scalar[0]: 0.69
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Divot_2_X_Amount
+      value:
+        scalar[0]: 15
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Divot_2_Y_Amount
+      value:
+        scalar[0]: 15
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Divot_2_Scale
+      value:
+        scalar[0]: 0.1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Divot_2_Scale_Random
+      value:
+        scalar[0]: 1
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
@@ -77,6 +157,10 @@ SubstanceImporter:
           texture: {instanceID: 0}
           scale: {x: 1, y: 1}
           offset: {x: 0, y: 0}
+      - _SpecGlossMap:
+          texture: {fileID: 2800000, guid: 8a5ed0053bd71c74699b3805da282d39, type: 3}
+          scale: {x: 1, y: 1}
+          offset: {x: 0, y: 0}
       floats:
       - _BumpScale: 1
       - _Cutoff: 0.5
@@ -98,27 +182,27 @@ SubstanceImporter:
       - _Color: {r: 1, g: 1, b: 1, a: 1}
       - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     textureParameters:
-    - name: Warehouse_Wall_Metal_basecolor
+    - name: Industrial_Concrete_basecolor
       alphaSource: 6
       filterMode: 1
       aniso: 1
       wrapMode: 0
-    - name: Warehouse_Wall_Metal_normal
+    - name: Industrial_Concrete_normal
       alphaSource: 0
       filterMode: 1
       aniso: 1
       wrapMode: 0
-    - name: Warehouse_Wall_Metal_metallic
+    - name: Industrial_Concrete_metallic
       alphaSource: 7
       filterMode: 1
       aniso: 1
       wrapMode: 0
-    - name: Warehouse_Wall_Metal_ambientOcclusion
+    - name: Industrial_Concrete_ambientOcclusion
       alphaSource: 0
       filterMode: 1
       aniso: 1
       wrapMode: 0
-    - name: Warehouse_Wall_Metal_height
+    - name: Industrial_Concrete_height
       alphaSource: 0
       filterMode: 1
       aniso: 1
@@ -126,19 +210,19 @@ SubstanceImporter:
     textureAssignments:
     - shaderProp: _MainTex
       material: {instanceID: 0}
-      baseUID: 3594089088
+      baseUID: 2811315271
     - shaderProp: _BumpMap
       material: {instanceID: 0}
-      baseUID: 3594089117
+      baseUID: 2811315268
     - shaderProp: _MetallicGlossMap
       material: {instanceID: 0}
-      baseUID: 3594089115
+      baseUID: 2811315278
     - shaderProp: _OcclusionMap
       material: {instanceID: 0}
-      baseUID: 3594089108
+      baseUID: 2811315275
     - shaderProp: _ParallaxMap
       material: {instanceID: 0}
-      baseUID: 3594089105
+      baseUID: 2811315272
     buildTargetSettings:
     - serializedVersion: 2
       buildTarget: 
