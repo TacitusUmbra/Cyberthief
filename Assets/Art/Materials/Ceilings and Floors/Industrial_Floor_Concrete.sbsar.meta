@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 43432d743b93b0742bf9a4a424238eb8
-timeCreated: 1525466474
+timeCreated: 1525631433
 licenseType: Free
 SubstanceImporter:
   externalObjects: {}
@@ -87,7 +87,7 @@ SubstanceImporter:
       - _DetailNormalMapScale: 1
       - _DstBlend: 0
       - _GlossMapScale: 1
-      - _Glossiness: 0.5
+      - _Glossiness: 0.8
       - _GlossyReflections: 1
       - _Metallic: 0
       - _Mode: 0
