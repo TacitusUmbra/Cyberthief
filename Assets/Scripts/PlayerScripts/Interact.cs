@@ -14,9 +14,9 @@ public class Interact : MonoBehaviour {
 	
 
 	[Header("People Choking")]
-	public float chokeTimer;
-	public float chokeTime;
-	public GameObject chokeTarget;
+	public float takedownTimer;
+	public float takedownTime;
+	public GameObject takedownTarget;
 	public float nearDistance;
 
 
@@ -36,21 +36,20 @@ public class Interact : MonoBehaviour {
 	[Header("Interactions")]
 	public GameObject doorText;
 	public GameObject keycardText;
-	public GameObject grabText;
-	public GameObject objecHeldText;
-	public GameObject chokeText;
-	public GameObject unconsciousBody;
+	public GameObject pickupObjectText;
+	public GameObject throwAndDropText;
+	public GameObject takedownText;
+	public GameObject IncapacitatedBodyText;
 	public GameObject useKeycardText;
 	public GameObject throwBodyText;
-	public GameObject chokeImage;
 
 	void Start () 
 	{
 		canGrab = true;
 		doorText.SetActive(false);
 		keycardText.SetActive(false);
-		grabText.SetActive(false);
-		objecHeldText.SetActive(false);
+		pickupObjectText.SetActive(false);
+		throwAndDropText.SetActive(false);
 		throwBodyText.SetActive (false);
 
 	}
@@ -107,7 +106,7 @@ public class Interact : MonoBehaviour {
 			//If conditions are met, pickup an object
 			if (interactHit.collider.tag == "Grabbable" && canGrab && interactHit.collider.gameObject.GetComponent<GrabbableObject>().objectState == GrabbableObject.State.Grounded)
 			{
-				grabText.SetActive(true);
+				pickupObjectText.SetActive(true);
 
 				if(Input.GetKeyDown (pc.interact))
 				{
@@ -119,14 +118,14 @@ public class Interact : MonoBehaviour {
 			}
 			else
 			{
-				grabText.SetActive(false);				
+				pickupObjectText.SetActive(false);				
 			}
 
 
 			//If you're holding something and there is an object being held, have it fall into your hands.
 			if(objectHeld)
 			{
-				objecHeldText.SetActive(true);
+				throwAndDropText.SetActive(true);
 				objectHeld.gameObject.GetComponent<GrabbableObject>().objectState = GrabbableObject.State.Held;
 				objectHeld.transform.position = Vector3.Lerp (objectHeld.transform.position, grabLocation.position, grabSpeed * Time.deltaTime);
 
@@ -160,7 +159,7 @@ public class Interact : MonoBehaviour {
 			}
 			else
 			{
-				objecHeldText.SetActive(false);
+				throwAndDropText.SetActive(false);
 			}
 			
 
@@ -236,10 +235,10 @@ public class Interact : MonoBehaviour {
 			}
 
 
-			//if you find an unconscious body, you can pick it up
-			if (interactHit.collider.tag == "Unconscious Body" && canGrab)
+			//if you find an Incapacitated body, you can pick it up
+			if (interactHit.collider.tag == "Incapacitated Body" && canGrab)
 			{
-				unconsciousBody.SetActive(true);
+				IncapacitatedBodyText.SetActive(true);
 				if(Input.GetKey (pc.interact))
 				{
 				bodyHeld = interactHit.collider.gameObject;
@@ -251,44 +250,28 @@ public class Interact : MonoBehaviour {
 			}
 			else
 			{
-				unconsciousBody.SetActive(false);
+				IncapacitatedBodyText.SetActive(false);
 			}
 
 
-			//Storing the hitzone as a target
-			if (interactHit.collider.tag == "HitZone") 
-				chokeTarget = interactHit.collider.gameObject;
+			//Storing the Drone as a target
+			if (interactHit.collider.tag == "Drone") 
+				takedownTarget = interactHit.collider.gameObject;
 			else
-				chokeTarget = null;
+				takedownTarget = null;
 
 			//if you're choking someone and you stop, they will recover and become hostile
-			if(chokeTarget){
-				//chokeImage.SetActive (true);
-				chokeText.SetActive(true);
-				//chokeImage.GetComponent<Fill
-				if((Input.GetKey(pc.alternativeInteract)) && interactHit.collider.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState != PatrolAI.State.Unconscious)
+			if(takedownTarget){
+				takedownText.SetActive(true);
+				if((Input.GetKey(pc.alternativeInteract)) && interactHit.collider.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState != PatrolAI.State.Incapacitated && interactHit.collider.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState != PatrolAI.State.Hostile )
 				{	
-					pl.isCrouched = false;
-					chokeTarget.GetComponentInParent<PatrolAI>().aiCurrentState = PatrolAI.State.Choking;
-					chokeTime += 1 * Time.deltaTime;
-					if(chokeTime > chokeTimer)
-					{
-					chokeTarget.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState = PatrolAI.State.Unconscious;
-					chokeTime = 0;
-					}
+					takedownTarget.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState = PatrolAI.State.Incapacitated;
 				}
-				else if((!Input.GetKey(pc.alternativeInteract)) && chokeTarget.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState == PatrolAI.State.Choking)
-
-					{	
-						chokeTime = 0;
-						chokeTarget.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState = PatrolAI.State.Recover;
-					}
 
 			}
 			else
 			{
-				//chokeImage.SetActive (false);
-				chokeText.SetActive(false);
+				takedownText.SetActive(false);
 			}
 		
 		}
@@ -296,10 +279,11 @@ public class Interact : MonoBehaviour {
 		{
 			doorText.SetActive(false);
 			keycardText.SetActive(false);
-			grabText.SetActive(false);
-			objecHeldText.SetActive(false);
-			unconsciousBody.SetActive(false);
+			pickupObjectText.SetActive(false);
+			throwAndDropText.SetActive(false);
+			IncapacitatedBodyText.SetActive(false);
 			useKeycardText.SetActive(false);
+			takedownText.SetActive(false);
 		}
 
 	}

@@ -84,7 +84,7 @@ public class ComHack : MonoBehaviour {
 					}
 					
 
-					if(comlinkHit.collider.tag == "Guard")
+					if(comlinkHit.collider.tag == "Guard" && comlinkHit.collider.gameObject.GetComponent<PatrolAI>().aiCurrentState != PatrolAI.State.Hostile && comlinkHit.collider.gameObject.GetComponent<PatrolAI>().aiCurrentState != PatrolAI.State.GoToAlarm)
 					{
 						
 						stringHack = comlinkHit.collider.gameObject.GetComponent<PatrolAI>().comlinkPercentageHacked.ToString();

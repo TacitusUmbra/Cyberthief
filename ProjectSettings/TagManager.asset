@@ -21,6 +21,7 @@ TagManager:
   - Guard
   - Floor
   - Activator
+  - Drone
   layers:
   - Default
   - TransparentFX
@@ -38,7 +39,7 @@ TagManager:
   - HitZone
   - ShadowBuffer
   - Object
-  - 
+  - Drone
   - 
   - 
   - 

@@ -1,4 +1,4 @@
-﻿ using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -102,8 +102,7 @@ public class PatrolAI : MonoBehaviour {
 		Paranoid,
 		GoToAlarm,
 		Choking,
-		Unconscious,
-		Recover,
+		Incapacitated,
 		Idle,
 		WalkBackToIdleSpot,
 		FollowOrder,
@@ -157,11 +156,8 @@ public class PatrolAI : MonoBehaviour {
 		case State.Choking:
 			this.Choking ();
 			break;
-		case State.Unconscious:
-			this.Unconscious ();
-			break;
-		case State.Recover:
-			this.Recover ();
+		case State.Incapacitated:
+			this.Incapacitated ();
 			break;
 		case State.Idle:
 			this.Idle ();
@@ -473,14 +469,6 @@ public class PatrolAI : MonoBehaviour {
 		
 	}
 
-	void Recover()
-	{
-		locationOfPlayerPreviouslySighted = pl.gameObject.transform.position;
-		shootTimer = 2.9f;
-		agent.isStopped = false;
-		aiCurrentState = State.Hostile;
-	}
-
 	void Calm()
 	{
 		//if calm, the suspicion cap becomes three
@@ -529,11 +517,11 @@ public class PatrolAI : MonoBehaviour {
 
 	}
 
-	void Unconscious()
+	void Incapacitated()
 	{
 		gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
 		Destroy(hitters);
-		gameObject.AddComponent<UnconsciousBody>();
+		gameObject.AddComponent<IncapacitatedBody>();
 		Destroy(this);
 	}
 

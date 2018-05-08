@@ -63,7 +63,7 @@ public class FieldOfView : MonoBehaviour {
 			
 		}
 		
-		if ((checkPosition.gameObject.tag == "Unconscious Body" && checkPosition.gameObject.GetComponent<UnconsciousBody>().seen == false))
+		if ((checkPosition.gameObject.tag == "Unconscious Body" && checkPosition.gameObject.GetComponent<IncapacitatedBody>().seen == false))
 		{
 			bodyInFieldOfView = true;
 
@@ -71,7 +71,7 @@ public class FieldOfView : MonoBehaviour {
 			{		
 				if((sightHit.collider.tag == "Unconscious Body"))
 				{
-				checkPosition.gameObject.GetComponent<UnconsciousBody>().seen = true;
+				checkPosition.gameObject.GetComponent<IncapacitatedBody>().seen = true;
 				canSeeBody = true;
 				}
 				else 
