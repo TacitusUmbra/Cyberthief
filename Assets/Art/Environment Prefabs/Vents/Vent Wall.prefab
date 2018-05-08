@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33322801151404790}
   - component: {fileID: 23242993876156934}
   - component: {fileID: 65932789886258738}
+  - component: {fileID: 208554386441885620}
   m_Layer: 11
   m_Name: Vent Wall
   m_TagString: Untagged
@@ -56,7 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 45c9950181ad06045b5a6847d6af7b66, type: 3}
+  - {fileID: 2100000, guid: cdb7f72de536ebc45beebc92eb0cd1f9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,3 +96,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0003291, y: 1.0003294, z: 0.100000024}
   m_Center: {x: 0, y: 0, z: 0.050000012}
+--- !u!208 &208554386441885620
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1044948085281036}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.05}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.05}
+  m_TimeToStationary: 0.5

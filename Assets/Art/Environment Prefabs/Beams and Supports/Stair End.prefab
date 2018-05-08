@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4991634005681076}
   - component: {fileID: 33595623456926000}
   - component: {fileID: 23082007412948340}
-  - component: {fileID: 95629588453076822}
+  - component: {fileID: 208454697554813336}
   m_Layer: 11
   m_Name: Stair End
   m_TagString: Untagged
@@ -35,8 +35,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1339240886368544}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 11.28, y: 0.054691, z: 28.475}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 6.8327, y: 2.8531, z: 28.663}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,20 +83,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1339240886368544}
   m_Mesh: {fileID: 4300000, guid: 4f9fdec9fc1a2324da6d652e645821e3, type: 3}
---- !u!95 &95629588453076822
-Animator:
-  serializedVersion: 3
+--- !u!208 &208454697554813336
+NavMeshObstacle:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1339240886368544}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 4f9fdec9fc1a2324da6d652e645821e3, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.30600002, y: 0.025, z: 0.177}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.006, y: 0.025, z: -0.177}
+  m_TimeToStationary: 0.5
