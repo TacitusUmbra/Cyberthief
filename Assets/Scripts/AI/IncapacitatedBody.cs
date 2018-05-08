@@ -11,7 +11,7 @@ public class IncapacitatedBody : MonoBehaviour {
 	{
 		seen = false;
 		gameObject.AddComponent<Rigidbody>();
-		gameObject.GetComponent<CapsuleCollider>().isTrigger = false;
+		gameObject.GetComponent<MeshCollider>().isTrigger = false;
 		gameObject.AddComponent<GrabbableObject>();
 		gameObject.tag = "Unconscious Body";
 	}

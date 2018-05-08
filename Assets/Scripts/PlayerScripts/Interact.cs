@@ -13,11 +13,8 @@ public class Interact : MonoBehaviour {
 	public Inventory inventory;
 	
 
-	[Header("People Choking")]
-	public float takedownTimer;
-	public float takedownTime;
+	[Header("Takedown")]
 	public GameObject takedownTarget;
-	public float nearDistance;
 
 
 	[Header("Holding Objects")]
@@ -255,7 +252,7 @@ public class Interact : MonoBehaviour {
 
 
 			//Storing the Drone as a target
-			if (interactHit.collider.tag == "Drone") 
+			if (interactHit.collider.tag == "Drone")
 				takedownTarget = interactHit.collider.gameObject;
 			else
 				takedownTarget = null;

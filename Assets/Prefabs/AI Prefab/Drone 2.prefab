@@ -40,9 +40,10 @@ GameObject:
   - component: {fileID: 23254282611178490}
   - component: {fileID: 195436445163407394}
   - component: {fileID: 114791181424450780}
-  m_Layer: 0
+  - component: {fileID: 64553797460632804}
+  m_Layer: 16
   m_Name: Drone 2
-  m_TagString: Untagged
+  m_TagString: Drone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,7 +129,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1466309665215716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.0828705, y: 0.05000024, z: 22.01213}
+  m_LocalPosition: {x: 11.0828705, y: 0.05000024, z: 23.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4337625806910038}
@@ -149,7 +150,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: f4b2f73f5d102114181264993c6e76e9, type: 3}
+  - {fileID: 2100000, guid: 381aeadd3afd7ff43876a6d4009aa080, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -182,6 +183,20 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1466309665215716}
+  m_Mesh: {fileID: 4300000, guid: f4b2f73f5d102114181264993c6e76e9, type: 3}
+--- !u!64 &64553797460632804
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1466309665215716}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: f4b2f73f5d102114181264993c6e76e9, type: 3}
 --- !u!64 &64745096002099624
 MeshCollider:
@@ -216,7 +231,7 @@ MonoBehaviour:
   hitArea: {x: 9.137319, y: 0.049999952, z: 116.09829}
   myposition: {x: 2.5299332, y: 0.9499999, z: 119.946304}
   couldHearSomething: 1
-  patrol: {fileID: 0}
+  patrol: {fileID: 114791181424450780}
 --- !u!114 &114759981770618158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -266,16 +281,18 @@ MonoBehaviour:
   defaultState: 11
   aiCurrentEmotionalState: 0
   defaultEmotionalState: 5
-  aiHearing: {fileID: 0}
+  aiHearing: {fileID: 114722608461142112}
   hearingTarget: {x: 0, y: 0, z: 0}
   distanceRequiredToHear: 20
   distanceToSound: 8.488689
   investigateTimer: 0
   timeWillingToInvestigate: 5
   withinRangeOfSound: 2
-  Fov: {fileID: 0}
+  Fov: {fileID: 114759981770618158}
   locationOfPlayerPreviouslySighted: {x: 0, y: 0, z: 0}
-  points: []
+  points:
+  - {fileID: 0}
+  - {fileID: 0}
   calmSpeed: 1
   calmSpeedTimer: 8
   hostileSpeed: 4
