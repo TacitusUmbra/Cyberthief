@@ -61,7 +61,13 @@ public class Device : MonoBehaviour {
 
 					}
 
-				}	
+				}
+				else
+					{
+					terminalText.SetActive(false);
+					autohackText.SetActive(false);
+
+					}
 		}
 
 	}

@@ -35,6 +35,7 @@ public class ComHack : MonoBehaviour {
 	{
 		if (inventory.equipState == Inventory.State.HoldComDevice)
 		{
+
 		Vector3 forward = transform.TransformDirection (Vector3.forward);
 		RaycastHit comlinkHit;
 		Ray comlinkRay = new Ray (transform.position, forward);
@@ -49,10 +50,10 @@ public class ComHack : MonoBehaviour {
 						guardHacked = null;
 					}
 
+					
+
 					if(guardHacked)
 					{
-						comHackTimer = 30;
-
 						comHackTimer -= 1 * Time.deltaTime;
 
 						if(comlinkHit.collider.tag == "Floor")
@@ -84,7 +85,7 @@ public class ComHack : MonoBehaviour {
 					}
 					
 
-					if(comlinkHit.collider.tag == "Guard" && comlinkHit.collider.gameObject.GetComponent<PatrolAI>().aiCurrentState != PatrolAI.State.Hostile && comlinkHit.collider.gameObject.GetComponent<PatrolAI>().aiCurrentState != PatrolAI.State.GoToAlarm)
+					if(comlinkHit.collider.tag == "Drone" && comlinkHit.collider.gameObject.GetComponent<PatrolAI>().aiCurrentState != PatrolAI.State.Hostile && comlinkHit.collider.gameObject.GetComponent<PatrolAI>().aiCurrentState != PatrolAI.State.GoToAlarm)
 					{
 						
 						stringHack = comlinkHit.collider.gameObject.GetComponent<PatrolAI>().comlinkPercentageHacked.ToString();
@@ -98,11 +99,13 @@ public class ComHack : MonoBehaviour {
 							{
 								comlinkHit.collider.gameObject.GetComponent<PatrolAI>().comlinkPercentageHacked += 15 * Time.deltaTime;
 
-								if(comlinkHit.collider.gameObject.GetComponent<PatrolAI>().comlinkPercentageHacked >= 100f)
+								if(comlinkHit.collider.gameObject.GetComponent<PatrolAI>().comlinkPercentageHacked >= 100f && comlinkHit.collider.gameObject.GetComponent<PatrolAI>().comlinkHacked == false)
 								{
 									guardHacked = comlinkHit.collider.gameObject;
+									comHackTimer = 30;
 									numberOfOrders = 1;
 									canHackGuard = false;
+									comlinkHit.collider.gameObject.GetComponent<PatrolAI>().comlinkHacked = true;
 								}
 
 

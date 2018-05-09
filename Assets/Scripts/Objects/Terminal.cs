@@ -5,6 +5,7 @@ using UnityEngine;
 public class Terminal : MonoBehaviour {
 
 	public GameObject door;
+	public GameObject vent;
 	public float percentageHacked;
 	public bool hacked;
 	public bool autohack;
@@ -21,8 +22,19 @@ public class Terminal : MonoBehaviour {
 
 			if(percentageHacked >= 100f)
 			{
+
+				if(door)
+				{
 				door.gameObject.GetComponent<Door> ().locked = false;
 				percentageHacked = 100;
+				}
+
+				if(vent)
+				{
+					
+				}
+
+
 			}
 
 			if(autohack && percentageHacked <= 100)

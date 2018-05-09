@@ -5,7 +5,8 @@ using UnityEngine;
 public class KeycardPanel : MonoBehaviour {
 
 	public float keycardLevelRequired;
-	public GameObject Door;
+	public GameObject door;
+	public GameObject vent;
 	public bool accessGranted;
 
 	// Use this for initialization
@@ -16,8 +17,17 @@ public class KeycardPanel : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(accessGranted)
-			Door.gameObject.GetComponent<Door>().locked = false;
+
+			if(door)
+			{
+			if(accessGranted)
+			door.gameObject.GetComponent<Door>().locked = false;
+			}
+
+			if(vent)
+			{
+			
+			}
 		
 	}
 }

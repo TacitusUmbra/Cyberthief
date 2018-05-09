@@ -13,7 +13,7 @@ public class IncapacitatedBody : MonoBehaviour {
 		gameObject.AddComponent<Rigidbody>();
 		gameObject.GetComponent<MeshCollider>().isTrigger = false;
 		gameObject.AddComponent<GrabbableObject>();
-		gameObject.tag = "Unconscious Body";
+		gameObject.tag = "Incapacitated Body";
 	}
 	
 	// Update is called once per frame

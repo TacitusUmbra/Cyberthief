@@ -11,6 +11,9 @@ public class Door : MonoBehaviour {
 	public State defaultdoorState = State.Closed;
 	public bool locked;
 
+	public GameObject closedLights;
+	public GameObject openLights;
+
 
 
 	public enum State 
@@ -26,11 +29,6 @@ public class Door : MonoBehaviour {
 	}
 	void Update() 
 	{
-
-
-		if (Input.GetKeyDown(KeyCode.Backspace)){
-			locked = false;
-		}
 
 		switch (this.doorState)
 		{
@@ -49,6 +47,20 @@ public class Door : MonoBehaviour {
 			break;
 
 		}
+
+		if(locked)
+		{
+			closedLights.SetActive(true);
+			openLights.SetActive(false);
+
+		}
+		
+		if(!locked)
+		{
+			closedLights.SetActive(false);
+			openLights.SetActive(true);
+		}
+
 	}
 
 	void Open()
@@ -62,14 +74,14 @@ public class Door : MonoBehaviour {
 	void Opening()
 	{	
 		
-		doorAnim.Play ("Open Door");
+		doorAnim.Play ("Industrial Door Open");
 		doorState = State.Open;
 		
 	}
 	void Closing()
 	{
 		
-		doorAnim.Play ("Close Door");
+		doorAnim.Play ("Industrial Door Close");
 		doorState = State.Closed;
 		
 	}

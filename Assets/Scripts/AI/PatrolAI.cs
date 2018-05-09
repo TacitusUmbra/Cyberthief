@@ -125,6 +125,7 @@ public class PatrolAI : MonoBehaviour {
 		agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 		hostileTimer = 0;
 		aiCurrentEmotionalState = defaultEmotionalState;
+		comlinkHacked = false;
 	}
 
 

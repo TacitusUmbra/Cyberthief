@@ -22,6 +22,7 @@ TagManager:
   - Floor
   - Activator
   - Drone
+  - Incapacitated Body
   layers:
   - Default
   - TransparentFX

@@ -216,15 +216,26 @@ public class Interact : MonoBehaviour {
 			//Using Keycard on Keycard Panel
 			if(interactHit.collider.tag == "Terminal")
 			{
-				useKeycardText.SetActive(true);
-
-				if(Input.GetKey(pc.interact))
-				{
 					if(interactHit.collider.gameObject.GetComponent<KeycardPanel>().keycardLevelRequired == 1 && inventory.keycardLevelOne == true)
+					{
+						useKeycardText.SetActive(true);
+
+						if(Input.GetKey(pc.interact))
+						{
 						interactHit.collider.gameObject.GetComponent<KeycardPanel>().accessGranted = true;
+						}
+					}	
 					else if(interactHit.collider.gameObject.GetComponent<KeycardPanel>().keycardLevelRequired == 2 && inventory.keycardLevelTwo == true)
-						interactHit.collider.gameObject.GetComponent<KeycardPanel>().accessGranted = true;	
-				}
+						{
+							useKeycardText.SetActive(true);
+
+							if(Input.GetKey(pc.interact))
+							{
+							interactHit.collider.gameObject.GetComponent<KeycardPanel>().accessGranted = true;	
+							}
+						}
+						
+				
 			}
 			else
 			{

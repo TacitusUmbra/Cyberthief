@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 
-	public GameObject nightstick;
+	public GameObject comlink;
 	public GameObject device;
 	public Interact interact;
 
@@ -63,7 +63,7 @@ public class Inventory : MonoBehaviour {
 	void EquipDevice()
 	{
 
-		nightstick.SetActive(false);
+		comlink.SetActive(false);
 		device.SetActive(true);
 		equipState = State.HoldDevice;
 
@@ -72,7 +72,7 @@ public class Inventory : MonoBehaviour {
 	void HoldDevice()
 	{
 
-		if(Input.GetKey(pc.nightstickKey))
+		if(Input.GetKey(pc.comlinkKey))
 		equipState = State.EquipComDevice;
 
 		if(interact.bodyHeld)
@@ -85,7 +85,7 @@ public class Inventory : MonoBehaviour {
 	void EquipComDevice()
 	{
 		device.SetActive(false);
-		nightstick.SetActive(true);
+		comlink.SetActive(true);
 		equipState = State.HoldComDevice;
 	}
 	void HoldComDevice()
@@ -103,7 +103,7 @@ public class Inventory : MonoBehaviour {
 	void CarryBody()
 	{
 	device.SetActive(false);
-	nightstick.SetActive(false);
+	comlink.SetActive(false);
 		if(!interact.bodyHeld)
 		{
 		if(previousEquipState == State.HoldDevice)

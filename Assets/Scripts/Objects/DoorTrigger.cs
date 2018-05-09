@@ -30,7 +30,6 @@ public class DoorTrigger : MonoBehaviour {
 	{
 		if(enter.gameObject.tag == "Keycard" )
 			{
-			Debug.Log ("SAD");
 			if(terminal)
 				{
 				if (enter.GetComponent<Keycard> ().keycardLevel == terminal.GetComponent<KeycardPanel>().keycardLevelRequired)

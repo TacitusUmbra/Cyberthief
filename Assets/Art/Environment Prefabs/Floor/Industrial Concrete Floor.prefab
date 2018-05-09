@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 33883653825811418}
   - component: {fileID: 65501144059235330}
   - component: {fileID: 23938596083624142}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Industrial Concrete Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

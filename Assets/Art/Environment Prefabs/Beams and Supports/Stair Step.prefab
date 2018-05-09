@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4519762183160136}
   - component: {fileID: 33972730571022402}
   - component: {fileID: 23816952946111604}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Stair Step Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,8 @@ GameObject:
   - component: {fileID: 65636536277882954}
   - component: {fileID: 65915331589466048}
   - component: {fileID: 65600754905883628}
-  m_Layer: 0
+  - component: {fileID: 65155833890104574}
+  m_Layer: 11
   m_Name: Stair Step
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +56,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1700257436973776}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 11.134, y: 0.2, z: 29.553}
+  m_LocalPosition: {x: 10.4494, y: 0.6, z: 29.553}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4519762183160136}
@@ -157,6 +158,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1679698384005534}
   m_Mesh: {fileID: 4300000, guid: 05606a2b174ecbb40afac6ae5095c2d2, type: 3}
+--- !u!65 &65155833890104574
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1700257436973776}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7824265, y: 0.34242642, z: 0.05}
+  m_Center: {x: 0, y: 0, z: 0.025}
 --- !u!65 &65600754905883628
 BoxCollider:
   m_ObjectHideFlags: 1

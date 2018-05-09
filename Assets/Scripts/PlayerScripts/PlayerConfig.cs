@@ -14,7 +14,7 @@ public class PlayerConfig : MonoBehaviour {
 	public KeyCode alternativeInteract;
 	public KeyCode use;
 	public KeyCode deviceKey;
-	public KeyCode nightstickKey;
+	public KeyCode comlinkKey;
 	public KeyCode escape;
 	public KeyCode hackMode;
 	public KeyCode comMode;

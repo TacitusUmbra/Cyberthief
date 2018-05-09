@@ -22,12 +22,12 @@ GameObject:
   - component: {fileID: 33599923138541592}
   - component: {fileID: 23598044908367584}
   - component: {fileID: 65133161627540246}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: H Beam UV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4617015369641710
 Transform:
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1869072026150736}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 7.4, y: 6, z: 10}
+  m_LocalPosition: {x: 37.849003, y: 2, z: 45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
