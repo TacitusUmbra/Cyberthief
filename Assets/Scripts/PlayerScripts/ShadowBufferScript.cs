@@ -15,7 +15,7 @@ public class ShadowBufferScript : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		tex2d = new Texture2D (shadowBuffer.width, shadowBuffer.height, TextureFormat.RGB24, false);
 

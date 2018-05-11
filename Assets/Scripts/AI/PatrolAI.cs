@@ -23,6 +23,7 @@ public class PatrolAI : MonoBehaviour {
 	public bool idleGuard;
 	public bool patrolGuard;
 
+
 	public Player pl;
 	
 	//AI State variables

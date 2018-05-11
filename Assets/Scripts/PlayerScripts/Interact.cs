@@ -87,17 +87,19 @@ public class Interact : MonoBehaviour {
 
 			if (interactHit.collider.tag == "Lightswitch")
 			{
-				if (Input.GetKeyDown (pc.interact))
-				{
-					if (interactHit.collider.gameObject.GetComponent<LightSwitch> ().switchState)
-					{
-						interactHit.collider.gameObject.GetComponent<LightSwitch> ().switchState = false;
-					}
-					else
-						{
-							interactHit.collider.gameObject.GetComponent<LightSwitch> ().switchState = true;
-						}
-				}
+				 if (Input.GetKeyDown (pc.interact))
+                {
+                    if (interactHit.collider.gameObject.GetComponent<LightSwitch> ().turnedOn)
+                    {
+                        interactHit.collider.gameObject.GetComponent<LightSwitch> ().switchState = false;
+                        interactHit.collider.gameObject.GetComponent<LightSwitch> ().turnedOn = false;
+                    }
+                    else
+                        {
+                            interactHit.collider.gameObject.GetComponent<LightSwitch> ().switchState = true;
+                            interactHit.collider.gameObject.GetComponent<LightSwitch> ().turnedOn = true;
+                        }
+                }
 			}
 
 			//If conditions are met, pickup an object

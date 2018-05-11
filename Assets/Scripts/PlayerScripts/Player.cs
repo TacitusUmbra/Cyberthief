@@ -77,7 +77,7 @@ this.anchorTransform = this.cam.transform.parent;
 //the originalCameraDistance is goign to set the distance of the camera that is goes back to if nothing is in the way
 this.originalCameraDistance = (this. cam.transform.parent.position -  this.cam.transform.position).magnitude;
 }
-void Update ()
+void FixedUpdate ()
 {
 visibility = sbs.percentageHidden * visibilityModifier;
 //If the character is grounded, turn the bool grounded to true, otherwise, it is false because they are not grounded.

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Device : MonoBehaviour {
 
@@ -11,11 +12,14 @@ public class Device : MonoBehaviour {
 	public GameObject autohackText;
 	public GameObject comlinkText;
 	public GameObject comlinkPercentage;
+	public GameObject devicePercentage;
 	public float deviceDistance;
+	private string stringHack;
+
 	
 
 
-	// Use this for initialization
+// Use this for initialization
 	void Start () {
 		
 	}
@@ -40,11 +44,27 @@ public class Device : MonoBehaviour {
 
 					if (deviceHit.collider.tag == "Terminal")
 					{
-						terminalText.SetActive(true);
-						if(inventory.numberOfDecoders > 1)
+						if(deviceHit.collider.gameObject.GetComponent<Terminal> ().percentageHacked < 100)
+							{
+							devicePercentage.SetActive(true);
+							terminalText.SetActive(true);
+
+							stringHack = deviceHit.collider.gameObject.GetComponent<Terminal>().percentageHacked.ToString();
+							devicePercentage.GetComponentInChildren<Text>().text = stringHack;
+							
+							if(inventory.numberOfDecoders > 1)
+								{
+								autohackText.SetActive(true);
+								}
+
+							}
+						else
 						{
-						autohackText.SetActive(true);
+						devicePercentage.SetActive(false);
+						terminalText.SetActive(false);
+						autohackText.SetActive(false);
 						}
+						
 
 						if (Input.GetKey (pc.use))
 						{
@@ -58,6 +78,7 @@ public class Device : MonoBehaviour {
 					{
 					terminalText.SetActive(false);
 					autohackText.SetActive(false);
+					devicePercentage.SetActive(false);
 
 					}
 
@@ -66,6 +87,7 @@ public class Device : MonoBehaviour {
 					{
 					terminalText.SetActive(false);
 					autohackText.SetActive(false);
+					devicePercentage.SetActive(false);
 
 					}
 		}
