@@ -223,7 +223,8 @@ Animation:
   serializedVersion: 3
   m_Animation: {fileID: 0}
   m_Animations:
-  - {fileID: 7400000, guid: 4d9912711497c5744adc4542476e3cfc, type: 2}
+  - {fileID: 0}
+  - {fileID: 7400000, guid: 7cd75f5eea056514c99a158bc67ff450, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -292,7 +293,7 @@ MonoBehaviour:
   waitCooldown: 5
   idleGuard: 1
   patrolGuard: 0
-  droneAnimation: {fileID: 111117459867439430}
+  droneAnimation: {fileID: 0}
   pl: {fileID: 0}
   aiCurrentState: 0
   defaultState: 11
