@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Lights : MonoBehaviour {
+	//The lightObject. This is where we put the light.
 	public GameObject lightObject;
 
 	// Use this for initialization

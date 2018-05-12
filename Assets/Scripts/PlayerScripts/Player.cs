@@ -101,7 +101,6 @@ if (isCrouched)
 cc.height = Mathf.Lerp (cc.height, crouchHeight, downLerpTime * Time.deltaTime);
 visibilityModifier = crouchVisibiltyModifier;
 }
-
 else{
 cc.height = Mathf.Lerp (cc.height, standHeight, standLerpTime * Time.deltaTime);
 visibilityModifier = standVisibilityModifier;
@@ -226,42 +225,48 @@ this.currentState = State.Jump;
 }
 
 
-
+//The player is permited to crouch here
 void Crouch(){
-Vector3 up = transform.TransformDirection (Vector3.up);
-RaycastHit crouchHit;
-Ray crouchRay = new Ray(transform.position, up);
-if (Physics.Raycast (crouchRay, out crouchHit, crouchRayDistance, crouchLayer)) 
-{
-if(crouchHit.collider) 
-{
-crouchBump = true;
-} 
-}else 
-{
-crouchBump = false;
-} 
-isCrouched = true;
-
-currentSpeed = Mathf.Lerp (currentSpeed, crouchSpeed, crouchLerpTime * Time.deltaTime);
-
-if (Input.GetKeyDown (this.pc.crouch) && cc.isGrounded && isCrouched && !crouchBump)
-{
-isCrouched = false;
-this.currentState = State.Idle;
-}
-else if(Input.GetKey(this.pc.run)&& !crouchBump)
-{
-isCrouched = false;
-this.currentState = State.Run;
-}
-else if (Input.GetKeyDown (this.pc.jump) && cc.isGrounded && !crouchBump) 
-{
-cc.height = Mathf.Lerp (cc.height, standHeight, standLerpTime * Time.deltaTime);
-isCrouched = false;
-currentGravity = jumpStrength;
-this.currentState = State.Jump;
-}
+        //The up is pointing up
+        Vector3 up = transform.TransformDirection (Vector3.up);
+        //the crouchHit for the raycast
+        RaycastHit crouchHit;
+        //The ray for the crouch raycast
+        Ray crouchRay = new Ray(transform.position, up);
+        //if casting a ray, condistion apply
+        if (Physics.Raycast (crouchRay, out crouchHit, crouchRayDistance, crouchLayer)) 
+        {
+                if(crouchHit.collider) 
+                {
+                crouchBump = true;
+                } 
+                }else 
+                {
+                crouchBump = false;
+                } 
+                isCrouched = true;
+        //Player moves at crouch speed
+        currentSpeed = Mathf.Lerp (currentSpeed, crouchSpeed, crouchLerpTime * Time.deltaTime);
+        //If the conditions are met, the player may uncrouch
+        if (Input.GetKeyDown (this.pc.crouch) && cc.isGrounded && isCrouched && !crouchBump)
+        {
+                isCrouched = false;
+                this.currentState = State.Idle;
+        }
+        //If conditions are met and they attempt to run, the player uncrouches and runs
+        else if(Input.GetKey(this.pc.run)&& !crouchBump)
+        {
+                isCrouched = false;
+                this.currentState = State.Run;
+        }
+        //if the player attempts to jump and conditions are pet, they jump and uncrouch
+        else if (Input.GetKeyDown (this.pc.jump) && cc.isGrounded && !crouchBump) 
+        {
+                cc.height = Mathf.Lerp (cc.height, standHeight, standLerpTime * Time.deltaTime);
+                isCrouched = false;
+                currentGravity = jumpStrength;
+                this.currentState = State.Jump;
+        }
 }
 
 

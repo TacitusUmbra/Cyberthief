@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 99b364cc66680dd429e530d4f52fb526
-timeCreated: 1525722919
+guid: faeb27bb87263534f918968020189b19
+timeCreated: 1526075301
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -10,7 +10,7 @@ ModelImporter:
     2100000: No Name
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Box001
+    4300000: Drone Lights
     9500000: //RootNode
   externalObjects: {}
   materials:

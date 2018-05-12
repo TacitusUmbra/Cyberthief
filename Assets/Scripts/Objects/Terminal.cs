@@ -4,39 +4,33 @@ using UnityEngine;
 
 public class Terminal : MonoBehaviour {
 
+	//The door associated with the terminal
 	public GameObject door;
-	public GameObject vent;
+	//The percentage hacked of the terminal
 	public float percentageHacked;
+	//The bool determining whether the terminal was hacked or not
 	public bool hacked;
+	//The bool determining whether the terminal was autohacked or not
 	public bool autohack;
 
 	// Use this for initialization
 	void Start () 
 	{
+		//Hacked is false
 		hacked = false;	
 	}
 	
 	// Update is called once per frame
 	void Update () 
-	{
-
+	{	
+			//If the percentage hacked is over 100, the door will be unlocked and the percentage hacked is set to 100
 			if(percentageHacked >= 100f)
 			{
-
-				if(door)
-				{
 				door.gameObject.GetComponent<Door> ().locked = false;
 				percentageHacked = 100;
-				}
-
-				if(vent)
-				{
-					
-				}
-
-
+				
 			}
-
+			//If autohacked and the percentage hacked is less than 100, the percentage hacked will increase over time
 			if(autohack && percentageHacked <= 100)
 			{
 				percentageHacked += 1 * Time.deltaTime;

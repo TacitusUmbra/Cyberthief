@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4331402395604820}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Long Wooden Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,8 +72,8 @@ GameObject:
   - component: {fileID: 4460474941549120}
   - component: {fileID: 33425660585331668}
   - component: {fileID: 23984534248425380}
-  - component: {fileID: 95063110143505732}
-  m_Layer: 0
+  - component: {fileID: 65713156072366738}
+  m_Layer: 11
   m_Name: Short wood Panel (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,8 +162,8 @@ GameObject:
   - component: {fileID: 4335143694424334}
   - component: {fileID: 33528147324814010}
   - component: {fileID: 23051423614493488}
-  - component: {fileID: 95060449026442528}
-  m_Layer: 0
+  - component: {fileID: 65953698971252138}
+  m_Layer: 11
   m_Name: Long Wood Panel (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,8 +198,8 @@ GameObject:
   - component: {fileID: 4119720175808038}
   - component: {fileID: 33951938969512096}
   - component: {fileID: 23453216663919612}
-  - component: {fileID: 95301160457910532}
-  m_Layer: 0
+  - component: {fileID: 65324481088764148}
+  m_Layer: 11
   m_Name: Long Wood Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,8 +216,8 @@ GameObject:
   - component: {fileID: 4086980083429896}
   - component: {fileID: 33455263481249352}
   - component: {fileID: 23107112354840986}
-  - component: {fileID: 95140215666417432}
-  m_Layer: 0
+  - component: {fileID: 65807624285838576}
+  m_Layer: 11
   m_Name: Long Wood Panel (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,8 +450,8 @@ GameObject:
   - component: {fileID: 4331207111865772}
   - component: {fileID: 33100016311995372}
   - component: {fileID: 23816645879567348}
-  - component: {fileID: 95917188796200742}
-  m_Layer: 0
+  - component: {fileID: 65935814764836350}
+  m_Layer: 11
   m_Name: Short wood Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,7 +469,7 @@ GameObject:
   - component: {fileID: 33817707425953754}
   - component: {fileID: 23657590715778280}
   - component: {fileID: 65581290442363718}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Long Wood Panel (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -643,8 +643,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1047632596151038}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.089, y: 0.0345, z: 38.213978}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.0238123, y: 0.06699996, z: 11.115974}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4016552971201248}
@@ -2057,6 +2057,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.4, y: 0.050000012, z: 0.20000005}
   m_Center: {x: 0, y: 0, z: 0.100000024}
+--- !u!65 &65324481088764148
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1492572945394116}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2, y: 0.05, z: 1}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!65 &65326993588351640
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2141,6 +2153,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.4, y: 0.050000012, z: 0.20000005}
   m_Center: {x: 0, y: 0, z: 0.100000024}
+--- !u!65 &65713156072366738
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1084787107199616}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000002, y: 0.100000024, z: 1}
+  m_Center: {x: 0, y: 0.00000047683716, z: 0.5}
 --- !u!65 &65805836122533258
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2153,6 +2177,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7998159, y: 0.05, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0.1}
+--- !u!65 &65807624285838576
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1570207965413228}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2000003, y: 0.05, z: 1}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!65 &65831954782144080
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2177,6 +2213,30 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7998159, y: 0.05, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0.1}
+--- !u!65 &65935814764836350
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1934172306473188}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000004, y: 0.10000026, z: 1.0000004}
+  m_Center: {x: 0.00000005960465, y: -0.00000005960466, z: 0.5000001}
+--- !u!65 &65953698971252138
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1457959376815402}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2, y: 0.050000012, z: 1.0000002}
+  m_Center: {x: 0, y: 0, z: 0.5000001}
 --- !u!65 &65962348931738716
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2189,88 +2249,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2000003, y: 0.050000012, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0.1}
---- !u!95 &95060449026442528
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1457959376815402}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 5c91f8719f8f48e44aafb94701e24587, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &95063110143505732
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1084787107199616}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 108c65dcdbe3f8b4a9fd8dd3a2200f59, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &95140215666417432
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1570207965413228}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 5c91f8719f8f48e44aafb94701e24587, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &95301160457910532
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1492572945394116}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 5c91f8719f8f48e44aafb94701e24587, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &95917188796200742
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1934172306473188}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 108c65dcdbe3f8b4a9fd8dd3a2200f59, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

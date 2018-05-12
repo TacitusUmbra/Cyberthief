@@ -45,6 +45,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &1038541915351152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224004678555755994}
+  - component: {fileID: 222550195228843654}
+  - component: {fileID: 114404414666563838}
+  m_Layer: 5
+  m_Name: Tutorial 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1039208300470074
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +267,40 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1230519944012640
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224714716447337028}
+  - component: {fileID: 222309993959087036}
+  - component: {fileID: 114759614374643562}
+  m_Layer: 5
+  m_Name: Tut1 Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1265628733698372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224106944485917972}
+  - component: {fileID: 222577175341635078}
+  - component: {fileID: 114960839364905176}
+  m_Layer: 5
+  m_Name: Tutorial 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1272229293590160
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,6 +491,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &1584764177736700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224067783726569488}
+  - component: {fileID: 222446881421792540}
+  - component: {fileID: 114629736180261470}
+  m_Layer: 5
+  m_Name: Tutorial 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1608682224244090
 GameObject:
   m_ObjectHideFlags: 1
@@ -452,6 +520,23 @@ GameObject:
   - component: {fileID: 114128314429981204}
   m_Layer: 5
   m_Name: Open Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1610480460518618
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224382106186541724}
+  - component: {fileID: 222018797636185822}
+  - component: {fileID: 114378487103935480}
+  m_Layer: 5
+  m_Name: Tut2 Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -661,6 +746,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &1925053463725948
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224472105565163352}
+  - component: {fileID: 222466203710717144}
+  - component: {fileID: 114836195469178458}
+  m_Layer: 5
+  m_Name: Tut3 Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4316960592356768
 Transform:
   m_ObjectHideFlags: 1
@@ -672,7 +774,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224856997139032646}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4704894989498138
 Transform:
@@ -685,7 +787,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224856997139032646}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4778553269074902
 Transform:
@@ -698,7 +800,7 @@ Transform:
   m_LocalScale: {x: 1, y: 2.896894, z: 3.1666772}
   m_Children: []
   m_Father: {fileID: 224856997139032646}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4839783314279542
 Transform:
@@ -711,7 +813,7 @@ Transform:
   m_LocalScale: {x: 3.352083, y: 2.852784, z: 2.4368436}
   m_Children: []
   m_Father: {fileID: 224856997139032646}
-  m_RootOrder: 24
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4883180720927352
 Transform:
@@ -724,7 +826,7 @@ Transform:
   m_LocalScale: {x: 1, y: 5.0134697, z: 7.5051594}
   m_Children: []
   m_Father: {fileID: 224856997139032646}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33173765193487726
 MeshFilter:
@@ -1101,20 +1203,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Tutorial # 2
-
-    Guards will spot the player if they are heard or are illuminated sufficiently.
-    The numbers below the reticule display how illuminated you are. Below 20, you
-    will be invisible to them. Between 20 and 40, the AI will have difficulty spotting
-    you, however, if you don''t get back into the shadows, they will spot you after
-    an amount of time. Above 40, you are completely visible to the guards and they
-    will become hostile.
-
-
-    In order to cross this room, you can distract the guard by throwing some bottles
-    OR you could break the light, allowing yourself to sneak to the door. If caught,
-    lose line of sight with them long enough by running away or running into spaces
-    they cannot reach. Press Esc to continue.'
+  m_Text: "Tutorial # 2\nGuards will spot the player if they are heard or are illuminated
+    sufficiently.\n\nYou can use objects to break lights or distract the guards by
+    throwing them.\n\n Press Esc to continue."
 --- !u!114 &114332526252658258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1319,6 +1410,52 @@ MonoBehaviour:
   m_Text: 'Object
 
 '
+--- !u!114 &114378487103935480
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1610480460518618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 20
+    m_MaxSize: 20
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 'Tutorial # 2
+
+    Guards will spot the player if they are heard or are illuminated sufficiently.
+    The numbers below the reticule display how illuminated you are. Below 20, you
+    will be invisible to them. Between 20 and 40, the AI will have difficulty spotting
+    you, however, if you don''t get back into the shadows, they will spot you after
+    an amount of time. Above 40, you are completely visible to the guards and they
+    will become hostile.
+
+
+    In order to cross this room, you can distract the guard by throwing some bottles
+    OR you could break the light, allowing yourself to sneak to the door. If caught,
+    lose line of sight with them long enough by running away or running into spaces
+    they cannot reach. Press Esc to continue.'
 --- !u!114 &114386079152748110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1335,6 +1472,33 @@ MonoBehaviour:
   thisTutorialObject: {fileID: 0}
   reticule: {fileID: 1222588537766704}
   paused: 0
+--- !u!114 &114404414666563838
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1038541915351152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &114498253820274232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1500,6 +1664,33 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: '[Hold LMB] Hack'
+--- !u!114 &114629736180261470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1584764177736700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &114630216049422852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1664,6 +1855,51 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
+  m_Text: 'Tutorial #1
+
+
+    WASD to Move
+
+    Space to Jump
+
+    Left Ctrl to crouch
+
+    The number near the reticule is how visible you are.
+
+
+    Press Esc to continue.'
+--- !u!114 &114759614374643562
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1230519944012640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 20
+    m_MaxSize: 20
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
   m_Text: "Tutorial #1\n\nThis is a stealth game. Use the WASD keys to MOVE around,
     the mouse to LOOK AROUND, the Space button to JUMP or certain ledges.\n\nPressing
     Crtl will permit for you to toggle CROUCH and Shift will allow you to RUN.\n\nGuard
@@ -1722,10 +1958,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pc: {fileID: 0}
-  tutorial: {fileID: 1470560755047778}
+  tutorial: {fileID: 0}
   thisTutorialObject: {fileID: 0}
   reticule: {fileID: 1222588537766704}
   paused: 0
+--- !u!114 &114836195469178458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1925053463725948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 20
+    m_MaxSize: 20
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: "Tutorial # 3\n\nAt times, you'll be incapable of moving outside of a guards
+    line of sight and without throwable objects to distract them. At these times,
+    you may use your COMLINK Device (Number 2) to hack into their communication system
+    and give the guards orders. Take care in being quick, as you only have 30 seconds
+    to give them an order. Once the timer or your number of orders runs out, you will
+    no be able to hack for a long period of time. \n\nYou can direct them to a location
+    by pointing the reticule to the floor location desiredand clicking LMB. Or, you
+    can point to the terminal near the door to have them open a door if they have
+    a keycard.\n\nTake out your Comlink Device and hack the guard, then point your
+    reticule on the TERMINAL to have him open the door. Or, you can drop down behind
+    him (Pink cube is his back) and CHOKE him from behind by holding RIGHT MOUSE BUTTON
+    until the pink cube disappears.\n\nPress Esc to continue."
 --- !u!114 &114844141596755130
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1942,6 +2222,33 @@ MonoBehaviour:
     reticule on the TERMINAL to have him open the door. Or, you can drop down behind
     him (Pink cube is his back) and CHOKE him from behind by holding RIGHT MOUSE BUTTON
     until the pink cube disappears.\n\nPress Esc to continue."
+--- !u!114 &114960839364905176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1265628733698372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &114966611358579704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2008,6 +2315,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1184874594097562}
+--- !u!222 &222018797636185822
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1610480460518618}
 --- !u!222 &222019827600127596
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -2068,6 +2381,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1470560755047778}
+--- !u!222 &222309993959087036
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1230519944012640}
+--- !u!222 &222446881421792540
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1584764177736700}
 --- !u!222 &222450509243423422
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -2086,6 +2411,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1113692376095168}
+--- !u!222 &222466203710717144
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1925053463725948}
 --- !u!222 &222498642397430986
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -2110,6 +2441,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1379963342201262}
+--- !u!222 &222550195228843654
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1038541915351152}
+--- !u!222 &222577175341635078
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1265628733698372}
 --- !u!222 &222606473553880860
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -2196,6 +2539,25 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!224 &224004678555755994
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1038541915351152}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.6, z: 0.5}
+  m_Children:
+  - {fileID: 224472105565163352}
+  m_Father: {fileID: 224856997139032646}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 550, y: 321.83325}
+  m_SizeDelta: {x: -76, y: 145}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224013710226307068
 RectTransform:
   m_ObjectHideFlags: 1
@@ -2232,6 +2594,44 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 65, y: 40}
   m_SizeDelta: {x: 180, y: 78.3}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224067783726569488
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1584764177736700}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.4, z: 0.5}
+  m_Children:
+  - {fileID: 224714716447337028}
+  m_Father: {fileID: 224856997139032646}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 550, y: 688.15}
+  m_SizeDelta: {x: -76, y: 254.29993}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224106944485917972
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1265628733698372}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.6, z: 0.5}
+  m_Children:
+  - {fileID: 224382106186541724}
+  m_Father: {fileID: 224856997139032646}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 550, y: 335.53333}
+  m_SizeDelta: {x: -76, y: 172.40002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224185008472300558
 RectTransform:
@@ -2317,12 +2717,12 @@ RectTransform:
   m_Children:
   - {fileID: 224762615025540336}
   m_Father: {fileID: 224856997139032646}
-  m_RootOrder: 16
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 75.54999}
-  m_SizeDelta: {x: 0, y: 151.09998}
+  m_AnchoredPosition: {x: 550, y: 466.04993}
+  m_SizeDelta: {x: -76, y: 184.09998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224240282327053986
 RectTransform:
@@ -2398,6 +2798,24 @@ RectTransform:
   m_AnchoredPosition: {x: 65, y: 40}
   m_SizeDelta: {x: 180, y: 78.3}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224382106186541724
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1610480460518618}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 1.6666665, z: 2}
+  m_Children: []
+  m_Father: {fileID: 224106944485917972}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 10, y: 291.46655}
+  m_SizeDelta: {x: 503.21, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224387682942662014
 RectTransform:
   m_ObjectHideFlags: 1
@@ -2446,12 +2864,30 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224856997139032646}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -110, y: -25}
   m_SizeDelta: {x: 180, y: 78.3}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224472105565163352
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1925053463725948}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 1.6666665, z: 2}
+  m_Children: []
+  m_Father: {fileID: 224004678555755994}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 10, y: 314.29993}
+  m_SizeDelta: {x: 503.21, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224621177957141398
 RectTransform:
@@ -2509,6 +2945,24 @@ RectTransform:
   m_AnchoredPosition: {x: 65, y: 40}
   m_SizeDelta: {x: 180, y: 78.3}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224714716447337028
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1230519944012640}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2.5, z: 2}
+  m_Children: []
+  m_Father: {fileID: 224067783726569488}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 10, y: 334.8249}
+  m_SizeDelta: {x: 503.21, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224738021510294074
 RectTransform:
   m_ObjectHideFlags: 1
@@ -2522,7 +2976,7 @@ RectTransform:
   - {fileID: 224831620067852776}
   - {fileID: 224387682942662014}
   m_Father: {fileID: 224856997139032646}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -2682,7 +3136,6 @@ RectTransform:
   - {fileID: 224928594932010672}
   - {fileID: 224875946368240368}
   - {fileID: 224267295107172804}
-  - {fileID: 224233864786929472}
   - {fileID: 224738021510294074}
   - {fileID: 224997169599192594}
   - {fileID: 224410626323227884}
@@ -2691,6 +3144,10 @@ RectTransform:
   - {fileID: 4316960592356768}
   - {fileID: 4778553269074902}
   - {fileID: 4839783314279542}
+  - {fileID: 224067783726569488}
+  - {fileID: 224106944485917972}
+  - {fileID: 224004678555755994}
+  - {fileID: 224233864786929472}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2820,7 +3277,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224856997139032646}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

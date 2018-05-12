@@ -5,31 +5,35 @@ using UnityEngine.UI;
 
 public class Interact : MonoBehaviour {
 
-
+	//the player config goes here
 	public PlayerConfig pc;
+	//the raycast distance of the interact ray
 	public float interactionDistance;
+	//player goes here
 	public Player pl;
+	//the ineteract layer mask
 	public LayerMask interactLayerMask;
+	//the inventory goes here
 	public Inventory inventory;
 	
-
+	//The takedown target
 	[Header("Takedown")]
 	public GameObject takedownTarget;
 
-
+	//these are the variables for holding objects
 	[Header("Holding Objects")]
 	public bool canGrab;
 	public GameObject objectHeld;
 	public float grabSpeed;
 	public Transform grabLocation;
 	public float thrust;
-
+	//these are the variables for holding bodies
 	[Header("Holding Bodies")]
 	public GameObject bodyHeld;
 	public Transform grabBodyLocation;
 	public float grabBodySpeed;
 	public float bodyThrust;
-
+	//these are the texts for interactions
 	[Header("Interactions")]
 	public GameObject doorText;
 	public GameObject keycardText;
@@ -42,7 +46,9 @@ public class Interact : MonoBehaviour {
 
 	void Start () 
 	{
+		//canGrab is true
 		canGrab = true;
+		//these texts are all inactive
 		doorText.SetActive(false);
 		keycardText.SetActive(false);
 		pickupObjectText.SetActive(false);
@@ -53,15 +59,20 @@ public class Interact : MonoBehaviour {
 	
 	void Update ()
 	{
-		//If you're holding a body, you can throw it by clicking the Use button
+		//If you're holding a body, you can throw it by clicking the Use button. the text to throw the body is active. 
 		if (bodyHeld)
 		{
 			throwBodyText.SetActive (true);
-
+			//the object state is Held
 			bodyHeld.gameObject.GetComponent<GrabbableObject> ().objectState = GrabbableObject.State.Held;
+			//move the body that is held to the grab body location
 			bodyHeld.transform.position = Vector3.Lerp (bodyHeld.transform.position, grabBodyLocation.position, grabBodySpeed * Time.deltaTime);
+			//the rotation set for the body held
 			bodyHeld.transform.rotation = grabBodyLocation.transform.rotation;
 
+			//if the player presses the use key while holding a body, the rigidbody's kinematic is false, the bodyheld is given force forward,
+			// the canGrab becomes true, the bodyheld has gravity, the bodyself parent is null, the bodyheld's Grabbable Object State is Dropped
+			// and the bodyheld is null. The body is being thrown here.
 			if (Input.GetKeyDown (pc.use))
 			{
 				bodyHeld.GetComponent<Rigidbody> ().isKinematic = false;
@@ -75,16 +86,22 @@ public class Interact : MonoBehaviour {
 		}
 		else
 		{
+			//this text is inactive
 			throwBodyText.SetActive (false);
 		}
 
-		//The interact ray
+		//The interact ray direction is forward
 		Vector3 forward = transform.TransformDirection (Vector3.forward);
+		//the interact ray hit
 		RaycastHit interactHit;
+		//the interact ray
 		Ray interactRay = new Ray (transform.position, forward);
+
+		// if the interact ray is active, many conditions below will be applied if it hits
 		if (Physics.Raycast (interactRay, out interactHit, interactionDistance,interactLayerMask))
 		{
-
+			//if the interact ray hits a lightswitch, the player will be given the option to turn off and on the light if they press
+			//the interact key
 			if (interactHit.collider.tag == "Lightswitch")
 			{
 				 if (Input.GetKeyDown (pc.interact))
@@ -102,7 +119,8 @@ public class Interact : MonoBehaviour {
                 }
 			}
 
-			//If conditions are met, pickup an object
+			//If conditions are met, the player will be able to pick up an object tagged Grabbable if they press the interact key
+			//and certain texts will be active
 			if (interactHit.collider.tag == "Grabbable" && canGrab && interactHit.collider.gameObject.GetComponent<GrabbableObject>().objectState == GrabbableObject.State.Grounded)
 			{
 				pickupObjectText.SetActive(true);
@@ -117,6 +135,7 @@ public class Interact : MonoBehaviour {
 			}
 			else
 			{
+				//the text is inactive
 				pickupObjectText.SetActive(false);				
 			}
 
@@ -124,10 +143,13 @@ public class Interact : MonoBehaviour {
 			//If you're holding something and there is an object being held, have it fall into your hands.
 			if(objectHeld)
 			{
+				//The text is active
 				throwAndDropText.SetActive(true);
+				//the objectHeld State becomes Held
 				objectHeld.gameObject.GetComponent<GrabbableObject>().objectState = GrabbableObject.State.Held;
+				//this brings the objectHeld to the grabLocation
 				objectHeld.transform.position = Vector3.Lerp (objectHeld.transform.position, grabLocation.position, grabSpeed * Time.deltaTime);
-
+				//if the object hits anything while being held, it will fall with these conditions
 				if(objectHeld.gameObject.GetComponent<GrabbableObject>().hit == true)
 					{
 						canGrab = true;
@@ -136,7 +158,7 @@ public class Interact : MonoBehaviour {
 						objectHeld.gameObject.GetComponent<GrabbableObject>().objectState = GrabbableObject.State.Dropped;
 						objectHeld = null;
 					}
-			//Throwing a gameobject that is being held		
+			//If holding an object, and the player presses the use key, the object will be thrown	
 				if(Input.GetKeyDown(pc.use))
 					{
 						objectHeld.GetComponent<Rigidbody> ().AddForce (transform.forward * thrust,ForceMode.Impulse);
@@ -158,11 +180,13 @@ public class Interact : MonoBehaviour {
 			}
 			else
 			{
+				//the textis inactive
 				throwAndDropText.SetActive(false);
 			}
 			
 
-			//Opening Doors
+			// If the interact ray hits something tagged door and they press the interact key, but the door is unlocked, it will 
+			//change the doorState to Opening
 			if (interactHit.collider.tag == "Door")
 			{
 				doorText.SetActive(true);
@@ -177,6 +201,7 @@ public class Interact : MonoBehaviour {
 			}
 			else
 			{
+				//the text is inactive
 			doorText.SetActive(false);
 			}
 
@@ -192,7 +217,8 @@ public class Interact : MonoBehaviour {
 				
 				}
 
-			//Picking up a keycard of a particular level and destroying it afterwards
+			//Picking up a keycard of a particular level and destroying it afterwards, but only if you havne't picked up
+			//a keycard already that is of that particular level
 			if(interactHit.collider.tag == "Keycard")
 			{
 				keycardText.SetActive(true);
@@ -212,6 +238,7 @@ public class Interact : MonoBehaviour {
 			}
 			else
 			{
+				//the text is inactive
 				keycardText.SetActive(false);
 			}
 
@@ -270,7 +297,8 @@ public class Interact : MonoBehaviour {
 			else
 				takedownTarget = null;
 
-			//if you're choking someone and you stop, they will recover and become hostile
+			//If you can perform a takedown, the text will be active and if you press the alternativeInteract key while the Ai isn't hostile or
+			//going to the alarm, you will perform a takedown, changing the AI state to Incapacitated
 			if(takedownTarget){
 				takedownText.SetActive(true);
 				if((Input.GetKey(pc.alternativeInteract)) && interactHit.collider.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState != PatrolAI.State.Incapacitated && interactHit.collider.gameObject.GetComponentInParent<PatrolAI>().aiCurrentState != PatrolAI.State.Hostile )
@@ -287,6 +315,7 @@ public class Interact : MonoBehaviour {
 		}
 		else
 		{
+			//these texts are inactive
 			doorText.SetActive(false);
 			keycardText.SetActive(false);
 			pickupObjectText.SetActive(false);

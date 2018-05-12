@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tutorial : MonoBehaviour {
-
+	//Player config goes here
 	public PlayerConfig pc;
+	// Tutorial gameobject goes here
 	public GameObject tutorial;
+	// collider goes here
 	public GameObject thisTutorialObject;
+	//reticule goes here
 	public GameObject reticule;
-
+	//checking if the game is paused
 	public bool paused;
 	// Use this for initialization
 	void Start () 
@@ -18,13 +21,13 @@ public class Tutorial : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () 
-	{
+	{	//if the game is paused and the player presses escape, unpause
 		if(paused && Input.GetKeyDown(this.pc.escape))
 		{
 			Unpause();
 		}
 	}
-
+	// As the player enters the collider, pause the game and show the tutorial
 	void OnTriggerEnter(Collider other)
 	{
 		if(other.gameObject.tag == "Player")
@@ -38,7 +41,7 @@ public class Tutorial : MonoBehaviour {
 		 
 
 	}
-
+	//If unpaused, destroy the collider and unpause the game
 	void Unpause()
 	{
 			reticule.SetActive(true);

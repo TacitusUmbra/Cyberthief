@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class Door : MonoBehaviour {
 	
-
+	//Door animations
 	public Animation doorAnim;
-
+	//Door State
 	public State doorState;
+	//Default Door Dtate
 	public State defaultdoorState = State.Closed;
+	//Bool on whether the door is locked
 	public bool locked;
-
+	//GameObject to the closed lights
 	public GameObject closedLights;
+	//GameObject to the open Lights
 	public GameObject openLights;
 
 
-
+	//The States of the Door
 	public enum State 
 	{
 		Open,
@@ -25,11 +28,12 @@ public class Door : MonoBehaviour {
 	}
 	void Start() 
 	{
+		//the door State is the default door state
 		doorState = defaultdoorState;
 	}
 	void Update() 
 	{
-
+		//all the door states
 		switch (this.doorState)
 		{
 
@@ -48,13 +52,14 @@ public class Door : MonoBehaviour {
 
 		}
 
+		//if locked, some lights will be active and others not
 		if(locked)
 		{
 			closedLights.SetActive(true);
 			openLights.SetActive(false);
 
 		}
-		
+		//if not locked, some lights will be active and others not
 		if(!locked)
 		{
 			closedLights.SetActive(false);
@@ -62,15 +67,18 @@ public class Door : MonoBehaviour {
 		}
 
 	}
-
+	//Open funtion
 	void Open()
 	{
 		
 	}
+	//Closed function
 	void Closed()
 	{
 		
 	}
+
+	//Opening function where teh animation is played to open the door
 	void Opening()
 	{	
 		
@@ -78,6 +86,7 @@ public class Door : MonoBehaviour {
 		doorState = State.Open;
 		
 	}
+	// Closing function where the animation is played to close the door
 	void Closing()
 	{
 		

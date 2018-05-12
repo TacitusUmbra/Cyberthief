@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FieldOfView : MonoBehaviour {
 
-
+	// Variables for the field of view of the AI
 	public bool canSeePlayer;
 	public bool canSeeBody;
 	public bool playerInFieldOfView;
@@ -16,11 +16,12 @@ public class FieldOfView : MonoBehaviour {
 
 	void Start()
 	{
+		// At the beginning, it cannot see the player or a body
 		canSeePlayer = false;
 		canSeeBody = false;
 	}
 	
-	
+	// If a Player or Unconscious Body is outside of the field of view, it cannot be potentially seen by the AI
 	void OnTriggerExit(Collider other)
 	{
 		if (other.gameObject.tag == "Player")
@@ -36,8 +37,11 @@ public class FieldOfView : MonoBehaviour {
 		
 	}
 	
+	//Conditions upon entering the collider of the field of view
 	void OnTriggerStay(Collider checkPosition)
 	{
+		//When something enters the field of view that is a player or an Unconscious Body, it will send a raycast in that direction to
+		//determine if the object is in light of sight. If it can see one of the two, it will be change the variables to true, otherwise, they are false.
 		Vector3 forward = checkPosition.transform.position - this.transform.position;
 		RaycastHit sightHit;
 		Ray sightRay = new Ray (transform.position, forward);

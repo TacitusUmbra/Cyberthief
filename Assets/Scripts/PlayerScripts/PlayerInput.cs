@@ -56,7 +56,7 @@ public class PlayerInput : MonoBehaviour {
 		{
 			pitch *= -1;
 		}
-
+		
 		this.rotation = new Vector3(yaw, pitch, 0f);
 
 	}

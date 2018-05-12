@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Keycard : MonoBehaviour {
-
+	//The keycard level
 	public float keycardLevel;
 
 	// Use this for initialization
