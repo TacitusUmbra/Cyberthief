@@ -43,6 +43,8 @@ public class Interact : MonoBehaviour {
 	public GameObject IncapacitatedBodyText;
 	public GameObject useKeycardText;
 	public GameObject throwBodyText;
+	public GameObject lightswitchText;
+
 
 	void Start () 
 	{
@@ -104,19 +106,26 @@ public class Interact : MonoBehaviour {
 			//the interact key
 			if (interactHit.collider.tag == "Lightswitch")
 			{
+				lightswitchText.SetActive(true);
 				 if (Input.GetKeyDown (pc.interact))
                 {
                     if (interactHit.collider.gameObject.GetComponent<LightSwitch> ().turnedOn)
-                    {
-                        interactHit.collider.gameObject.GetComponent<LightSwitch> ().switchState = false;
+                    {						
+						lightswitchText.GetComponent<Text>().text = "Lightswitch \n[E] Turn On";
                         interactHit.collider.gameObject.GetComponent<LightSwitch> ().turnedOn = false;
                     }
                     else
                         {
-                            interactHit.collider.gameObject.GetComponent<LightSwitch> ().switchState = true;
+							lightswitchText.GetComponent<Text>().text = "Lightswitch \n[E] Turn Off";
                             interactHit.collider.gameObject.GetComponent<LightSwitch> ().turnedOn = true;
+
                         }
                 }
+			}
+			else
+			{
+			lightswitchText.SetActive(false);
+
 			}
 
 			//If conditions are met, the player will be able to pick up an object tagged Grabbable if they press the interact key
@@ -124,13 +133,14 @@ public class Interact : MonoBehaviour {
 			if (interactHit.collider.tag == "Grabbable" && canGrab && interactHit.collider.gameObject.GetComponent<GrabbableObject>().objectState == GrabbableObject.State.Grounded)
 			{
 				pickupObjectText.SetActive(true);
+				pickupObjectText.GetComponent<Text>().text = "Bottle \n[E] Grab";
 
 				if(Input.GetKeyDown (pc.interact))
 				{
-				objectHeld = interactHit.collider.gameObject;
-				objectHeld.transform.SetParent(grabLocation);
-				canGrab = false;
-				objectHeld.GetComponent<Rigidbody>().useGravity = false;
+					objectHeld = interactHit.collider.gameObject;
+					objectHeld.transform.SetParent(grabLocation);
+					canGrab = false;
+					objectHeld.GetComponent<Rigidbody>().useGravity = false;
 				}
 			}
 			else
@@ -189,13 +199,18 @@ public class Interact : MonoBehaviour {
 			//change the doorState to Opening
 			if (interactHit.collider.tag == "Door")
 			{
-				doorText.SetActive(true);
-				if(Input.GetKeyDown (pc.interact))
+				doorText.SetActive(true);				
+				if(interactHit.collider.gameObject.GetComponent<Door> ().locked == false)
 				{
-					if(interactHit.collider.gameObject.GetComponent<Door> ().locked == false)
-						{
+					doorText.GetComponent<Text>().text = "Door \n[E] Open";
+					if(Input.GetKeyDown (pc.interact))
+					{
 						interactHit.collider.gameObject.GetComponent<Door> ().doorState = Door.State.Opening;
-						}
+					}
+				}
+				else
+				{
+					doorText.GetComponent<Text>().text = "Door (Locked)";
 				}	
 
 			}
@@ -209,8 +224,7 @@ public class Interact : MonoBehaviour {
 			if(interactHit.collider.tag == "Terminal" && Input.GetKeyDown(pc.alternativeInteract) && interactHit.collider.gameObject.GetComponent<Terminal>().autohack == false && inventory.numberOfDecoders > 0)
 				{
 					interactHit.collider.gameObject.GetComponent<Terminal>().autohack = true;
-					inventory.numberOfDecoders = inventory.numberOfDecoders-1;
-					
+					inventory.numberOfDecoders = inventory.numberOfDecoders-1;		
 				}
 			else if(interactHit.collider.tag == "Terminal" && Input.GetKey(pc.alternativeInteract) && inventory.numberOfDecoders == 0)
 				{
@@ -222,19 +236,27 @@ public class Interact : MonoBehaviour {
 			if(interactHit.collider.tag == "Keycard")
 			{
 				keycardText.SetActive(true);
-				if(Input.GetKey(pc.interact))
-				{
+				
 					if(interactHit.collider.gameObject.GetComponent<Keycard>().keycardLevel == 1 && inventory.keycardLevelOne == false)
 					{
-						inventory.keycardLevelOne = true;
-						Destroy(interactHit.collider.gameObject);
+						keycardText.GetComponent<Text>().text = "Keycard Lv1 \n[E] Pickup";
+						if(Input.GetKey(pc.interact))
+						{
+							inventory.keycardLevelOne = true;
+							Destroy(interactHit.collider.gameObject);
+						}
+
 					}
 					if(interactHit.collider.gameObject.GetComponent<Keycard>().keycardLevel == 2 && inventory.keycardLevelOne == false)
-					{
-						inventory.keycardLevelTwo = true;
-						Destroy(interactHit.collider.gameObject);
+					{								
+						keycardText.GetComponent<Text>().text = "Keycard Lv2 \n[E] Pickup";
+						if(Input.GetKey(pc.interact))
+						{				
+							inventory.keycardLevelTwo = true;
+							Destroy(interactHit.collider.gameObject);
+						}
 					}
-				}
+				
 			}
 			else
 			{
@@ -251,7 +273,7 @@ public class Interact : MonoBehaviour {
 
 						if(Input.GetKey(pc.interact))
 						{
-						interactHit.collider.gameObject.GetComponent<KeycardPanel>().accessGranted = true;
+							interactHit.collider.gameObject.GetComponent<KeycardPanel>().accessGranted = true;
 						}
 					}	
 					else if(interactHit.collider.gameObject.GetComponent<KeycardPanel>().keycardLevelRequired == 2 && inventory.keycardLevelTwo == true)
@@ -260,7 +282,7 @@ public class Interact : MonoBehaviour {
 
 							if(Input.GetKey(pc.interact))
 							{
-							interactHit.collider.gameObject.GetComponent<KeycardPanel>().accessGranted = true;	
+								interactHit.collider.gameObject.GetComponent<KeycardPanel>().accessGranted = true;	
 							}
 						}
 						
@@ -276,13 +298,15 @@ public class Interact : MonoBehaviour {
 			if (interactHit.collider.tag == "Incapacitated Body" && canGrab)
 			{
 				IncapacitatedBodyText.SetActive(true);
+				IncapacitatedBodyText.GetComponent<Text>().text = "Body \n[E] Pickup";
+
 				if(Input.GetKey (pc.interact))
 				{
-				bodyHeld = interactHit.collider.gameObject;
-				bodyHeld.transform.SetParent(grabBodyLocation);
-				canGrab = false;
-				bodyHeld.GetComponent<Rigidbody>().useGravity = false;
-				bodyHeld.GetComponent<Rigidbody> ().isKinematic = true;
+					bodyHeld = interactHit.collider.gameObject;
+					bodyHeld.transform.SetParent(grabBodyLocation);
+					canGrab = false;
+					bodyHeld.GetComponent<Rigidbody>().useGravity = false;
+					bodyHeld.GetComponent<Rigidbody> ().isKinematic = true;
 				}
 			}
 			else
