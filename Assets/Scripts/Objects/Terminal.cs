@@ -13,6 +13,8 @@ public class Terminal : MonoBehaviour {
 	//The bool determining whether the terminal was autohacked or not
 	public bool autohack;
 
+	public float autohackRate;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -33,7 +35,7 @@ public class Terminal : MonoBehaviour {
 			//If autohacked and the percentage hacked is less than 100, the percentage hacked will increase over time
 			if(autohack && percentageHacked <= 100)
 			{
-				percentageHacked += 1 * Time.deltaTime;
+				percentageHacked += autohackRate * Time.deltaTime;
 			}
 
 	}

@@ -24,6 +24,8 @@ public class Device : MonoBehaviour {
 	public float deviceDistance;
 	//string for showing numbers
 	private string stringHack;
+	//rate at which the player can hack
+	public float hackRate;
 
 	
 
@@ -86,7 +88,7 @@ public class Device : MonoBehaviour {
 						{
 							if (deviceHit.collider.gameObject.GetComponent<Terminal> ().hacked == false)
 							{
-								deviceHit.collider.gameObject.GetComponent<Terminal> ().percentageHacked += 15f * Time.deltaTime;
+								deviceHit.collider.gameObject.GetComponent<Terminal> ().percentageHacked += hackRate * Time.deltaTime;
 							}
 						}
 					}

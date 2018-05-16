@@ -230,7 +230,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1193348379543174
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1624346068861434
 GameObject:
   m_ObjectHideFlags: 1
@@ -569,7 +569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4410599057452918
 Transform:
   m_ObjectHideFlags: 1
@@ -1597,7 +1597,11 @@ MonoBehaviour:
     Press 2 to get your Comlink out to hack the coms of guards.
 
 
-    Once hacked, the guards can move to specified locations and open doors.
+    Once hacked, the guards can move to specified locations and open doors, but they
+    cannot be hacked again.
+
+
+    If they do not notice you, you may perform a takedown on guards and drones.
 
 
     Drones do not carry keycards.
