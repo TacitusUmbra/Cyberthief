@@ -9,7 +9,7 @@ public class Health : MonoBehaviour {
 	//The slider goes here
 	public Slider slider;
 	//The respawn zone
-	public Transform respawnZone;
+	public Vector3 respawnZone;
 	// Use this for initialization
 	void Start () 
 	{
@@ -26,7 +26,7 @@ public class Health : MonoBehaviour {
 		// if the health is below 1, change the position of the gameObject to be the respawnZone position and health becomes 5
 		if(health < 1)
 		{
-			gameObject.transform.position = respawnZone.position;
+			gameObject.transform.position = respawnZone;
 			health = 5;
 		}
 	
